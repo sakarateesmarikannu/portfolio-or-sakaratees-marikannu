@@ -32,7 +32,7 @@
     </div>
 
     <!-- Transparent PNG Portrait -->
-    <img src="My portrait.png" alt="Sakaratees Marikannu" class="hero-portrait">
+    <img src="portrait.png" alt="Sakaratees Marikannu" class="hero-portrait">
 
     <!-- Left Floating Info Card -->
     <div class="hero-card hero-left">
@@ -66,7 +66,7 @@
     </div>
   </header>
 
-  <!-- INTERACTIVE 4:3 LARGE TABS (ONE LINE) -->
+  <!-- INTERACTIVE 4:3 LARGE TABS (ONE LINE NO WRAP) -->
   <nav id="portfolio-tabs" class="image-nav-area">
     <div class="nav-image-container">
       
@@ -224,7 +224,7 @@
             <li><i class="fas fa-people-arrows"></i> Stakeholders</li>
             <li><i class="fas fa-server"></i> Cosmo Database</li>
             <li><i class="fas fa-arrows-spin"></i> Process QA</li>
-            <li><i class="fas fa-tags"></i> Metadata Handling</li> <!-- New Skill Added Here -->
+            <li><i class="fas fa-tags"></i> Metadata Handling</li>
           </ul>
         </div>
 
@@ -292,6 +292,101 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- BULLETPROOF EMBEDDED JAVASCRIPT -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // 1. Automatically Calculate Experience (Starts from April 2025)
+      const expCounter = document.getElementById('exp-counter');
+      if (expCounter) {
+        const startDate = new Date(2025, 3, 1); // April 2025
+        const currentDate = new Date();
+        
+        let years = currentDate.getFullYear() - startDate.getFullYear();
+        let months = currentDate.getMonth() - startDate.getMonth();
+        
+        if (months < 0) {
+          years--;
+          months += 12;
+        }
+        
+        let expString = "With ";
+        if (years > 0) {
+          expString += years === 1 ? "1 Year " : `${years} Years `;
+        }
+        
+        if (months > 0) {
+          if (years > 0) expString += "& ";
+          expString += months === 1 ? "1 Month " : `${months} Months `;
+        }
+        
+        expString += "of Experience";
+        
+        if (years === 0 && months === 0) {
+          expString = "Recently Started Experience"; 
+        }
+        
+        expCounter.textContent = expString;
+      }
+
+      // 2. Tab Switching Logic
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const targetTab = button.getAttribute('data-tab');
+
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+
+          button.classList.add('active');
+          const targetElement = document.getElementById(targetTab);
+          if (targetElement) {
+            targetElement.classList.add('active');
+            
+            // Auto-scroll down slightly if on mobile so content is clearly visible
+            if (window.innerWidth < 768) {
+               targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
+
+      // 3. Dark/Light Mode Theme Toggle
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const themeText = document.getElementById('theme-text');
+      const body = document.body;
+
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        body.classList.remove('dark-theme');
+        if(themeIcon) themeIcon.className = 'fas fa-moon';
+        if(themeText) themeText.textContent = 'Dark Mode';
+      } else {
+        body.classList.add('dark-theme');
+        if(themeIcon) themeIcon.className = 'fas fa-sun';
+        if(themeText) themeText.textContent = 'Light Mode';
+      }
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          body.classList.toggle('dark-theme');
+          const isDark = body.classList.contains('dark-theme');
+
+          if (isDark) {
+            themeIcon.className = 'fas fa-sun';
+            themeText.textContent = 'Light Mode';
+            localStorage.setItem('theme', 'dark');
+          } else {
+            themeIcon.className = 'fas fa-moon';
+            themeText.textContent = 'Dark Mode';
+            localStorage.setItem('theme', 'light');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
