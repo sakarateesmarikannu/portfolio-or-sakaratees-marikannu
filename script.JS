@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Automatically Calculate Experience (Starts from April 2025)
   const expCounter = document.getElementById('exp-counter');
   if (expCounter) {
-    const startDate = new Date(2025, 3, 1); // 2025, index 3 = April
+    const startDate = new Date(2025, 3, 1); // April 2025
     const currentDate = new Date();
     
     let years = currentDate.getFullYear() - startDate.getFullYear();
@@ -33,8 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     expCounter.textContent = expString;
   }
 
-
-  // 2. Single Page Tab Switching Logic
+  // 2. Tab Switching Logic
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 
