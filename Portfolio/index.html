@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sakaratees Marikannu | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="dark-theme">
+
+  <!-- FULL SCREEN HERO LANDING PAGE -->
+  <header class="hero blueprint-bg">
+    
+    <!-- Top Navigation Bar -->
+    <div class="hero-top-bar container">
+      <span class="exp-badge" id="exp-counter">Calculating Experience...</span>
+      
+      <button id="theme-toggle" class="theme-toggle-btn">
+        <i class="fas fa-sun" id="theme-icon"></i>
+        <span id="theme-text">Light Mode</span>
+      </button>
+    </div>
+
+    <!-- Massive Background Text Group -->
+    <div class="hero-bg-group">
+      <h1 class="hero-bg-text">Scheduling<br>Analyst</h1>
+      <h2 class="hero-bg-subtext">Broadcast Analyst</h2>
+    </div>
+
+    <!-- Transparent PNG Portrait -->
+    <img src="My portrait.png" alt="Sakaratees Marikannu" class="hero-portrait">
+
+    <!-- Left Floating Info Card -->
+    <div class="hero-card hero-left">
+      <div class="crosshair top-left"></div>
+      <div class="crosshair top-right"></div>
+      <div class="crosshair bottom-left"></div>
+      <div class="crosshair bottom-right"></div>
+      <p>Hey, I am Sakaratees. I help businesses turn complex data into accurate, streamlined broadcast schedules.</p>
+      <a href="#contact" class="hero-cta" onclick="document.querySelector('[data-tab=\'contact\']').click();">
+        Let's Talk Now <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <!-- Right Floating Info Card -->
+    <div class="hero-card hero-right">
+      <div class="crosshair top-left"></div>
+      <div class="crosshair top-right"></div>
+      <div class="crosshair bottom-left"></div>
+      <div class="crosshair bottom-right"></div>
+      <p>This portfolio showcases my journey as a Scheduling & Data Analyst, reflecting my passion for data integrity.</p>
+      <div class="hero-socials">
+        <a href="https://linkedin.com/in/sakaratees-marikannu" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:Sakaratees02@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="Sakaratees_Marikannu_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-pdf"></i></a>
+      </div>
+    </div>
+
+    <!-- Bouncing Scroll Down Arrow -->
+    <div class="scroll-down-wrapper">
+      <a href="#portfolio-tabs"><i class="fas fa-chevron-down"></i></a>
+    </div>
+  </header>
+
+  <!-- INTERACTIVE 4:3 LARGE TABS (ONE LINE) -->
+  <nav id="portfolio-tabs" class="image-nav-area">
+    <div class="nav-image-container">
+      
+      <button class="tab-btn active" data-tab="overview">
+        <div class="tab-content-inner">
+          <i class="fas fa-chart-pie"></i>
+          <span>Overview</span>
+        </div>
+      </button>
+
+      <button class="tab-btn" data-tab="experience">
+        <div class="tab-content-inner">
+          <i class="fas fa-briefcase"></i>
+          <span>Experience</span>
+        </div>
+      </button>
+
+      <button class="tab-btn" data-tab="projects">
+        <div class="tab-content-inner">
+          <i class="fas fa-diagram-project"></i>
+          <span>Projects</span>
+        </div>
+      </button>
+
+      <button class="tab-btn" data-tab="skills">
+        <div class="tab-content-inner">
+          <i class="fas fa-laptop-code"></i>
+          <span>Skills</span>
+        </div>
+      </button>
+
+      <button class="tab-btn" data-tab="contact">
+        <div class="tab-content-inner">
+          <i class="fas fa-paper-plane"></i>
+          <span>Contact</span>
+        </div>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT AREAS -->
+  <main class="container content">
+
+    <!-- TAB 1: OVERVIEW -->
+    <section id="overview" class="tab-content active neural-card">
+      <h2><i class="fas fa-user-gear"></i> Professional Summary</h2>
+      <p class="lead-text">
+        <i class="fas fa-quote-left quote-icon"></i> Scheduling Analyst with extensive experience managing broadcast schedules for over 125 North American television channels at a high level of data accuracy using specialized scheduling databases. Skilled in identifying and resolving scheduling discrepancies, coordinating cross-functional teams, and maintaining data integrity across platforms. Proficient in MS Excel (Advanced), Power BI, and data visualization tools, with a focus on improving turnaround time through quality assurance workflows.
+      </p>
+
+      <div class="metrics-grid">
+        <div class="metric-card cyan">
+          <i class="fas fa-tv icon"></i>
+          <h3>125+</h3>
+          <p><i class="fas fa-satellite-dish"></i> North American TV Channels Managed</p>
+        </div>
+        <div class="metric-card emerald">
+          <i class="fas fa-bullseye icon"></i>
+          <h3>99.70%</h3>
+          <p><i class="fas fa-shield-check"></i> Schedule Data Accuracy Maintained</p>
+        </div>
+        <div class="metric-card violet">
+          <i class="fas fa-graduation-cap icon"></i>
+          <h3>9.13 / 10</h3>
+          <p><i class="fas fa-award"></i> MBA Distinction (PTU)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: EXPERIENCE -->
+    <section id="experience" class="tab-content neural-card">
+      <h2><i class="fas fa-history"></i> Professional Experience</h2>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <div>
+              <h3><i class="fas fa-database"></i> Scheduling Analyst</h3>
+              <p class="company"><i class="fas fa-building"></i> Straive | North American TV Networks</p>
+            </div>
+            <span class="badge blue"><i class="fas fa-calendar-alt"></i> Apr 2025 – Present</span>
+          </div>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Manage end-to-end broadcast schedules for 125+ North American television channels using the Cosmo database.</li>
+            <li><i class="fas fa-check-circle"></i> Maintain 99.70% data accuracy in programming schedules by validating listings against station source data.</li>
+            <li><i class="fas fa-check-circle"></i> Proactively cross-check station data against internal systems to eliminate discrepancies prior to publication.</li>
+            <li><i class="fas fa-check-circle"></i> Generate daily and weekly operational performance metrics, schedule status reports, and tracking dashboards.</li>
+            <li><i class="fas fa-check-circle"></i> Apply advanced MS Excel functions (lookups, pivot tables, conditional formatting) to streamline QA workflows.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <div>
+              <h3><i class="fas fa-users-gear"></i> HR Recruiter</h3>
+              <p class="company"><i class="fas fa-building"></i> Navayuga Consultancy Services | Talent Acquisition</p>
+            </div>
+            <span class="badge purple"><i class="fas fa-calendar-alt"></i> Sep 2024 – Mar 2025</span>
+          </div>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Sourced, screened, and managed interview schedules across client teams and candidates.</li>
+            <li><i class="fas fa-check-circle"></i> Built and maintained talent databases while tracking key recruitment efficiency metrics.</li>
+            <li><i class="fas fa-check-circle"></i> Facilitated candidate salary negotiations and supported seamless onboarding processes.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: PROJECTS -->
+    <section id="projects" class="tab-content neural-card">
+      <h2><i class="fas fa-network-wired"></i> Key Projects</h2>
+      <div class="card-grid">
+        <div class="card border-cyan">
+          <div class="card-body">
+            <span class="card-tag cyan-tag"><i class="fas fa-lightbulb"></i> Product Concept / UX</span>
+            <h3><i class="fas fa-mobile-screen-button"></i> KID OS Product Concept</h3>
+            <p>Proposed KID OS during MBA final year targeting Gen Z screen time trends (4-7 hrs daily); designed to encourage healthier device habits and child wellbeing.</p>
+          </div>
+        </div>
+
+        <div class="card border-violet">
+          <div class="card-body">
+            <span class="card-tag violet-tag"><i class="fas fa-chart-pie"></i> Analytics & Strategy</span>
+            <h3><i class="fas fa-bullhorn"></i> AIC-PECF Public Relations Strategy</h3>
+            <p>Constructed a 30-day content calendar analyzing past page performance, increasing LinkedIn reach by 7% among students and 2% among entrepreneurs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: SKILLS & CERTS -->
+    <section id="skills" class="tab-content neural-card">
+      <h2><i class="fas fa-brain"></i> Skills & Educational Background</h2>
+      
+      <div class="skills-grid">
+        <div class="skills-category">
+          <h3><i class="fas fa-chart-simple"></i> Analytics & Reporting</h3>
+          <ul class="tag-list">
+            <li><i class="fas fa-check"></i> Data Validation & QA</li>
+            <li><i class="fas fa-file-excel"></i> MS Excel (Advanced)</li>
+            <li><i class="fas fa-chart-column"></i> Power BI</li>
+            <li><i class="fas fa-eye"></i> Data Visualization</li>
+            <li><i class="fas fa-table"></i> MIS Reporting</li>
+            <li><i class="fab fa-google"></i> Google Analytics</li>
+          </ul>
+        </div>
+
+        <div class="skills-category">
+          <h3><i class="fas fa-sliders"></i> Scheduling & Operations</h3>
+          <ul class="tag-list">
+            <li><i class="fas fa-clock"></i> Broadcast Scheduling</li>
+            <li><i class="fas fa-triangle-exclamation"></i> Discrepancy Resolution</li>
+            <li><i class="fas fa-database"></i> Data Integrity</li>
+            <li><i class="fas fa-people-arrows"></i> Stakeholders</li>
+            <li><i class="fas fa-server"></i> Cosmo Database</li>
+            <li><i class="fas fa-arrows-spin"></i> Process QA</li>
+            <li><i class="fas fa-tags"></i> Metadata Handling</li> <!-- New Skill Added Here -->
+          </ul>
+        </div>
+
+        <div class="skills-category">
+          <h3><i class="fas fa-rectangle-ad"></i> Digital Marketing & Tools</h3>
+          <ul class="tag-list">
+            <li><i class="fab fa-google"></i> Google Ads</li>
+            <li><i class="fab fa-meta"></i> Meta Ads</li>
+            <li><i class="fas fa-envelope-open"></i> Mailchimp</li>
+            <li><i class="fas fa-share-nodes"></i> Hootsuite</li>
+            <li><i class="fas fa-list-check"></i> Google Forms</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="section-sub-title"><i class="fas fa-certificate"></i> Professional Certifications</h3>
+      <div class="certifications-list">
+        <div class="cert-item"><i class="fas fa-award"></i> Business Analytics using Excel</div>
+        <div class="cert-item"><i class="fas fa-award"></i> Power BI for Beginners</div>
+        <div class="cert-item"><i class="fas fa-award"></i> MS Excel using AI</div>
+        <div class="cert-item"><i class="fas fa-award"></i> Financial Independence</div>
+      </div>
+
+      <h3 class="section-sub-title"><i class="fas fa-graduation-cap"></i> Education</h3>
+      <div class="education-grid">
+        <div class="edu-card">
+          <h4><i class="fas fa-university"></i> MBA – Entrepreneurship</h4>
+          <p>Puducherry Technological University (CGPA: 9.13/10)</p>
+          <span class="date"><i class="fas fa-calendar"></i> Nov 2022 – May 2024</span>
+        </div>
+        <div class="edu-card">
+          <h4><i class="fas fa-university"></i> B.Com – General</h4>
+          <p>Perunthalaivar Kamarajar Arts College (CGPA: 7.4/10)</p>
+          <span class="date"><i class="fas fa-calendar"></i> Sep 2019 – Jul 2022</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: CONTACT & RESUME -->
+    <section id="contact" class="tab-content neural-card">
+      <h2><i class="fas fa-address-book"></i> Contact & Resume Download</h2>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <p><i class="fas fa-location-dot"></i> Villianur, Puducherry-605110</p>
+          <p><i class="fas fa-envelope"></i> Sakaratees02@gmail.com</p>
+          <p><i class="fas fa-phone-volume"></i> +91 8870613643</p>
+          <p><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/sakaratees-marikannu" target="_blank">linkedin.com/in/sakaratees-marikannu</a></p>
+        </div>
+
+        <div class="resume-download-box">
+          <h3><i class="fas fa-file-pdf"></i> Download Resume</h3>
+          <p>Get a complete copy of my updated resume in PDF format:</p>
+          <a href="Sakaratees_Marikannu_Resume.pdf" target="_blank" class="download-btn">
+            <i class="fas fa-download"></i> Download PDF Resume
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Sakaratees Marikannu. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
