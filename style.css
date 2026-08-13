@@ -797,7 +797,8 @@ h2 i {
   .hero {
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 100px;
+    /* FIXED MOBILE GAP: Reduced top padding heavily so elements pull upwards */
+    padding-top: 80px; 
     height: auto;
     min-height: 100vh;
   }
@@ -812,7 +813,8 @@ h2 i {
   .hero-bg-group {
     position: relative;
     top: 0;
-    margin-bottom: 20px;
+    /* FIXED MOBILE GAP: Removed bottom margin to keep portrait tight to text */
+    margin-bottom: 0; 
     gap: 0;
   }
   
@@ -826,10 +828,11 @@ h2 i {
   
   .hero-portrait { 
     position: relative;
-    height: 45vh; 
+    /* FIXED MOBILE GAP: Increased portrait height to explicitly fill the blank space */
+    height: 55vh; 
     min-width: unset;
-    width: 80%;
-    max-width: 350px;
+    width: 100%;
+    max-width: 400px;
     left: 0;
     bottom: -25px; 
     transform: none !important;
