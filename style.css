@@ -98,8 +98,8 @@ body {
 }
 
 /* 
-  NEW: Dynamic Landing Page Background! 
-  It stays bright blue in Light Mode, and shifts to Dark Space Blue in Dark Mode.
+  FIXED: Static Blue Background! 
+  It stays bright blue in both Light and Dark Mode.
 */
 .hero-color-layer {
   position: absolute;
@@ -107,10 +107,6 @@ body {
   background: linear-gradient(135deg, #4da4f7 0%, #1e45b8 100%);
   z-index: 0;
   will-change: opacity;
-  transition: background 0.5s ease;
-}
-body.dark-theme .hero-color-layer {
-  background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
 }
 
 /* Smooth Color Blend Transition overlay */
@@ -120,6 +116,7 @@ body.dark-theme .hero-color-layer {
   left: 0;
   width: 100%;
   height: 25vh; 
+  /* Fades into the body background color, so it naturally matches the theme below */
   background: linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%);
   z-index: 2; 
   pointer-events: none;
@@ -190,14 +187,13 @@ body.dark-theme .hero-color-layer {
 }
 
 /* 
-  FIXED: Bulletproof Text Visibility
-  Forced Pure White with a Drop Shadow so it NEVER blends in.
+  FIXED: Hardcoded Bright Cyan Color
+  This color bypasses the theme variables so it stays identical in both modes
 */
 .hero-bg-subtext {
   font-size: clamp(1rem, 2.5vw, 1.5rem); 
-  color: #ffffff !important; 
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  font-weight: 800;
+  color: #4cc9f0 !important; 
+  font-weight: 700;
   letter-spacing: 5px;
   text-transform: uppercase;
   opacity: 0;
@@ -207,8 +203,7 @@ body.dark-theme .hero-color-layer {
 .hero-bg-text {
   font-size: clamp(3.5rem, 9vw, 7.5rem);
   line-height: 1.1;
-  color: rgba(255, 255, 255, 0.95) !important;
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.7) !important;
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
@@ -216,7 +211,7 @@ body.dark-theme .hero-color-layer {
   animation: slideDownFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
 }
 
-/* Portrait (Cutout PNG) - SMOOTH & FLUSH FIX */
+/* Portrait (Cutout PNG) */
 .hero-portrait {
   position: absolute;
   bottom: -25px; 
