@@ -797,23 +797,25 @@ h2 i {
   .hero {
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 80px; 
+    padding-top: 30px; /* Space at top of screen */
     height: auto;
     min-height: 100vh;
   }
   
   .hero-top-bar {
-    top: 20px;
+    position: relative; /* Fixes overlap by pushing elements down */
+    top: 0;
     padding: 0 20px;
     flex-direction: column;
     gap: 15px;
+    margin-bottom: 40px; /* Space between toggle button and text */
   }
   
   .hero-bg-group {
-    position: relative;
+    position: relative; /* Removes absolute positioning overlap */
     top: 0;
-    margin-bottom: 0; 
-    gap: 0;
+    margin-bottom: 10px; /* Brings portrait closer to text */
+    gap: 5px;
   }
   
   .hero-bg-subtext {
@@ -825,13 +827,14 @@ h2 i {
   }
   
   .hero-portrait { 
-    position: relative;
-    height: 55vh; 
-    min-width: unset;
+    position: relative; /* Lets image flow naturally under text */
+    height: auto; /* Scales proportionally */
+    max-height: 55vh; /* Prevents it from getting too tall */
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
+    margin: 0 auto; /* Centers it */
     left: 0;
-    bottom: -25px; 
+    bottom: 0; /* Removes bottom pin */
     transform: none !important;
     z-index: 5;
   }
@@ -841,7 +844,7 @@ h2 i {
     width: 90%; 
     top: 0; 
     transform: none !important; 
-    margin: 10px auto; 
+    margin: 20px auto; 
     left: 0; 
     right: 0; 
     z-index: 6; 
