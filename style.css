@@ -3,98 +3,84 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Executive Color Palette & Apple Glassmorphism Variables */
+/* Executive Color Palette & iPhone Glassmorphism Variables */
 :root {
-  /* NEW: Premium Sand Color & Fixed Dot Pattern for Light Mode */
+  /* Premium Sand Color & Fixed Pattern for Light Mode */
   --bg-color: #FDF5E6; 
-  --bg-pattern: radial-gradient(rgba(160, 140, 110, 0.15) 2px, transparent 2px);
+  --bg-pattern: radial-gradient(rgba(160, 140, 110, 0.25) 2px, transparent 2px);
   --bg-size: 25px 25px;
 
-  --header-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  /* iPhone Light Mode Frosted Glass UI */
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  --inner-card-bg: rgba(255, 255, 255, 0.35);
+  
   --text-main: #334155;
   --text-heading: #0f172a;
-  
   --accent-blue: #2563eb;
   --accent-cyan: #0284c7;
   --accent-emerald: #059669;
   --accent-violet: #7c3aed;
-  
-  /* Apple Light Mode Glass UI */
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --glass-shadow: 0 15px 35px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  --inner-card-bg: rgba(255, 255, 255, 0.6);
-  
-  --neural-opacity: 0.03;
 }
 
 body.dark-theme {
-  /* Dark Mode remains unchanged, but inherits a subtle dark dot pattern */
+  /* Dark Mode Pattern */
   --bg-color: #0b132b;
-  --bg-pattern: radial-gradient(rgba(255, 255, 255, 0.03) 2px, transparent 2px);
+  --bg-pattern: radial-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px);
   --bg-size: 25px 25px;
 
-  --header-bg: linear-gradient(135deg, #0b132b 0%, #1c2541 100%);
+  /* iPhone Dark Mode Frosted Glass UI */
+  --glass-bg: rgba(20, 25, 40, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  --inner-card-bg: rgba(255, 255, 255, 0.05);
+
   --text-main: #e0e1dd;
   --text-heading: #ffffff;
-  
   --accent-blue: #4361ee;
   --accent-cyan: #4cc9f0;
   --accent-emerald: #10b981;
   --accent-violet: #8b5cf6;
-
-  /* Apple Dark Mode Glass UI */
-  --glass-bg: rgba(20, 25, 40, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-shadow: 0 25px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  --inner-card-bg: rgba(255, 255, 255, 0.03);
-
-  --neural-opacity: 0.08;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-color);
   
-  /* Applies the new Sand Pattern */
+  /* Applies the Base Pattern */
   background-image: var(--bg-pattern);
   background-size: var(--bg-size);
-  background-attachment: fixed; /* This creates the premium parallax scrolling effect */
+  background-attachment: fixed;
   
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* OUT-OF-FOCUS BACKGROUND BLUR EFFECT */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: -1; 
+  pointer-events: none;
 }
 
 .container {
   max-width: 1050px;
   margin: 0 auto;
   padding: 0 24px;
-}
-
-/* Neural Background */
-.neural-bg, .neural-card {
-  position: relative;
-  overflow: hidden;
-}
-.neural-bg::before, .neural-card::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    radial-gradient(circle at 15% 20%, rgba(76, 201, 240, var(--neural-opacity)) 2px, transparent 2px),
-    radial-gradient(circle at 85% 30%, rgba(67, 97, 238, var(--neural-opacity)) 2px, transparent 2px),
-    radial-gradient(circle at 50% 75%, rgba(139, 92, 246, var(--neural-opacity)) 2px, transparent 2px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
 }
 
 /* ========================================= */
@@ -108,10 +94,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-color); 
+  /* Override body blur for hero section if needed, but hero uses its own color layer */
 }
 
-/* Static Blue Background */
+/* Static Blue Background for Hero Only */
 .hero-color-layer {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -120,7 +106,7 @@ body {
   will-change: opacity;
 }
 
-/* Smooth Color Blend Transition overlay */
+/* Smooth Color Blend Transition overlay into Sand Background */
 .hero-fade-bottom {
   position: absolute;
   bottom: 0;
@@ -165,9 +151,13 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* iPhone Glass Button */
 .theme-toggle-btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   color: #ffffff;
   padding: 8px 18px;
   border-radius: 30px;
@@ -177,7 +167,6 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  backdrop-filter: blur(5px);
 }
 .theme-toggle-btn:hover { background: rgba(255, 255, 255, 0.25); }
 
@@ -242,7 +231,7 @@ body {
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-/* Apple Glass Hero Cards */
+/* iPhone Glass Hero Cards */
 .hero-card {
   position: absolute;
   top: 55%;
@@ -254,9 +243,9 @@ body {
   background: rgba(20, 25, 40, 0.45); 
   backdrop-filter: blur(25px) saturate(200%);
   -webkit-backdrop-filter: blur(25px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 40px; 
-  box-shadow: 0 30px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px; 
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
   will-change: transform;
 }
 
@@ -361,7 +350,6 @@ body {
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* Tab Switching Animation */
 @keyframes tabSwitchFade {
   0% { opacity: 0; transform: translateY(15px) scale(0.98); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -390,17 +378,22 @@ body {
   height: 100%;
 }
 
+/* iPhone Glass Carousel Items */
 .cf-item {
   position: absolute;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
   transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border-radius: 20px;
+  border-radius: 30px;
   overflow: hidden;
-  background: var(--inner-card-bg);
+  
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
+  
   display: flex;
   flex-direction: column;
 }
@@ -419,9 +412,8 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
   padding: 10px;
+  /* Handled by parent's backdrop-filter */
 }
 .cf-caption h3 {
   font-size: 1.1rem;
@@ -434,7 +426,6 @@ body {
   margin: 0;
 }
 
-/* Coverflow JS States */
 .cf-item.active {
   transform: translateX(0) scale(1) translateZ(0);
   z-index: 3;
@@ -461,6 +452,8 @@ body {
 
 .coverflow-btn {
   background: var(--glass-bg);
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
   border: 1px solid var(--glass-border);
   color: var(--text-heading);
   border-radius: 50%;
@@ -472,8 +465,7 @@ body {
   cursor: pointer;
   z-index: 10;
   position: absolute;
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--glass-shadow);
   transition: background 0.3s, color 0.3s, transform 0.2s;
 }
 .coverflow-btn:hover { 
@@ -518,6 +510,7 @@ body {
   }
 }
 
+/* iPhone Glass Tabs */
 .tab-btn {
   width: clamp(140px, 18vw, 220px);
   aspect-ratio: 4 / 3;
@@ -564,7 +557,7 @@ body {
 
 .tab-btn:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 .tab-btn:hover .tab-content-inner i {
   transform: scale(1.15);
@@ -573,8 +566,8 @@ body {
 
 .tab-btn.active {
   border-color: var(--accent-cyan);
-  background: rgba(76, 201, 240, 0.1);
-  box-shadow: 0 0 30px rgba(76, 201, 240, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: rgba(76, 201, 240, 0.15);
+  box-shadow: 0 0 30px rgba(76, 201, 240, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.8);
   transform: scale(1.03);
 }
 .tab-btn.active .tab-content-inner i,
@@ -590,6 +583,7 @@ body {
   min-height: 50vh;
 }
 
+/* iPhone Glass Content Area */
 .tab-content {
   display: none;
   background: var(--glass-bg);
@@ -634,9 +628,17 @@ h2 i {
 }
 .quote-icon { color: var(--accent-blue); margin-right: 6px; }
 
-/* Apple UI Inner Cards */
+/* Sub-Cards with iPhone Glass styling */
 .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-.metric-card { padding: 24px; border-radius: 20px; text-align: center; border: 1px solid var(--glass-border); background: var(--inner-card-bg); }
+.metric-card, .timeline-item, .card, .skills-category, .edu-card, .cert-img-wrapper, .resume-download-box { 
+  padding: 24px; 
+  border-radius: 20px; 
+  border: 1px solid var(--glass-border); 
+  background: var(--inner-card-bg);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+}
+
+.metric-card { text-align: center; }
 .metric-card.cyan { border-top: 4px solid var(--accent-cyan); }
 .metric-card.emerald { border-top: 4px solid var(--accent-emerald); }
 .metric-card.violet { border-top: 4px solid var(--accent-violet); }
@@ -649,7 +651,6 @@ h2 i {
 
 /* Timeline */
 .timeline { display: flex; flex-direction: column; gap: 20px; }
-.timeline-item { border: 1px solid var(--glass-border); padding: 24px; border-radius: 20px; background: var(--inner-card-bg); }
 .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
 .company { color: var(--accent-cyan); font-weight: 600; font-size: 0.95rem; }
 .badge { padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
@@ -685,11 +686,13 @@ h2 i {
   display: none; 
 }
 
+/* iPhone Glass Inner Carousel Card */
 .carousel-card {
   flex: 0 0 calc(100% - 20px); 
   scroll-snap-align: center;
   background: var(--inner-card-bg);
   border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
   border-radius: 20px;
   padding: 30px;
   position: relative;
@@ -701,6 +704,8 @@ h2 i {
 
 .carousel-btn {
   background: var(--glass-bg);
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
   border: 1px solid var(--glass-border);
   color: var(--text-heading);
   border-radius: 50%;
@@ -712,8 +717,7 @@ h2 i {
   cursor: pointer;
   z-index: 2;
   position: absolute;
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--glass-shadow);
   transition: background 0.3s, color 0.3s, transform 0.2s;
 }
 .carousel-btn:hover { 
@@ -725,13 +729,14 @@ h2 i {
 #works-right { right: -15px; }
 
 /* Tags */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .card-tag { font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 8px; display: inline-block; margin-bottom: 16px; }
 .cyan-tag { background: rgba(76, 201, 240, 0.15); color: var(--accent-cyan); }
 .violet-tag { background: rgba(139, 92, 246, 0.15); color: var(--accent-violet); }
 .emerald-tag { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
 
-.carousel-card h3 { font-size: 1.3rem; color: var(--text-heading); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-.carousel-card p { color: var(--text-main); font-size: 0.95rem; line-height: 1.6; }
+.card h3, .carousel-card h3 { font-size: 1.3rem; color: var(--text-heading); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.card p, .carousel-card p { color: var(--text-main); font-size: 0.95rem; line-height: 1.6; }
 
 .border-cyan { border-left: 4px solid var(--accent-cyan); }
 .border-violet { border-left: 4px solid var(--accent-violet); }
@@ -739,7 +744,6 @@ h2 i {
 
 /* Skills */
 .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-.skills-category { padding: 20px; border-radius: 20px; border: 1px solid var(--glass-border); background: var(--inner-card-bg); }
 .skills-category h3 { font-size: 1.1rem; color: var(--text-heading); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
 .tag-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
 .tag-list li { background: rgba(76, 201, 240, 0.08); color: var(--text-main); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(76, 201, 240, 0.2); }
@@ -753,16 +757,13 @@ h2 i {
   margin-top: 20px;
 }
 .cert-img-wrapper {
-  background: var(--inner-card-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
   padding: 16px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .cert-img-wrapper:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 .cert-img {
   width: 100%;
@@ -783,7 +784,6 @@ h2 i {
 
 /* Education */
 .education-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-.edu-card { padding: 24px; border-radius: 20px; border: 1px solid var(--glass-border); background: var(--inner-card-bg); }
 .edu-card h4 { color: var(--text-heading); display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
 .edu-card .date { color: var(--accent-cyan); font-size: 0.85rem; font-weight: 600; }
 
@@ -791,8 +791,8 @@ h2 i {
 .contact-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
 .contact-info p { margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 1.05rem; }
 .contact-info i { color: var(--accent-cyan); font-size: 1.2rem; }
-.resume-download-box { padding: 32px; border-radius: 24px; border: 1px solid var(--glass-border); background: var(--inner-card-bg); text-align: center; }
-.download-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%); color: #ffffff; padding: 14px 28px; border-radius: 12px; text-decoration: none; margin-top: 16px; font-weight: 600; box-shadow: var(--shadow-sm); }
+.resume-download-box { text-align: center; }
+.download-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%); color: #ffffff; padding: 14px 28px; border-radius: 12px; text-decoration: none; margin-top: 16px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 .download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(76, 201, 240, 0.3); }
 
 /* Footer */
@@ -883,7 +883,6 @@ h2 i {
     border-radius: 28px !important;
   }
 
-  /* Coverflow mobile adjust */
   .cf-item.prev { transform: translateX(-20%) scale(0.85) translateZ(-100px) !important; }
   .cf-item.next { transform: translateX(20%) scale(0.85) translateZ(-100px) !important; }
 }
