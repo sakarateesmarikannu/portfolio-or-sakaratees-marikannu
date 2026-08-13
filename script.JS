@@ -51,30 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-
-  // 3. Scroll Reveal Animation for Tabs and Content
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15
-  };
-
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Adds the .visible class to make the element slide up smoothly
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-    revealObserver.observe(el);
-  });
-
-
-  // 4. Tab Switching Logic
+  // 3. Tab Switching Logic
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 
@@ -97,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 5. Theme Toggle
+  // 4. Theme Toggle
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
