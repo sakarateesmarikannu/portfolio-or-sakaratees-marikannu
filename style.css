@@ -3,45 +3,44 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Executive Color Palette & iPhone Glassmorphism Variables */
+/* ========================================= */
+/* PREMIUM DEEP BLUE GLASSMORPHISM VARIABLES */
+/* ========================================= */
 :root {
-  /* Premium Sand Color & Fixed Pattern for Light Mode */
+  /* Light Mode: Sand Background */
   --bg-color: #FDF5E6; 
   --bg-pattern: radial-gradient(rgba(160, 140, 110, 0.25) 2px, transparent 2px);
   --bg-size: 25px 25px;
 
-  /* iPhone Light Mode Frosted Glass UI */
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-  --inner-card-bg: rgba(255, 255, 255, 0.35);
+  /* Royal Blue Frosted Glass (Matches your screenshot exactly!) */
+  --glass-bg: rgba(28, 55, 120, 0.7); 
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 15px 35px rgba(0,0,0,0.15), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  --inner-card-bg: rgba(255, 255, 255, 0.1);
   
-  --text-main: #334155;
-  --text-heading: #0f172a;
-  --accent-blue: #2563eb;
-  --accent-cyan: #0284c7;
-  --accent-emerald: #059669;
-  --accent-violet: #7c3aed;
+  --text-main: #f8fafc;     /* Bright light-gray for readability */
+  --text-heading: #ffffff;  /* Pure white for headings */
+  
+  --accent-cyan: #4cc9f0;
+  --accent-blue: #4da4f7;
+  --accent-emerald: #10b981;
+  --accent-violet: #8b5cf6;
 }
 
 body.dark-theme {
-  /* Dark Mode Pattern */
+  /* Dark Mode: Space Background */
   --bg-color: #0b132b;
   --bg-pattern: radial-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px);
   --bg-size: 25px 25px;
 
-  /* iPhone Dark Mode Frosted Glass UI */
-  --glass-bg: rgba(20, 25, 40, 0.45);
+  /* Deep Navy Blue Frosted Glass */
+  --glass-bg: rgba(15, 28, 65, 0.75);
   --glass-border: rgba(255, 255, 255, 0.15);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-  --inner-card-bg: rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  --inner-card-bg: rgba(255, 255, 255, 0.06);
 
-  --text-main: #e0e1dd;
+  --text-main: #e2e8f0;
   --text-heading: #ffffff;
-  --accent-blue: #4361ee;
-  --accent-cyan: #4cc9f0;
-  --accent-emerald: #10b981;
-  --accent-violet: #8b5cf6;
 }
 
 * {
@@ -55,7 +54,7 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-color);
   
-  /* Applies the Base Pattern */
+  /* Fixed Background Pattern */
   background-image: var(--bg-pattern);
   background-size: var(--bg-size);
   background-attachment: fixed;
@@ -71,8 +70,8 @@ body::before {
   content: "";
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: -1; 
   pointer-events: none;
 }
@@ -94,10 +93,9 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Override body blur for hero section if needed, but hero uses its own color layer */
 }
 
-/* Static Blue Background for Hero Only */
+/* Static Blue Background for Hero */
 .hero-color-layer {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -106,7 +104,7 @@ body::before {
   will-change: opacity;
 }
 
-/* Smooth Color Blend Transition overlay into Sand Background */
+/* Smooth Color Blend Transition into background */
 .hero-fade-bottom {
   position: absolute;
   bottom: 0;
@@ -118,7 +116,7 @@ body::before {
   pointer-events: none;
 }
 
-/* Grid Background Blueprint overlay */
+/* Grid Blueprint overlay */
 .blueprint-bg::before {
   content: "";
   position: absolute;
@@ -151,7 +149,7 @@ body::before {
   letter-spacing: 0.5px;
 }
 
-/* iPhone Glass Button */
+/* Glass Theme Button */
 .theme-toggle-btn {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(20px) saturate(180%);
@@ -185,7 +183,6 @@ body::before {
   will-change: transform;
 }
 
-/* Static Cyan Color for Subtext */
 .hero-bg-subtext {
   font-size: clamp(1rem, 2.5vw, 1.5rem); 
   color: #4cc9f0 !important; 
@@ -231,31 +228,38 @@ body::before {
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-/* iPhone Glass Hero Cards */
+/* ========================================= */
+/* UNIVERSAL BLUE GLASS CARDS                */
+/* ========================================= */
+.hero-card, .cf-item, .carousel-card, .tab-content, .tab-btn {
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Hero Cards Formatting */
 .hero-card {
   position: absolute;
   top: 55%;
   transform: translateY(-50%);
   width: clamp(260px, 22vw, 340px);
   padding: 30px;
-  color: #ffffff;
-  z-index: 6; 
-  background: rgba(20, 25, 40, 0.45); 
-  backdrop-filter: blur(25px) saturate(200%);
-  -webkit-backdrop-filter: blur(25px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 30px; 
-  box-shadow: 0 30px 60px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
   will-change: transform;
+  z-index: 6; 
 }
-
 .hero-left { left: 8%; opacity: 0; animation: slideInLeftFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards; }
 .hero-right { right: 8%; opacity: 0; animation: slideInRightFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards; }
 
+/* Perfect match for your screenshot text */
 .hero-card p {
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  color: #ffffff;
+  font-weight: 500;
 }
 
 /* Let's Talk CTA Button */
@@ -263,7 +267,8 @@ body::before {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(90deg, #1f2937, #374151);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255,255,255,0.2);
   color: white;
   padding: 10px 16px 10px 20px;
   border-radius: 30px;
@@ -271,8 +276,7 @@ body::before {
   font-weight: 600;
   font-size: 0.9rem;
   width: 100%;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  transition: transform 0.2s;
+  transition: transform 0.2s, background 0.3s;
 }
 .hero-cta i {
   background: #ffffff;
@@ -281,22 +285,22 @@ body::before {
   width: 28px; height: 28px;
   display: flex; align-items: center; justify-content: center;
 }
-.hero-cta:hover { transform: scale(1.05); }
+.hero-cta:hover { transform: scale(1.05); background: rgba(255,255,255,0.2); }
 
-/* Social Links right card */
+/* Perfect match for your screenshot social links */
 .hero-socials {
   display: flex;
-  gap: 12px;
+  gap: 15px;
   justify-content: center;
 }
 .hero-socials a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15); /* The subtle white circle */
   color: #ffffff;
   text-decoration: none;
   font-size: 1.2rem;
@@ -349,12 +353,10 @@ body::before {
   from { opacity: 0; transform: translateX(40px); }
   to { opacity: 1; transform: translateX(0); }
 }
-
 @keyframes tabSwitchFade {
   0% { opacity: 0; transform: translateY(15px) scale(0.98); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
-
 
 /* ========================================= */
 /* 3D COVERFLOW CAROUSEL (FEATURED)          */
@@ -378,22 +380,14 @@ body::before {
   height: 100%;
 }
 
-/* iPhone Glass Carousel Items */
 .cf-item {
   position: absolute;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
   transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border-radius: 30px;
+  border-radius: 30px; /* Matching rounded corners */
   overflow: hidden;
-  
-  background: var(--glass-bg);
-  backdrop-filter: blur(25px) saturate(200%);
-  -webkit-backdrop-filter: blur(25px) saturate(200%);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  
   display: flex;
   flex-direction: column;
 }
@@ -402,7 +396,7 @@ body::before {
   width: 100%;
   height: 75%;
   object-fit: cover;
-  background: rgba(128, 128, 128, 0.2);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .cf-caption {
@@ -413,19 +407,20 @@ body::before {
   justify-content: center;
   text-align: center;
   padding: 10px;
-  /* Handled by parent's backdrop-filter */
+  background: transparent;
 }
 .cf-caption h3 {
-  font-size: 1.1rem;
-  color: var(--text-heading);
+  font-size: 1.15rem;
+  color: #ffffff;
   margin-bottom: 4px;
 }
 .cf-caption p {
   font-size: 0.85rem;
-  color: var(--text-main);
+  color: rgba(255, 255, 255, 0.85);
   margin: 0;
 }
 
+/* Coverflow JS States */
 .cf-item.active {
   transform: translateX(0) scale(1) translateZ(0);
   z-index: 3;
@@ -451,11 +446,11 @@ body::before {
 }
 
 .coverflow-btn {
-  background: var(--glass-bg);
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(25px) saturate(200%);
   -webkit-backdrop-filter: blur(25px) saturate(200%);
-  border: 1px solid var(--glass-border);
-  color: var(--text-heading);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
   border-radius: 50%;
   width: 45px;
   height: 45px;
@@ -465,17 +460,15 @@ body::before {
   cursor: pointer;
   z-index: 10;
   position: absolute;
-  box-shadow: var(--glass-shadow);
-  transition: background 0.3s, color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: background 0.3s, transform 0.2s;
 }
 .coverflow-btn:hover { 
   background: var(--accent-cyan); 
-  color: #fff; 
   transform: scale(1.1);
 }
 #cf-left { left: 0; }
 #cf-right { right: 0; }
-
 
 /* ========================================= */
 /* APPLE UI TABS                             */
@@ -484,7 +477,6 @@ body::before {
   position: relative;
   z-index: 10;
   padding: 40px 0 30px 0;
-  background-color: transparent;
   width: 100%;
 }
 
@@ -500,33 +492,20 @@ body::before {
   scrollbar-width: none; 
   -ms-overflow-style: none;
 }
-.nav-image-container::-webkit-scrollbar {
-  display: none;
-}
+.nav-image-container::-webkit-scrollbar { display: none; }
 
 @media (min-width: 1150px) {
-  .nav-image-container {
-    justify-content: center;
-  }
+  .nav-image-container { justify-content: center; }
 }
 
-/* iPhone Glass Tabs */
 .tab-btn {
   width: clamp(140px, 18vw, 220px);
   aspect-ratio: 4 / 3;
   flex-shrink: 0;
-  
-  background: var(--glass-bg);
-  backdrop-filter: blur(25px) saturate(200%);
-  -webkit-backdrop-filter: blur(25px) saturate(200%);
-  border: 1px solid var(--glass-border);
   border-radius: 30px; 
-  box-shadow: var(--glass-shadow);
-  
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   padding: 0;
 }
 
@@ -538,16 +517,14 @@ body::before {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  color: var(--text-heading);
+  color: #ffffff;
   z-index: 2;
 }
-
 .tab-content-inner i {
   font-size: 2.2rem;
-  color: var(--text-main);
+  color: #ffffff;
   transition: transform 0.3s ease, color 0.3s ease;
 }
-
 .tab-content-inner span {
   font-size: 1.1rem;
   font-weight: 700;
@@ -557,17 +534,14 @@ body::before {
 
 .tab-btn:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 .tab-btn:hover .tab-content-inner i {
   transform: scale(1.15);
   color: var(--accent-cyan);
 }
-
 .tab-btn.active {
   border-color: var(--accent-cyan);
-  background: rgba(76, 201, 240, 0.15);
-  box-shadow: 0 0 30px rgba(76, 201, 240, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1); /* Slight highlight */
   transform: scale(1.03);
 }
 .tab-btn.active .tab-content-inner i,
@@ -576,33 +550,26 @@ body::before {
 }
 
 /* ========================================= */
-/* APPLE UI CONTENT AREA                     */
+/* CONTENT AREA (TABS)                       */
 /* ========================================= */
 .content {
   padding: 30px 24px 60px 24px;
   min-height: 50vh;
 }
 
-/* iPhone Glass Content Area */
 .tab-content {
   display: none;
-  background: var(--glass-bg);
-  backdrop-filter: blur(30px) saturate(200%);
-  -webkit-backdrop-filter: blur(30px) saturate(200%);
-  border: 1px solid var(--glass-border);
   border-radius: 40px; 
-  box-shadow: var(--glass-shadow);
   padding: 45px;
   position: relative;
 }
-
 .tab-content.active {
   display: block;
   animation: tabSwitchFade 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 h2 {
-  color: var(--text-heading);
+  color: #ffffff;
   margin-bottom: 28px;
   font-size: 1.6rem;
   font-weight: 700;
@@ -612,7 +579,7 @@ h2 {
 }
 h2 i {
   color: var(--accent-cyan);
-  background: rgba(76, 201, 240, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   padding: 12px;
   border-radius: 12px;
 }
@@ -621,21 +588,22 @@ h2 i {
   font-size: 1.05rem;
   line-height: 1.7;
   padding: 24px;
-  background: var(--inner-card-bg);
+  background: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
   border-left: 4px solid var(--accent-blue);
   border-radius: 16px;
   margin-bottom: 32px;
 }
-.quote-icon { color: var(--accent-blue); margin-right: 6px; }
+.quote-icon { color: var(--accent-cyan); margin-right: 6px; }
 
-/* Sub-Cards with iPhone Glass styling */
+/* Inner Sub-Cards styling */
 .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
 .metric-card, .timeline-item, .card, .skills-category, .edu-card, .cert-img-wrapper, .resume-download-box { 
   padding: 24px; 
   border-radius: 20px; 
-  border: 1px solid var(--glass-border); 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
   background: var(--inner-card-bg);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
 }
 
 .metric-card { text-align: center; }
@@ -646,18 +614,18 @@ h2 i {
 .metric-card.cyan .icon { color: var(--accent-cyan); }
 .metric-card.emerald .icon { color: var(--accent-emerald); }
 .metric-card.violet .icon { color: var(--accent-violet); }
-.metric-card h3 { font-size: 1.8rem; color: var(--text-heading); }
-.metric-card p { font-size: 0.9rem; margin-top: 6px; color: var(--text-main); }
+.metric-card h3 { font-size: 1.8rem; color: #ffffff; }
+.metric-card p { font-size: 0.9rem; margin-top: 6px; color: rgba(255, 255, 255, 0.85); }
 
 /* Timeline */
 .timeline { display: flex; flex-direction: column; gap: 20px; }
 .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
 .company { color: var(--accent-cyan); font-weight: 600; font-size: 0.95rem; }
 .badge { padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
-.badge.blue { background: rgba(67, 97, 238, 0.15); color: var(--accent-blue); }
-.badge.purple { background: rgba(139, 92, 246, 0.15); color: var(--accent-violet); }
+.badge.blue { background: rgba(255, 255, 255, 0.15); color: #ffffff; }
+.badge.purple { background: rgba(139, 92, 246, 0.3); color: #ffffff; }
 .timeline-item ul { list-style: none; }
-.timeline-item li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; }
+.timeline-item li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; color: #ffffff; }
 .timeline-item li i { color: var(--accent-emerald); margin-top: 4px; }
 
 
@@ -670,7 +638,6 @@ h2 i {
   align-items: center;
   margin-top: 20px;
 }
-
 .carousel-track {
   display: flex;
   gap: 20px;
@@ -682,32 +649,25 @@ h2 i {
   scroll-behavior: smooth;
   width: 100%;
 }
-.carousel-track::-webkit-scrollbar {
-  display: none; 
-}
+.carousel-track::-webkit-scrollbar { display: none; }
 
-/* iPhone Glass Inner Carousel Card */
 .carousel-card {
   flex: 0 0 calc(100% - 20px); 
   scroll-snap-align: center;
-  background: var(--inner-card-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-  border-radius: 20px;
+  border-radius: 30px;
   padding: 30px;
   position: relative;
 }
-
 @media (min-width: 768px) {
   .carousel-card { flex: 0 0 calc(50% - 10px); } 
 }
 
 .carousel-btn {
-  background: var(--glass-bg);
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(25px) saturate(200%);
   -webkit-backdrop-filter: blur(25px) saturate(200%);
-  border: 1px solid var(--glass-border);
-  color: var(--text-heading);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
   border-radius: 50%;
   width: 45px;
   height: 45px;
@@ -717,26 +677,22 @@ h2 i {
   cursor: pointer;
   z-index: 2;
   position: absolute;
-  box-shadow: var(--glass-shadow);
-  transition: background 0.3s, color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: background 0.3s, transform 0.2s;
 }
-.carousel-btn:hover { 
-  background: var(--accent-cyan); 
-  color: #fff; 
-  transform: scale(1.1);
-}
+.carousel-btn:hover { background: var(--accent-cyan); transform: scale(1.1); }
 #works-left { left: -15px; }
 #works-right { right: -15px; }
 
-/* Tags */
+/* Tags & Inner Typography */
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .card-tag { font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 8px; display: inline-block; margin-bottom: 16px; }
-.cyan-tag { background: rgba(76, 201, 240, 0.15); color: var(--accent-cyan); }
-.violet-tag { background: rgba(139, 92, 246, 0.15); color: var(--accent-violet); }
-.emerald-tag { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
+.cyan-tag { background: rgba(76, 201, 240, 0.2); color: #ffffff; }
+.violet-tag { background: rgba(139, 92, 246, 0.3); color: #ffffff; }
+.emerald-tag { background: rgba(16, 185, 129, 0.25); color: #ffffff; }
 
-.card h3, .carousel-card h3 { font-size: 1.3rem; color: var(--text-heading); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-.card p, .carousel-card p { color: var(--text-main); font-size: 0.95rem; line-height: 1.6; }
+.card h3, .carousel-card h3 { font-size: 1.3rem; color: #ffffff; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.card p, .carousel-card p { color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; line-height: 1.6; }
 
 .border-cyan { border-left: 4px solid var(--accent-cyan); }
 .border-violet { border-left: 4px solid var(--accent-violet); }
@@ -744,10 +700,10 @@ h2 i {
 
 /* Skills */
 .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-.skills-category h3 { font-size: 1.1rem; color: var(--text-heading); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.skills-category h3 { font-size: 1.1rem; color: #ffffff; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
 .tag-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
-.tag-list li { background: rgba(76, 201, 240, 0.08); color: var(--text-main); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(76, 201, 240, 0.2); }
-.section-sub-title { margin: 32px 0 16px 0; color: var(--text-heading); display: flex; align-items: center; gap: 8px; }
+.tag-list li { background: rgba(255, 255, 255, 0.1); color: #ffffff; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(255, 255, 255, 0.15); }
+.section-sub-title { margin: 32px 0 16px 0; color: #ffffff; display: flex; align-items: center; gap: 8px; }
 
 /* Certifications Image Grid */
 .cert-image-grid {
@@ -757,47 +713,49 @@ h2 i {
   margin-top: 20px;
 }
 .cert-img-wrapper {
-  padding: 16px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .cert-img-wrapper:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
 .cert-img {
   width: 100%;
   height: auto;
   border-radius: 12px;
   margin-bottom: 12px;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   aspect-ratio: 4/3;
   object-fit: cover;
-  background: rgba(128, 128, 128, 0.1);
+  background: rgba(0, 0, 0, 0.2);
   display: block;
 }
 .cert-img-wrapper p {
   font-weight: 600;
-  color: var(--text-heading);
+  color: #ffffff;
   font-size: 0.95rem;
 }
 
 /* Education */
 .education-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-.edu-card h4 { color: var(--text-heading); display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
+.edu-card h4 { color: #ffffff; display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
+.edu-card p { color: rgba(255, 255, 255, 0.85); }
 .edu-card .date { color: var(--accent-cyan); font-size: 0.85rem; font-weight: 600; }
 
 /* Contact Box */
 .contact-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-.contact-info p { margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 1.05rem; }
+.contact-info p { margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 1.05rem; color: #ffffff; }
 .contact-info i { color: var(--accent-cyan); font-size: 1.2rem; }
 .resume-download-box { text-align: center; }
-.download-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%); color: #ffffff; padding: 14px 28px; border-radius: 12px; text-decoration: none; margin-top: 16px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-.download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(76, 201, 240, 0.3); }
+.resume-download-box h3 { color: #ffffff; }
+.resume-download-box p { color: rgba(255, 255, 255, 0.85); }
+.download-btn { display: inline-flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; padding: 14px 28px; border-radius: 12px; text-decoration: none; margin-top: 16px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.download-btn:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.25); }
 
 /* Footer */
 .footer {
-  color: #94a3b8;
+  color: #cbd5e1;
   text-align: center;
   padding: 40px 0;
   font-size: 0.9rem;
