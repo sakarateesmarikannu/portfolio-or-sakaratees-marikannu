@@ -87,7 +87,6 @@ body {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  /* Removed the hard border to stop the gap issue! */
   border-bottom: none; 
   display: flex;
   align-items: center;
@@ -100,9 +99,9 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 25vh; /* Fades the bottom 25% of the hero */
+  height: 25vh; 
   background: linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%);
-  z-index: 2; /* Sits beneath portrait, but over blueprint */
+  z-index: 2; 
   pointer-events: none;
 }
 
@@ -190,10 +189,10 @@ body {
   animation: slideDownFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
 }
 
-/* Portrait (Cutout PNG) - SMOOTH & FLUSH FIX */
+/* Portrait (Cutout PNG) */
 .hero-portrait {
   position: absolute;
-  bottom: -25px; /* Razor blade effect: Pulls image heavily down below the nav line */
+  bottom: -25px; 
   left: 50%;
   transform: translateX(-50%);
   height: 95vh;
@@ -217,7 +216,7 @@ body {
   width: clamp(250px, 20vw, 320px);
   padding: 24px;
   color: #ffffff;
-  z-index: 6; /* Raised slightly */
+  z-index: 6; 
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(8px);
@@ -336,30 +335,18 @@ body {
   to { opacity: 1; translate: 0 0; }
 }
 
-/* Scroll Reveal Animation Class */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.reveal-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* Tab Switching Animation */
 @keyframes tabSwitchFade {
   0% { opacity: 0; transform: translateY(15px) scale(0.98); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-
 /* ========================================= */
 /* CENTERED 4:3 LARGE TABS (ONE LINE NO WRAP)*/
 /* ========================================= */
 .image-nav-area {
   position: relative;
-  z-index: 10; /* Lays directly over the bottom of the pulled-down portrait */
+  z-index: 10;
   padding: 40px 0 30px 0;
   background-color: var(--bg-color);
   width: 100%;
@@ -609,7 +596,7 @@ h2 i {
     width: 80%;
     max-width: 350px;
     left: 0;
-    bottom: -25px; /* Slices off bottom gap on mobile too */
+    bottom: -25px;
     transform: none;
     z-index: 5;
   }
