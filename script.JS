@@ -23,7 +23,40 @@ document.addEventListener('DOMContentLoaded', () => {
     expCounter.textContent = expString;
   }
 
-  // 2. Tab Switching Logic
+  // 2. Parallax and Scroll Fade Effects
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    
+    // Fade out the blue background color layer
+    const heroBgLayer = document.getElementById('hero-bg-layer');
+    if (heroBgLayer) {
+      // Background fully fades out after scrolling 600px
+      let opacity = 1 - (scrollY / 600); 
+      heroBgLayer.style.opacity = Math.max(opacity, 0);
+    }
+    
+    // Parallax the Portrait (pushes it down into the background)
+    // Only apply on Desktop screens so mobile layout doesn't break
+    if (window.innerWidth > 900) {
+      const portrait = document.getElementById('parallax-portrait');
+      if (portrait) {
+        // Moves the image down slightly slower than the scroll speed
+        portrait.style.transform = `translateX(-50%) translateY(${scrollY * 0.3}px)`;
+      }
+
+      // Parallax the text and cards slightly upwards
+      const textGroup = document.getElementById('parallax-text');
+      const cardLeft = document.getElementById('parallax-card-left');
+      const cardRight = document.getElementById('parallax-card-right');
+      
+      if (textGroup) textGroup.style.transform = `translateY(${scrollY * -0.15}px)`;
+      if (cardLeft) cardLeft.style.transform = `translateY(calc(-50% + ${scrollY * -0.1}px))`;
+      if (cardRight) cardRight.style.transform = `translateY(calc(-50% + ${scrollY * -0.1}px))`;
+    }
+  });
+
+
+  // 3. Tab Switching Logic
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 
@@ -46,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. Theme Toggle
+  // 4. Theme Toggle
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
