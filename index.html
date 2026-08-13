@@ -13,7 +13,10 @@
 <body class="dark-theme">
 
   <!-- FULL SCREEN HERO LANDING PAGE -->
-  <header class="hero blueprint-bg">
+  <header class="hero">
+    
+    <!-- This new layer holds the blue color & grid so it can fade out smoothly -->
+    <div class="hero-color-layer blueprint-bg" id="hero-bg-layer"></div>
     
     <!-- Top Navigation Bar -->
     <div class="hero-top-bar container">
@@ -26,32 +29,24 @@
     </div>
 
     <!-- Massive Background Text Group -->
-    <div class="hero-bg-group">
+    <div class="hero-bg-group" id="parallax-text">
       <h2 class="hero-bg-subtext">Broadcast Operations</h2>
       <h1 class="hero-bg-text">Scheduling<br>Analyst</h1>
     </div>
 
     <!-- Transparent PNG Portrait -->
-    <img src="my%20portrait.png" alt="Sakaratees Marikannu" class="hero-portrait">
+    <img src="my%20portrait.png" alt="Sakaratees Marikannu" class="hero-portrait" id="parallax-portrait">
 
-    <!-- Left Floating Info Card -->
-    <div class="hero-card hero-left">
-      <div class="crosshair top-left"></div>
-      <div class="crosshair top-right"></div>
-      <div class="crosshair bottom-left"></div>
-      <div class="crosshair bottom-right"></div>
+    <!-- Left Floating Info Card (Apple Droplet Style) -->
+    <div class="hero-card hero-left" id="parallax-card-left">
       <p>Hey, I am Sakaratees. I help businesses turn complex data into accurate, streamlined broadcast schedules.</p>
       <a href="#contact" class="hero-cta" onclick="document.querySelector('[data-tab=\'contact\']').click();">
         Let's Talk Now <i class="fas fa-arrow-right"></i>
       </a>
     </div>
 
-    <!-- Right Floating Info Card -->
-    <div class="hero-card hero-right">
-      <div class="crosshair top-left"></div>
-      <div class="crosshair top-right"></div>
-      <div class="crosshair bottom-left"></div>
-      <div class="crosshair bottom-right"></div>
+    <!-- Right Floating Info Card (Apple Droplet Style) -->
+    <div class="hero-card hero-right" id="parallax-card-right">
       <p>This portfolio showcases my journey as a Scheduling & Data Analyst, reflecting my passion for data integrity.</p>
       <div class="hero-socials">
         <a href="https://linkedin.com/in/sakaratees-marikannu" target="_blank"><i class="fab fa-linkedin-in"></i></a>
