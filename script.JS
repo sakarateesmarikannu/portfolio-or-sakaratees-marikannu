@@ -74,7 +74,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Theme Toggle
+  // 4. Featured Projects Carousel Logic
+  const carouselTrack = document.getElementById('project-carousel');
+  const btnLeft = document.getElementById('carousel-left');
+  const btnRight = document.getElementById('carousel-right');
+
+  if (carouselTrack && btnLeft && btnRight) {
+    btnLeft.addEventListener('click', () => {
+      carouselTrack.scrollBy({ left: -320, behavior: 'smooth' });
+    });
+    
+    btnRight.addEventListener('click', () => {
+      carouselTrack.scrollBy({ left: 320, behavior: 'smooth' });
+    });
+  }
+
+  // 5. Theme Toggle
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
