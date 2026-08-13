@@ -25,13 +25,13 @@
       </button>
     </div>
 
-    <!-- Massive Background Text Group (UPDATED ORDER) -->
+    <!-- Massive Background Text Group -->
     <div class="hero-bg-group">
       <h2 class="hero-bg-subtext">Broadcast Operations</h2>
       <h1 class="hero-bg-text">Scheduling<br>Analyst</h1>
     </div>
 
-    <!-- Transparent PNG Portrait (Space handled with %20) -->
+    <!-- Transparent PNG Portrait -->
     <img src="my%20portrait.png" alt="Sakaratees Marikannu" class="hero-portrait">
 
     <!-- Left Floating Info Card -->
@@ -66,8 +66,8 @@
     </div>
   </header>
 
-  <!-- INTERACTIVE 4:3 LARGE TABS (ONE LINE NO WRAP) -->
-  <nav id="portfolio-tabs" class="image-nav-area">
+  <!-- INTERACTIVE 4:3 LARGE TABS (WITH SCROLL REVEAL) -->
+  <nav id="portfolio-tabs" class="image-nav-area reveal-on-scroll">
     <div class="nav-image-container">
       
       <button class="tab-btn active" data-tab="overview">
@@ -108,8 +108,8 @@
     </div>
   </nav>
 
-  <!-- MAIN CONTENT AREAS -->
-  <main class="container content">
+  <!-- MAIN CONTENT AREAS (WITH SCROLL REVEAL) -->
+  <main class="container content reveal-on-scroll">
 
     <!-- TAB 1: OVERVIEW -->
     <section id="overview" class="tab-content active neural-card">
@@ -292,39 +292,29 @@
     </div>
   </footer>
 
-  <!-- BULLETPROOF EMBEDDED JAVASCRIPT -->
+  <!-- BULLETPROOF EMBEDDED JAVASCRIPT WITH SCROLL OBSERVER -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-      // 1. Automatically Calculate Experience (Starts from April 2025)
+      // 1. Calculate Experience
       const expCounter = document.getElementById('exp-counter');
       if (expCounter) {
-        const startDate = new Date(2025, 3, 1); // April 2025
+        const startDate = new Date(2025, 3, 1);
         const currentDate = new Date();
         
         let years = currentDate.getFullYear() - startDate.getFullYear();
         let months = currentDate.getMonth() - startDate.getMonth();
         
-        if (months < 0) {
-          years--;
-          months += 12;
-        }
+        if (months < 0) { years--; months += 12; }
         
         let expString = "With ";
-        if (years > 0) {
-          expString += years === 1 ? "1 Year " : `${years} Years `;
-        }
-        
+        if (years > 0) expString += years === 1 ? "1 Year " : `${years} Years `;
         if (months > 0) {
           if (years > 0) expString += "& ";
           expString += months === 1 ? "1 Month " : `${months} Months `;
         }
-        
         expString += "of Experience";
-        
-        if (years === 0 && months === 0) {
-          expString = "Recently Started Experience"; 
-        }
+        if (years === 0 && months === 0) expString = "Recently Started Experience"; 
         
         expCounter.textContent = expString;
       }
@@ -352,7 +342,7 @@
         });
       });
 
-      // 3. Dark/Light Mode Theme Toggle
+      // 3. Theme Toggle
       const themeToggleBtn = document.getElementById('theme-toggle');
       const themeIcon = document.getElementById('theme-icon');
       const themeText = document.getElementById('theme-text');
@@ -385,6 +375,24 @@
           }
         });
       }
+
+      // 4. Scroll Reveal Animations (Intersection Observer)
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Animate only once
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.1, // Trigger when 10% of element is visible
+        rootMargin: "0px 0px -50px 0px" // Trigger slightly before it hits the bottom
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+
     });
   </script>
 </body>
