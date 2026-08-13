@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Theme Toggle
+  // 6. Theme Toggle with Icon Pop Animation
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
@@ -142,18 +142,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
+      // Trigger the spring pop animation
+      themeIcon.classList.remove('theme-icon-animate');
+      void themeIcon.offsetWidth; // forces a reflow to restart animation
+      themeIcon.classList.add('theme-icon-animate');
+
       body.classList.toggle('dark-theme');
       const isDark = body.classList.contains('dark-theme');
 
-      if (isDark) {
-        themeIcon.className = 'fas fa-sun';
-        themeText.textContent = 'Light Mode';
-        localStorage.setItem('theme', 'dark');
-      } else {
-        themeIcon.className = 'fas fa-moon';
-        themeText.textContent = 'Dark Mode';
-        localStorage.setItem('theme', 'light');
-      }
+      // Change icon halfway through the animation for a smoother look
+      setTimeout(() => {
+        if (isDark) {
+          themeIcon.className = 'fas fa-sun theme-icon-animate';
+          themeText.textContent = 'Light Mode';
+          localStorage.setItem('theme', 'dark');
+        } else {
+          themeIcon.className = 'fas fa-moon theme-icon-animate';
+          themeText.textContent = 'Dark Mode';
+          localStorage.setItem('theme', 'light');
+        }
+      }, 150);
     });
   }
+
+  // 7. Scroll Reveal Animation Logic
+  const revealElements = document.querySelectorAll('.reveal');
+  
+  if (revealElements.length > 0) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { 
+      threshold: 0.15, // Trigger when 15% of the element is visible
+      rootMargin: "0px 0px -50px 0px" // Trigger slightly before the bottom of the screen
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  }
+
 });
