@@ -355,6 +355,123 @@ body {
 
 
 /* ========================================= */
+/* 3D COVERFLOW CAROUSEL (FEATURED)          */
+/* ========================================= */
+.coverflow-carousel {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0;
+  perspective: 1200px;
+}
+
+.coverflow-track {
+  position: relative;
+  width: 60%;
+  min-width: 280px;
+  max-width: 500px;
+  height: 100%;
+}
+
+.cf-item {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--inner-card-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.cf-img {
+  width: 100%;
+  height: 75%;
+  object-fit: cover;
+  background: rgba(128, 128, 128, 0.2);
+}
+
+.cf-caption {
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+}
+.cf-caption h3 {
+  font-size: 1.1rem;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+}
+.cf-caption p {
+  font-size: 0.85rem;
+  color: var(--text-main);
+  margin: 0;
+}
+
+/* Coverflow JS States */
+.cf-item.active {
+  transform: translateX(0) scale(1) translateZ(0);
+  z-index: 3;
+  opacity: 1;
+}
+.cf-item.prev {
+  transform: translateX(-40%) scale(0.8) translateZ(-100px);
+  z-index: 2;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.cf-item.next {
+  transform: translateX(40%) scale(0.8) translateZ(-100px);
+  z-index: 2;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.cf-item.hidden {
+  transform: translateX(0) scale(0.6) translateZ(-200px);
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.coverflow-btn {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-heading);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  position: absolute;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+.coverflow-btn:hover { 
+  background: var(--accent-cyan); 
+  color: #fff; 
+  transform: scale(1.1);
+}
+#cf-left { left: 0; }
+#cf-right { right: 0; }
+
+
+/* ========================================= */
 /* APPLE UI TABS                             */
 /* ========================================= */
 .image-nav-area {
@@ -528,7 +645,10 @@ h2 i {
 .timeline-item li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; }
 .timeline-item li i { color: var(--accent-emerald); margin-top: 4px; }
 
-/* FEATURED CAROUSEL SECTION */
+
+/* ========================================= */
+/* REGULAR CAROUSEL (WORKS TAB)              */
+/* ========================================= */
 .carousel-wrapper {
   position: relative;
   display: flex;
@@ -587,8 +707,8 @@ h2 i {
   color: #fff; 
   transform: scale(1.1);
 }
-#carousel-left, #works-left { left: -15px; }
-#carousel-right, #works-right { right: -15px; }
+#works-left { left: -15px; }
+#works-right { right: -15px; }
 
 /* Tags */
 .card-tag { font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 8px; display: inline-block; margin-bottom: 16px; }
@@ -742,4 +862,8 @@ h2 i {
     padding: 24px;
     border-radius: 28px;
   }
+
+  /* Coverflow mobile adjust */
+  .cf-item.prev { transform: translateX(-20%) scale(0.85) translateZ(-100px); }
+  .cf-item.next { transform: translateX(20%) scale(0.85) translateZ(-100px); }
 }
