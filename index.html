@@ -41,8 +41,8 @@
     <div class="hero-card hero-left" id="parallax-card-left">
       <p>Hey, I am Sakaratees. I help businesses turn complex data into accurate, streamlined broadcast schedules.</p>
       
-      <!-- NEW: WhatsApp Direct Link Button -->
-      <a href="https://wa.me/918870613643?text=Hi%20Sakaratees!%20I%20just%20saw%20your%20portfolio%20website%20and%20would%20like%20to%20connect." target="_blank" class="hero-cta">
+      <!-- FIXED WhatsApp Direct Link Button (GitHub Safe) -->
+      <a href="https://api.whatsapp.com/send?phone=918870613643&text=Hi+Sakaratees!+I+just+saw+your+portfolio+and+would+like+to+connect." target="_blank" class="hero-cta">
         Let's Talk Now <i class="fab fa-whatsapp"></i>
       </a>
     </div>
@@ -176,25 +176,39 @@
       </div>
     </section>
 
-    <!-- TAB 3: PROJECTS -->
+    <!-- TAB 3: PROJECTS (NEW FEATURED CAROUSEL) -->
     <section id="projects" class="tab-content">
-      <h2><i class="fas fa-network-wired"></i> Key Projects</h2>
-      <div class="card-grid">
-        <div class="card border-cyan">
-          <div class="card-body">
+      <h2><i class="fas fa-star"></i> Featured Projects</h2>
+      
+      <div class="carousel-wrapper">
+        <button class="carousel-btn" id="carousel-left"><i class="fas fa-chevron-left"></i></button>
+        
+        <div class="carousel-track" id="project-carousel">
+          
+          <!-- Card 1 -->
+          <div class="carousel-card border-cyan">
             <span class="card-tag cyan-tag"><i class="fas fa-lightbulb"></i> Product Concept / UX</span>
             <h3><i class="fas fa-mobile-screen-button"></i> KID OS Product Concept</h3>
             <p>Proposed KID OS during MBA final year targeting Gen Z screen time trends (4-7 hrs daily); designed to encourage healthier device habits and child wellbeing.</p>
           </div>
-        </div>
 
-        <div class="card border-violet">
-          <div class="card-body">
+          <!-- Card 2 -->
+          <div class="carousel-card border-violet">
             <span class="card-tag violet-tag"><i class="fas fa-chart-pie"></i> Analytics & Strategy</span>
             <h3><i class="fas fa-bullhorn"></i> AIC-PECF Public Relations Strategy</h3>
             <p>Constructed a 30-day content calendar analyzing past page performance, increasing LinkedIn reach by 7% among students and 2% among entrepreneurs.</p>
           </div>
+
+          <!-- Card 3 -->
+          <div class="carousel-card border-emerald">
+            <span class="card-tag emerald-tag"><i class="fas fa-rocket"></i> Future Initiative</span>
+            <h3><i class="fas fa-chart-line"></i> Operations Dashboard</h3>
+            <p>Upcoming project focused on automating discrepancy resolution workflows and building a centralized tracking dashboard for cross-functional teams.</p>
+          </div>
+
         </div>
+
+        <button class="carousel-btn" id="carousel-right"><i class="fas fa-chevron-right"></i></button>
       </div>
     </section>
 
