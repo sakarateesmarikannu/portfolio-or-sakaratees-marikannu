@@ -97,13 +97,20 @@ body {
   background-color: var(--bg-color); 
 }
 
-/* The Blue Layer that will fade out on scroll */
+/* 
+  NEW: Dynamic Landing Page Background! 
+  It stays bright blue in Light Mode, and shifts to Dark Space Blue in Dark Mode.
+*/
 .hero-color-layer {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background: linear-gradient(135deg, #4da4f7 0%, #1e45b8 100%);
   z-index: 0;
   will-change: opacity;
+  transition: background 0.5s ease;
+}
+body.dark-theme .hero-color-layer {
+  background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
 }
 
 /* Smooth Color Blend Transition overlay */
@@ -182,10 +189,15 @@ body {
   will-change: transform;
 }
 
+/* 
+  FIXED: Bulletproof Text Visibility
+  Forced Pure White with a Drop Shadow so it NEVER blends in.
+*/
 .hero-bg-subtext {
   font-size: clamp(1rem, 2.5vw, 1.5rem); 
-  color: rgba(255, 255, 255, 0.85); 
-  font-weight: 700;
+  color: #ffffff !important; 
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  font-weight: 800;
   letter-spacing: 5px;
   text-transform: uppercase;
   opacity: 0;
@@ -195,7 +207,8 @@ body {
 .hero-bg-text {
   font-size: clamp(3.5rem, 9vw, 7.5rem);
   line-height: 1.1;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.95) !important;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
