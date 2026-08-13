@@ -65,6 +65,24 @@ body {
   padding: 0 24px;
 }
 
+/* Neural Background */
+.neural-bg, .neural-card {
+  position: relative;
+  overflow: hidden;
+}
+.neural-bg::before, .neural-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(76, 201, 240, var(--neural-opacity)) 2px, transparent 2px),
+    radial-gradient(circle at 85% 30%, rgba(67, 97, 238, var(--neural-opacity)) 2px, transparent 2px),
+    radial-gradient(circle at 50% 75%, rgba(139, 92, 246, var(--neural-opacity)) 2px, transparent 2px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* ========================================= */
 /* FULL SCREEN HERO LANDING PAGE             */
 /* ========================================= */
@@ -164,9 +182,10 @@ body {
   will-change: transform;
 }
 
+/* FIXED: Changed color to solid white with opacity so it is ALWAYS visible against blue */
 .hero-bg-subtext {
   font-size: clamp(1rem, 2.5vw, 1.5rem); 
-  color: var(--accent-cyan);
+  color: rgba(255, 255, 255, 0.85); 
   font-weight: 700;
   letter-spacing: 5px;
   text-transform: uppercase;
@@ -332,19 +351,6 @@ body {
 @keyframes tabSwitchFade {
   0% { opacity: 0; transform: translateY(15px) scale(0.98); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* ========================================= */
-/* SCROLL REVEAL ANIMATIONS                  */
-/* ========================================= */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.reveal-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 
