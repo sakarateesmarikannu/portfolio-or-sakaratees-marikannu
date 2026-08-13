@@ -1,34 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // 1. Automatically Calculate Experience (Starts from April 2025)
+  // 1. Calculate Experience
   const expCounter = document.getElementById('exp-counter');
   if (expCounter) {
-    const startDate = new Date(2025, 3, 1); // April 2025
+    const startDate = new Date(2025, 3, 1);
     const currentDate = new Date();
     
     let years = currentDate.getFullYear() - startDate.getFullYear();
     let months = currentDate.getMonth() - startDate.getMonth();
     
-    if (months < 0) {
-      years--;
-      months += 12;
-    }
+    if (months < 0) { years--; months += 12; }
     
     let expString = "With ";
-    if (years > 0) {
-      expString += years === 1 ? "1 Year " : `${years} Years `;
-    }
-    
+    if (years > 0) expString += years === 1 ? "1 Year " : `${years} Years `;
     if (months > 0) {
       if (years > 0) expString += "& ";
       expString += months === 1 ? "1 Month " : `${months} Months `;
     }
-    
     expString += "of Experience";
-    
-    if (years === 0 && months === 0) {
-      expString = "Recently Started Experience"; 
-    }
+    if (years === 0 && months === 0) expString = "Recently Started Experience"; 
     
     expCounter.textContent = expString;
   }
@@ -41,17 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', () => {
       const targetTab = button.getAttribute('data-tab');
 
-      // Remove active status from all tabs and content sections
       tabButtons.forEach(btn => btn.classList.remove('active'));
       tabContents.forEach(content => content.classList.remove('active'));
 
-      // Activate the clicked tab and corresponding section
       button.classList.add('active');
       const targetElement = document.getElementById(targetTab);
       if (targetElement) {
         targetElement.classList.add('active');
         
-        // Auto-scroll down slightly if on mobile so content is clearly visible
         if (window.innerWidth < 768) {
            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -59,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. Dark/Light Mode Theme Toggle
+  // 3. Theme Toggle
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
