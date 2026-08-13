@@ -27,19 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     
-    // Fade out the blue background color layer seamlessly
     const heroBgLayer = document.getElementById('hero-bg-layer');
     if (heroBgLayer) {
       let opacity = 1 - (scrollY / 600); 
       heroBgLayer.style.opacity = Math.max(opacity, 0);
     }
     
-    // Parallax the Portrait & Cards
     if (window.innerWidth > 900) {
       const portrait = document.getElementById('parallax-portrait');
-      if (portrait) {
-        portrait.style.transform = `translateX(-50%) translateY(${scrollY * 0.3}px)`;
-      }
+      if (portrait) portrait.style.transform = `translateX(-50%) translateY(${scrollY * 0.3}px)`;
 
       const textGroup = document.getElementById('parallax-text');
       const cardLeft = document.getElementById('parallax-card-left');
@@ -66,8 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetElement = document.getElementById(targetTab);
       if (targetElement) {
         targetElement.classList.add('active');
-        
-        // Smooth scroll to the tab content on mobile so they don't have to scroll down manually
         if (window.innerWidth < 768) {
            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -75,21 +69,62 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Multi-Carousel Logic (Featured & Works)
-  const setupCarousel = (trackId, leftBtnId, rightBtnId) => {
-    const track = document.getElementById(trackId);
-    const btnLeft = document.getElementById(leftBtnId);
-    const btnRight = document.getElementById(rightBtnId);
-    if (track && btnLeft && btnRight) {
-      btnLeft.addEventListener('click', () => track.scrollBy({ left: -320, behavior: 'smooth' }));
-      btnRight.addEventListener('click', () => track.scrollBy({ left: 320, behavior: 'smooth' }));
-    }
-  };
+  // 4. Regular Works Carousel
+  const worksTrack = document.getElementById('works-carousel');
+  const worksLeft = document.getElementById('works-left');
+  const worksRight = document.getElementById('works-right');
 
-  setupCarousel('project-carousel', 'carousel-left', 'carousel-right');
-  setupCarousel('works-carousel', 'works-left', 'works-right');
+  if (worksTrack && worksLeft && worksRight) {
+    worksLeft.addEventListener('click', () => worksTrack.scrollBy({ left: -320, behavior: 'smooth' }));
+    worksRight.addEventListener('click', () => worksTrack.scrollBy({ left: 320, behavior: 'smooth' }));
+  }
 
-  // 5. Theme Toggle
+  // 5. 3D Coverflow Logic (Featured Section)
+  const cfItems = document.querySelectorAll('.cf-item');
+  const cfLeft = document.getElementById('cf-left');
+  const cfRight = document.getElementById('cf-right');
+  let currentCfIndex = 0;
+
+  function updateCoverflow() {
+    if (cfItems.length === 0) return;
+    
+    cfItems.forEach((item, index) => {
+      item.className = 'cf-item'; 
+      if (index === currentCfIndex) {
+        item.classList.add('active');
+      } else if (index === (currentCfIndex - 1 + cfItems.length) % cfItems.length) {
+        item.classList.add('prev');
+      } else if (index === (currentCfIndex + 1) % cfItems.length) {
+        item.classList.add('next');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  }
+
+  if (cfItems.length > 0) {
+    updateCoverflow();
+    cfRight.addEventListener('click', () => {
+      currentCfIndex = (currentCfIndex + 1) % cfItems.length;
+      updateCoverflow();
+    });
+    cfLeft.addEventListener('click', () => {
+      currentCfIndex = (currentCfIndex - 1 + cfItems.length) % cfItems.length;
+      updateCoverflow();
+    });
+    
+    // Allow clicking the side cards to bring them to center
+    cfItems.forEach((item, index) => {
+      item.addEventListener('click', () => {
+        if (item.classList.contains('prev') || item.classList.contains('next')) {
+          currentCfIndex = index;
+          updateCoverflow();
+        }
+      });
+    });
+  }
+
+  // 6. Theme Toggle
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
