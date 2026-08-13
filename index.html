@@ -66,39 +66,45 @@
     <div class="hero-fade-bottom"></div>
   </header>
 
-  <!-- PERMANENT FEATURED SECTION (Always visible below Hero) -->
-  <section id="featured" class="container content" style="padding-bottom: 10px;">
-    <h2><i class="fas fa-star"></i> Featured</h2>
+  <!-- PERMANENT 3D FEATURED CAROUSEL -->
+  <section id="featured" class="container content" style="padding-bottom: 0px;">
+    <h2 style="text-align: center; justify-content: center;"><i class="fas fa-star"></i> Featured Highlights</h2>
     
-    <div class="carousel-wrapper">
-      <button class="carousel-btn" id="carousel-left"><i class="fas fa-chevron-left"></i></button>
+    <div class="coverflow-carousel">
+      <button class="coverflow-btn" id="cf-left"><i class="fas fa-chevron-left"></i></button>
       
-      <div class="carousel-track" id="project-carousel">
+      <div class="coverflow-track" id="cf-track">
         
-        <!-- Card 1 -->
-        <div class="carousel-card border-cyan">
-          <span class="card-tag cyan-tag"><i class="fas fa-lightbulb"></i> Product Concept / UX</span>
-          <h3><i class="fas fa-mobile-screen-button"></i> KID OS Product Concept</h3>
-          <p>Proposed KID OS during MBA final year targeting Gen Z screen time trends (4-7 hrs daily); designed to encourage healthier device habits and child wellbeing.</p>
+        <!-- Card 1: KID OS PPT -->
+        <div class="cf-item">
+          <img src="kidos.jpg" alt="KID OS PPT" class="cf-img">
+          <div class="cf-caption">
+            <h3>KID OS Concept</h3>
+            <p>Product Design Pitch</p>
+          </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="carousel-card border-violet">
-          <span class="card-tag violet-tag"><i class="fas fa-chart-pie"></i> Analytics & Strategy</span>
-          <h3><i class="fas fa-bullhorn"></i> AIC-PECF Public Relations Strategy</h3>
-          <p>Constructed a 30-day content calendar analyzing past page performance, increasing LinkedIn reach by 7% among students and 2% among entrepreneurs.</p>
+        <!-- Card 2: Graduation -->
+        <div class="cf-item">
+          <img src="graduation.jpg" alt="Graduation" class="cf-img">
+          <div class="cf-caption">
+            <h3>MBA Graduation</h3>
+            <p>Puducherry Technological University</p>
+          </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="carousel-card border-emerald">
-          <span class="card-tag emerald-tag"><i class="fas fa-rocket"></i> Future Initiative</span>
-          <h3><i class="fas fa-chart-line"></i> Operations Dashboard</h3>
-          <p>Upcoming project focused on automating discrepancy resolution workflows and building a centralized tracking dashboard for cross-functional teams.</p>
+        <!-- Card 3: Seminars -->
+        <div class="cf-item">
+          <img src="seminar.jpg" alt="Seminars" class="cf-img">
+          <div class="cf-caption">
+            <h3>Academic Seminars</h3>
+            <p>Business Analytics & Strategy</p>
+          </div>
         </div>
 
       </div>
 
-      <button class="carousel-btn" id="carousel-right"><i class="fas fa-chevron-right"></i></button>
+      <button class="coverflow-btn" id="cf-right"><i class="fas fa-chevron-right"></i></button>
     </div>
   </section>
 
@@ -309,31 +315,33 @@
       </div>
     </section>
 
-    <!-- TAB 5: CERTIFICATIONS (IMAGE UPLOADS) -->
+    <!-- TAB 5: CERTIFICATIONS (UPDATED WITH YOUR FILES) -->
     <section id="certifications" class="tab-content">
       <h2><i class="fas fa-award"></i> Professional Certifications</h2>
-      <p class="lead-text">Here are my professional certifications. Replace the image files in the repository to display them here.</p>
+      <p class="lead-text">Here is a showcase of my official certificates and ongoing professional development.</p>
       
       <div class="cert-image-grid">
         
         <div class="cert-img-wrapper">
-          <img src="cert1.jpg" alt="Business Analytics using Excel" class="cert-img">
-          <p>Business Analytics using Excel</p>
+          <!-- Added %20 for spaces so GitHub reads it perfectly -->
+          <img src="Market%20Ka%20Eklavya.jpg" alt="Market Ka Eklavya" class="cert-img">
+          <p>Market Ka Eklavya</p>
         </div>
 
         <div class="cert-img-wrapper">
-          <img src="cert2.jpg" alt="Power BI for Beginners" class="cert-img">
+          <!-- Used your exact spelling for the file, but fixed it for the display text! -->
+          <img src="Customeer%20Care%20Executive.jpg" alt="Customer Care Executive" class="cert-img">
+          <p>Customer Care Executive</p>
+        </div>
+
+        <div class="cert-img-wrapper">
+          <img src="Power%20BI%20for%20Beginners.jpg" alt="Power BI for Beginners" class="cert-img">
           <p>Power BI for Beginners</p>
         </div>
 
         <div class="cert-img-wrapper">
-          <img src="cert3.jpg" alt="MS Excel using AI" class="cert-img">
-          <p>MS Excel using AI</p>
-        </div>
-
-        <div class="cert-img-wrapper">
-          <img src="cert4.jpg" alt="Financial Independence" class="cert-img">
-          <p>Financial Independence</p>
+          <img src="Power%20BI%20Projects.jpg" alt="Power BI Projects" class="cert-img">
+          <p>Power BI Projects</p>
         </div>
 
       </div>
