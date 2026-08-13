@@ -113,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
       updateCoverflow();
     });
     
-    // Allow clicking the side cards to bring them to center
     cfItems.forEach((item, index) => {
       item.addEventListener('click', () => {
         if (item.classList.contains('prev') || item.classList.contains('next')) {
