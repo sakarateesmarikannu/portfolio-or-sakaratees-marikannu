@@ -142,7 +142,7 @@ body {
 }
 .theme-toggle-btn:hover { background: rgba(255, 255, 255, 0.25); }
 
-/* Massive Background Text Group (UPDATED) */
+/* Massive Background Text Group */
 .hero-bg-group {
   position: absolute;
   top: 10%;
@@ -153,23 +153,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px; /* Spaces out the top and bottom text slightly */
+  gap: 5px;
 }
 
-/* Now applied to Broadcast Operations (Top, Smaller) */
 .hero-bg-subtext {
   font-size: clamp(1rem, 2.5vw, 1.5rem); 
   color: var(--accent-cyan);
   font-weight: 700;
   letter-spacing: 5px;
   text-transform: uppercase;
-  
-  /* Entrance Animation */
   opacity: 0;
   animation: slideDownFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s forwards;
 }
 
-/* Now applied to Scheduling Analyst (Bottom, Massive) */
 .hero-bg-text {
   font-size: clamp(3.5rem, 9vw, 7.5rem);
   line-height: 1.1;
@@ -177,16 +173,14 @@ body {
   font-weight: 800;
   letter-spacing: -2px;
   text-transform: uppercase;
-  
-  /* Entrance Animation */
   opacity: 0;
   animation: slideDownFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
 }
 
-/* Portrait (Cutout PNG) - SMOOTH & FLUSH */
+/* Portrait */
 .hero-portrait {
   position: absolute;
-  bottom: -15px; /* Pulls the image down to hide the gap */
+  bottom: -15px;
   left: 50%;
   transform: translateX(-50%);
   height: 95vh;
@@ -198,8 +192,6 @@ body {
   object-position: bottom;
   pointer-events: none;
   display: block;
-  
-  /* Entrance Animation */
   opacity: 0;
   animation: slideUpFade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
 }
@@ -218,17 +210,8 @@ body {
   backdrop-filter: blur(8px);
 }
 
-.hero-left { 
-  left: 8%; 
-  opacity: 0;
-  animation: slideInLeftFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards;
-}
-
-.hero-right { 
-  right: 8%; 
-  opacity: 0;
-  animation: slideInRightFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards;
-}
+.hero-left { left: 8%; opacity: 0; animation: slideInLeftFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards; }
+.hero-right { right: 8%; opacity: 0; animation: slideInRightFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards; }
 
 .hero-card p {
   font-size: 0.95rem;
@@ -340,6 +323,24 @@ body {
   to { opacity: 1; translate: 0 0; }
 }
 
+/* NEW: Scroll Reveal Animation Class */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* NEW: Tab Switching Animation */
+@keyframes tabSwitchFade {
+  0% { opacity: 0; transform: translateY(15px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
 /* ========================================= */
 /* CENTERED 4:3 LARGE TABS (ONE LINE NO WRAP)*/
 /* ========================================= */
@@ -449,16 +450,13 @@ body {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-lg);
   position: relative;
-  animation: fadeIn 0.4s ease forwards;
+  /* Old animation removed, upgraded one applied to .active */
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
+/* Premium smooth scaling fade for tabs */
 .tab-content.active {
   display: block;
+  animation: tabSwitchFade 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 h2 {
@@ -597,7 +595,7 @@ h2 i {
     width: 80%;
     max-width: 350px;
     left: 0;
-    bottom: -15px; /* Ensure gap is hidden on mobile too */
+    bottom: -15px; 
     transform: none;
     z-index: 1;
   }
