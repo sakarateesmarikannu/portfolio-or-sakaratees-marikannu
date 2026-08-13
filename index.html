@@ -15,7 +15,7 @@
   <!-- FULL SCREEN HERO LANDING PAGE -->
   <header class="hero">
     
-    <!-- This new layer holds the blue color & grid so it can fade out smoothly -->
+    <!-- Hero Background Layer for Fade -->
     <div class="hero-color-layer blueprint-bg" id="hero-bg-layer"></div>
     
     <!-- Top Navigation Bar -->
@@ -37,7 +37,7 @@
     <!-- Transparent PNG Portrait -->
     <img src="my%20portrait.png" alt="Sakaratees Marikannu" class="hero-portrait" id="parallax-portrait">
 
-    <!-- Left Floating Info Card (Apple Droplet Style) -->
+    <!-- Left Floating Info Card -->
     <div class="hero-card hero-left" id="parallax-card-left">
       <p>Hey, I am Sakaratees. I help businesses turn complex data into accurate, streamlined broadcast schedules.</p>
       <a href="#contact" class="hero-cta" onclick="document.querySelector('[data-tab=\'contact\']').click();">
@@ -45,7 +45,7 @@
       </a>
     </div>
 
-    <!-- Right Floating Info Card (Apple Droplet Style) -->
+    <!-- Right Floating Info Card -->
     <div class="hero-card hero-right" id="parallax-card-right">
       <p>This portfolio showcases my journey as a Scheduling & Data Analyst, reflecting my passion for data integrity.</p>
       <div class="hero-socials">
@@ -60,12 +60,12 @@
       <a href="#portfolio-tabs"><i class="fas fa-chevron-down"></i></a>
     </div>
 
-    <!-- Smooth Color Blend Transition to Next Section -->
+    <!-- Smooth Color Blend Transition -->
     <div class="hero-fade-bottom"></div>
   </header>
 
-  <!-- INTERACTIVE 4:3 LARGE TABS -->
-  <nav id="portfolio-tabs" class="image-nav-area">
+  <!-- INTERACTIVE 4:3 LARGE TABS (APPLE GLASS UI & SCROLL REVEAL) -->
+  <nav id="portfolio-tabs" class="image-nav-area reveal-on-scroll">
     <div class="nav-image-container">
       
       <button class="tab-btn active" data-tab="overview">
@@ -106,11 +106,11 @@
     </div>
   </nav>
 
-  <!-- MAIN CONTENT AREAS -->
-  <main class="container content">
+  <!-- MAIN CONTENT AREAS (APPLE GLASS UI & SCROLL REVEAL) -->
+  <main class="container content reveal-on-scroll">
 
     <!-- TAB 1: OVERVIEW -->
-    <section id="overview" class="tab-content active neural-card">
+    <section id="overview" class="tab-content active">
       <h2><i class="fas fa-user-gear"></i> Professional Summary</h2>
       <p class="lead-text">
         <i class="fas fa-quote-left quote-icon"></i> Scheduling Analyst with extensive experience managing broadcast schedules for over 125 North American television channels at a high level of data accuracy using specialized scheduling databases. Skilled in identifying and resolving scheduling discrepancies, coordinating cross-functional teams, and maintaining data integrity across platforms. Proficient in MS Excel (Advanced), Power BI, and data visualization tools, with a focus on improving turnaround time through quality assurance workflows.
@@ -136,7 +136,7 @@
     </section>
 
     <!-- TAB 2: EXPERIENCE -->
-    <section id="experience" class="tab-content neural-card">
+    <section id="experience" class="tab-content">
       <h2><i class="fas fa-history"></i> Professional Experience</h2>
       
       <div class="timeline">
@@ -175,7 +175,7 @@
     </section>
 
     <!-- TAB 3: PROJECTS -->
-    <section id="projects" class="tab-content neural-card">
+    <section id="projects" class="tab-content">
       <h2><i class="fas fa-network-wired"></i> Key Projects</h2>
       <div class="card-grid">
         <div class="card border-cyan">
@@ -197,7 +197,7 @@
     </section>
 
     <!-- TAB 4: SKILLS & CERTS -->
-    <section id="skills" class="tab-content neural-card">
+    <section id="skills" class="tab-content">
       <h2><i class="fas fa-brain"></i> Skills & Educational Background</h2>
       
       <div class="skills-grid">
@@ -262,7 +262,7 @@
     </section>
 
     <!-- TAB 5: CONTACT & RESUME -->
-    <section id="contact" class="tab-content neural-card">
+    <section id="contact" class="tab-content">
       <h2><i class="fas fa-address-book"></i> Contact & Resume Download</h2>
       <div class="contact-wrapper">
         <div class="contact-info">
@@ -290,7 +290,6 @@
     </div>
   </footer>
 
-  <!-- Exact match to your script.JS file -->
   <script src="script.JS"></script>
 </body>
 </html>
