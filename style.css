@@ -97,10 +97,7 @@ body {
   background-color: var(--bg-color); 
 }
 
-/* 
-  FIXED: Static Blue Background! 
-  It stays bright blue in both Light and Dark Mode.
-*/
+/* Static Blue Background! It stays bright blue in both Light and Dark Mode. */
 .hero-color-layer {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -116,7 +113,6 @@ body {
   left: 0;
   width: 100%;
   height: 25vh; 
-  /* Fades into the body background color, so it naturally matches the theme below */
   background: linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%);
   z-index: 2; 
   pointer-events: none;
@@ -186,10 +182,7 @@ body {
   will-change: transform;
 }
 
-/* 
-  FIXED: Hardcoded Bright Cyan Color
-  This color bypasses the theme variables so it stays identical in both modes
-*/
+/* Hardcoded Bright Cyan Color */
 .hero-bg-subtext {
   font-size: clamp(1rem, 2.5vw, 1.5rem); 
   color: #4cc9f0 !important; 
@@ -359,7 +352,6 @@ body {
   0% { opacity: 0; transform: translateY(15px) scale(0.98); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
-
 
 /* ========================================= */
 /* APPLE UI TABS                             */
