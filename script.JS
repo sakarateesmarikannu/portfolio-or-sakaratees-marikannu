@@ -27,24 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     
-    // Fade out the blue background color layer
+    // Fade out the blue background color layer seamlessly
     const heroBgLayer = document.getElementById('hero-bg-layer');
     if (heroBgLayer) {
-      // Background fully fades out after scrolling 600px
       let opacity = 1 - (scrollY / 600); 
       heroBgLayer.style.opacity = Math.max(opacity, 0);
     }
     
-    // Parallax the Portrait (pushes it down into the background)
-    // Only apply on Desktop screens so mobile layout doesn't break
+    // Parallax the Portrait & Cards
     if (window.innerWidth > 900) {
       const portrait = document.getElementById('parallax-portrait');
       if (portrait) {
-        // Moves the image down slightly slower than the scroll speed
         portrait.style.transform = `translateX(-50%) translateY(${scrollY * 0.3}px)`;
       }
 
-      // Parallax the text and cards slightly upwards
       const textGroup = document.getElementById('parallax-text');
       const cardLeft = document.getElementById('parallax-card-left');
       const cardRight = document.getElementById('parallax-card-right');
@@ -56,7 +52,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // 3. Tab Switching Logic
+  // 3. Scroll Reveal Animation for Tabs and Content
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Adds the .visible class to make the element slide up smoothly
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+
+  // 4. Tab Switching Logic
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 
@@ -79,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Theme Toggle
+  // 5. Theme Toggle
   const themeToggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
