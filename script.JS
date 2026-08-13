@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetElement) {
         targetElement.classList.add('active');
         
+        // Smooth scroll to the tab content on mobile so they don't have to scroll down manually
         if (window.innerWidth < 768) {
            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -74,20 +75,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 4. Featured Projects Carousel Logic
-  const carouselTrack = document.getElementById('project-carousel');
-  const btnLeft = document.getElementById('carousel-left');
-  const btnRight = document.getElementById('carousel-right');
+  // 4. Multi-Carousel Logic (Featured & Works)
+  const setupCarousel = (trackId, leftBtnId, rightBtnId) => {
+    const track = document.getElementById(trackId);
+    const btnLeft = document.getElementById(leftBtnId);
+    const btnRight = document.getElementById(rightBtnId);
+    if (track && btnLeft && btnRight) {
+      btnLeft.addEventListener('click', () => track.scrollBy({ left: -320, behavior: 'smooth' }));
+      btnRight.addEventListener('click', () => track.scrollBy({ left: 320, behavior: 'smooth' }));
+    }
+  };
 
-  if (carouselTrack && btnLeft && btnRight) {
-    btnLeft.addEventListener('click', () => {
-      carouselTrack.scrollBy({ left: -320, behavior: 'smooth' });
-    });
-    
-    btnRight.addEventListener('click', () => {
-      carouselTrack.scrollBy({ left: 320, behavior: 'smooth' });
-    });
-  }
+  setupCarousel('project-carousel', 'carousel-left', 'carousel-right');
+  setupCarousel('works-carousel', 'works-left', 'works-right');
 
   // 5. Theme Toggle
   const themeToggleBtn = document.getElementById('theme-toggle');
