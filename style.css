@@ -83,7 +83,6 @@ body {
 /* FULL SCREEN HERO LANDING PAGE             */
 /* ========================================= */
 .hero {
-  background: linear-gradient(135deg, #4da4f7 0%, #1e45b8 100%);
   min-height: 100vh;
   position: relative;
   overflow: hidden;
@@ -91,6 +90,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--bg-color); /* Base color behind the fade */
+}
+
+/* The Blue Layer that will fade out on scroll */
+.hero-color-layer {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, #4da4f7 0%, #1e45b8 100%);
+  z-index: 0;
+  /* Will be controlled by JS */
+  will-change: opacity;
 }
 
 /* Smooth Color Blend Transition overlay */
@@ -166,6 +176,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  will-change: transform;
 }
 
 .hero-bg-subtext {
@@ -189,10 +200,10 @@ body {
   animation: slideDownFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
 }
 
-/* Portrait (Cutout PNG) */
+/* Portrait (Cutout PNG) - SMOOTH & FLUSH FIX */
 .hero-portrait {
   position: absolute;
-  bottom: -25px; 
+  bottom: -25px; /* Razor blade effect: Pulls image heavily down below the nav line */
   left: 50%;
   transform: translateX(-50%);
   height: 95vh;
@@ -205,21 +216,35 @@ body {
   pointer-events: none;
   display: block;
   opacity: 0;
-  animation: slideUpFade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+  animation: portraitSlideUpFade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+  will-change: transform;
+}
+@keyframes portraitSlideUpFade {
+  from { opacity: 0; transform: translateX(-50%) translateY(50px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-/* Floating Glass Cards */
+/* ========================================= */
+/* APPLE "WATER DROPLET" GLASS CARDS         */
+/* ========================================= */
 .hero-card {
   position: absolute;
   top: 55%;
   transform: translateY(-50%);
-  width: clamp(250px, 20vw, 320px);
-  padding: 24px;
+  width: clamp(260px, 22vw, 340px);
+  padding: 30px;
   color: #ffffff;
   z-index: 6; 
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(8px);
+  
+  /* The Apple Glass UI Look */
+  background: rgba(20, 25, 40, 0.45); 
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 40px; /* Deep pill/droplet shape */
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  
+  will-change: transform;
 }
 
 .hero-left { left: 8%; opacity: 0; animation: slideInLeftFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards; }
@@ -230,22 +255,6 @@ body {
   line-height: 1.6;
   margin-bottom: 20px;
 }
-
-/* Yellow Crosshairs */
-.crosshair {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-}
-.crosshair::before, .crosshair::after {
-  content: ''; position: absolute; background: #cce94c;
-}
-.crosshair::before { top: 4px; left: 0; width: 10px; height: 2px; }
-.crosshair::after { top: 0; left: 4px; width: 2px; height: 10px; }
-.top-left { top: -5px; left: -5px; }
-.top-right { top: -5px; right: -5px; }
-.bottom-left { bottom: -5px; left: -5px; }
-.bottom-right { bottom: -5px; right: -5px; }
 
 /* Let's Talk CTA Button */
 .hero-cta {
@@ -259,7 +268,7 @@ body {
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
-  width: 80%;
+  width: 100%;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   transition: transform 0.2s;
 }
@@ -276,21 +285,25 @@ body {
 .hero-socials {
   display: flex;
   gap: 12px;
+  justify-content: center;
 }
 .hero-socials a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   text-decoration: none;
-  font-size: 1.1rem;
-  transition: background 0.3s;
+  font-size: 1.2rem;
+  transition: background 0.3s, transform 0.3s;
 }
-.hero-socials a:hover { background: var(--accent-cyan); }
+.hero-socials a:hover { 
+  background: var(--accent-cyan); 
+  transform: translateY(-3px);
+}
 
 /* Bouncing Scroll Indicator */
 .scroll-down-wrapper {
@@ -340,6 +353,7 @@ body {
   0% { opacity: 0; transform: translateY(15px) scale(0.98); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
+
 
 /* ========================================= */
 /* CENTERED 4:3 LARGE TABS (ONE LINE NO WRAP)*/
@@ -596,8 +610,8 @@ h2 i {
     width: 80%;
     max-width: 350px;
     left: 0;
-    bottom: -25px;
-    transform: none;
+    bottom: -25px; 
+    transform: none !important; /* Disables heavy parallax on mobile to prevent clipping */
     z-index: 5;
   }
   
@@ -605,12 +619,11 @@ h2 i {
     position: relative; 
     width: 90%; 
     top: 0; 
-    transform: none; 
+    transform: none !important; 
     margin: 10px auto; 
     left: 0; 
     right: 0; 
     z-index: 6; 
-    background: rgba(11, 19, 43, 0.8); 
   }
   
   .scroll-down-wrapper {
