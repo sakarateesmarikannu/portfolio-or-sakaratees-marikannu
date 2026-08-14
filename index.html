@@ -4,37 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sakaratees Marikannu | Portfolio</title>
-  
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-
+  
   <style>
-    /* ========================================= */
-    /* GLOBAL CSS & DYNAMIC VARIABLES            */
-    /* ========================================= */
+    /* Smooth scrolling for anchor links */
     html {
       scroll-behavior: smooth;
     }
 
+    /* ========================================= */
+    /* GLASSMORPHISM & THEME VARIABLES           */
+    /* ========================================= */
     :root {
-      /* LIGHT MODE: Premium Sand Background */
+      /* Light Mode: Sand Background */
       --bg-color: #FDF5E6; 
       --bg-pattern: radial-gradient(rgba(160, 140, 110, 0.25) 2px, transparent 2px);
       --bg-size: 25px 25px;
 
-      /* PURE FROSTED GLASS (Colorless/Transparent) */
-      --glass-bg: rgba(255, 255, 255, 0.45);
-      --glass-border: rgba(255, 255, 255, 0.6);
-      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-      --inner-card-bg: rgba(255, 255, 255, 0.5);
+      /* Pure Transparent Glass (No added colors) */
+      --glass-bg: rgba(255, 255, 255, 0.15); 
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --glass-shadow: 0 15px 35px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+      --inner-card-bg: rgba(255, 255, 255, 0.2);
       
-      /* LIGHT MODE TEXT (Dark text for visibility) */
-      --text-main: #334155;     /* Dark gray for paragraphs */
-      --text-heading: #0f172a;  /* Near-black for headings */
+      /* Dynamic Text Colors - Dark for Light Mode */
+      --text-main: #334155;     
+      --text-heading: #0f172a;  
       
-      /* Accents */
       --accent-cyan: #0284c7;
       --accent-blue: #2563eb;
       --accent-emerald: #059669;
@@ -42,22 +41,21 @@
     }
 
     body.dark-theme {
-      /* DARK MODE: Space Background */
+      /* Dark Mode: Space Background */
       --bg-color: #0b132b;
       --bg-pattern: radial-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px);
       --bg-size: 25px 25px;
 
-      /* DARK FROSTED GLASS */
-      --glass-bg: rgba(20, 25, 40, 0.45);
+      /* Pure Transparent Glass (No added colors) */
+      --glass-bg: rgba(255, 255, 255, 0.05);
       --glass-border: rgba(255, 255, 255, 0.15);
-      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-      --inner-card-bg: rgba(255, 255, 255, 0.05);
+      --glass-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      --inner-card-bg: rgba(255, 255, 255, 0.03);
 
-      /* DARK MODE TEXT (Light text for visibility) */
-      --text-main: #e2e8f0;     /* Light gray */
-      --text-heading: #ffffff;  /* Pure white */
+      /* Dynamic Text Colors - Light for Dark Mode */
+      --text-main: #e2e8f0;
+      --text-heading: #ffffff;
       
-      /* Dark Mode Accents */
       --accent-cyan: #4cc9f0;
       --accent-blue: #4da4f7;
       --accent-emerald: #10b981;
@@ -117,7 +115,6 @@
       top: 0; left: 0; right: 0; bottom: 0;
       background: linear-gradient(135deg, #4da4f7 0%, #1e45b8 100%);
       z-index: 0;
-      will-change: opacity;
     }
 
     .hero-fade-bottom {
@@ -156,19 +153,17 @@
     }
 
     .exp-badge {
-      color: #ffffff; /* Always white due to blue background */
+      color: #ffffff;
       font-weight: 600;
       font-size: 0.95rem;
       letter-spacing: 0.5px;
     }
 
-    /* TOGGLE BUTTON & ICON ANIMATION */
+    /* TOGGLE BUTTON */
     .theme-toggle-btn {
       background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       color: #ffffff;
       padding: 8px 18px;
       border-radius: 30px;
@@ -201,7 +196,6 @@
       flex-direction: column;
       align-items: center;
       gap: 5px;
-      will-change: transform;
     }
 
     .hero-bg-subtext {
@@ -211,18 +205,18 @@
       letter-spacing: 5px;
       text-transform: uppercase;
       opacity: 0;
-      animation: slideDownFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s forwards;
+      animation: slideDownFade 1s forwards 0.1s;
     }
 
     .hero-bg-text {
       font-size: clamp(3.5rem, 9vw, 7.5rem);
       line-height: 1.1;
-      color: rgba(255, 255, 255, 0.8) !important;
+      color: rgba(255, 255, 255, 0.7) !important;
       font-weight: 800;
       letter-spacing: -2px;
       text-transform: uppercase;
       opacity: 0;
-      animation: slideDownFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+      animation: slideDownFade 1s forwards 0.3s;
     }
 
     .hero-portrait {
@@ -238,23 +232,23 @@
       object-fit: contain;
       object-position: bottom;
       pointer-events: none;
-      display: block;
       opacity: 0;
-      animation: portraitSlideUpFade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
-      will-change: transform;
+      animation: portraitSlideUpFade 1.2s forwards 0.4s;
     }
 
     /* ========================================= */
     /* UNIVERSAL GLASS CARDS                     */
     /* ========================================= */
-    .hero-card, .cf-item, .carousel-card, .tab-content, .tab-btn {
+    .hero-card, .cf-item, .carousel-card, .tab-content, .tab-btn, .metric-card, .timeline-item, .skills-category, .edu-card, .cert-img-wrapper, .resume-download-box {
       background: var(--glass-bg);
       backdrop-filter: blur(25px) saturate(180%);
       -webkit-backdrop-filter: blur(25px) saturate(180%);
       border: 1px solid var(--glass-border);
       box-shadow: var(--glass-shadow);
+      color: var(--text-heading);
     }
 
+    /* Hero Side Panels (No hardcoded colors, dynamic text) */
     .hero-card {
       position: absolute;
       top: 55%;
@@ -262,28 +256,26 @@
       width: clamp(260px, 22vw, 340px);
       padding: 30px;
       border-radius: 30px; 
-      will-change: transform;
       z-index: 6; 
     }
-    .hero-left { left: 8%; opacity: 0; animation: slideInLeftFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards; }
-    .hero-right { right: 8%; opacity: 0; animation: slideInRightFade 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards; }
+    .hero-left { left: 8%; opacity: 0; animation: slideInLeftFade 1s forwards 0.7s; }
+    .hero-right { right: 8%; opacity: 0; animation: slideInRightFade 1s forwards 0.7s; }
 
     .hero-card p {
       font-size: 1.05rem;
       line-height: 1.6;
       margin-bottom: 25px;
-      /* Forced white because the hero section always has a blue background behind the glass */
-      color: #ffffff; 
       font-weight: 500;
+      color: var(--text-heading); /* Changes dynamically with theme */
     }
 
     .hero-cta {
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: white;
+      background: var(--inner-card-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-heading);
       padding: 10px 16px 10px 20px;
       border-radius: 30px;
       text-decoration: none;
@@ -293,13 +285,13 @@
       transition: transform 0.2s, background 0.3s;
     }
     .hero-cta i {
-      background: #ffffff;
-      color: var(--accent-blue);
+      background: var(--text-heading);
+      color: var(--bg-color);
       border-radius: 50%;
       width: 28px; height: 28px;
       display: flex; align-items: center; justify-content: center;
     }
-    .hero-cta:hover { transform: scale(1.05); background: rgba(255,255,255,0.2); }
+    .hero-cta:hover { transform: scale(1.05); }
 
     .hero-socials {
       display: flex;
@@ -313,14 +305,15 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15); 
-      color: #ffffff;
+      background: var(--inner-card-bg); 
+      color: var(--text-heading);
       text-decoration: none;
       font-size: 1.2rem;
       transition: background 0.3s, transform 0.3s;
     }
     .hero-socials a:hover { 
       background: var(--accent-cyan); 
+      color: #fff;
       transform: translateY(-3px);
     }
 
@@ -340,9 +333,8 @@
     }
     .scroll-down-wrapper a:hover { color: var(--accent-cyan); }
 
-
     /* ========================================= */
-    /* SCROLL REVEAL ANIMATIONS FOR ENTIRE SITE  */
+    /* SCROLL REVEAL ANIMATIONS                  */
     /* ========================================= */
     .reveal {
       opacity: 0;
@@ -418,7 +410,7 @@
       width: 100%;
       height: 75%;
       object-fit: cover;
-      background: rgba(0, 0, 0, 0.1); /* Subtle dark back layer */
+      background: rgba(0, 0, 0, 0.1);
     }
 
     .cf-caption {
@@ -433,16 +425,15 @@
     }
     .cf-caption h3 {
       font-size: 1.15rem;
-      color: var(--text-heading); /* Dynamic color */
+      color: var(--text-heading);
       margin-bottom: 4px;
     }
     .cf-caption p {
       font-size: 0.85rem;
-      color: var(--text-main); /* Dynamic color */
+      color: var(--text-main);
       margin: 0;
     }
 
-    /* Coverflow JS States */
     .cf-item.active {
       transform: translateX(0) scale(1) translateZ(0);
       z-index: 3;
@@ -469,8 +460,7 @@
 
     .coverflow-btn {
       background: var(--glass-bg);
-      backdrop-filter: blur(25px) saturate(200%);
-      -webkit-backdrop-filter: blur(25px) saturate(200%);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--glass-border);
       color: var(--text-heading);
       border-radius: 50%;
@@ -483,18 +473,18 @@
       z-index: 10;
       position: absolute;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: background 0.3s, color 0.3s, transform 0.2s;
+      transition: background 0.3s, transform 0.2s;
     }
     .coverflow-btn:hover { 
       background: var(--accent-cyan); 
-      color: #fff; 
+      color: #fff;
       transform: scale(1.1);
     }
     #cf-left { left: 0; }
     #cf-right { right: 0; }
 
     /* ========================================= */
-    /* GLASS TABS                                */
+    /* GLASS UI TABS                             */
     /* ========================================= */
     .image-nav-area {
       position: relative;
@@ -540,7 +530,6 @@
       justify-content: center;
       align-items: center;
       gap: 12px;
-      color: var(--text-heading); /* Dynamic color */
       z-index: 2;
     }
     .tab-content-inner i {
@@ -564,7 +553,7 @@
     }
     .tab-btn.active {
       border-color: var(--accent-cyan);
-      background: var(--inner-card-bg); /* Highlight */
+      background: var(--inner-card-bg); 
       transform: scale(1.03);
     }
     .tab-btn.active .tab-content-inner i,
@@ -573,7 +562,7 @@
     }
 
     /* ========================================= */
-    /* CONTENT AREA                              */
+    /* CONTENT AREA (TABS)                       */
     /* ========================================= */
     .content {
       padding: 30px 24px 60px 24px;
@@ -613,7 +602,7 @@
       padding: 24px;
       background: var(--inner-card-bg);
       color: var(--text-main);
-      border-left: 4px solid var(--accent-blue);
+      border-left: 4px solid var(--accent-cyan);
       border-radius: 16px;
       margin-bottom: 32px;
     }
@@ -621,12 +610,9 @@
 
     /* Inner Sub-Cards styling */
     .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-    .metric-card, .timeline-item, .card, .skills-category, .edu-card, .cert-img-wrapper, .resume-download-box { 
+    .metric-card, .timeline-item, .skills-category, .edu-card, .cert-img-wrapper, .resume-download-box { 
       padding: 24px; 
       border-radius: 20px; 
-      border: 1px solid var(--glass-border); 
-      background: var(--inner-card-bg);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
     }
 
     .metric-card { text-align: center; }
@@ -645,8 +631,8 @@
     .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
     .company { color: var(--accent-cyan); font-weight: 600; font-size: 0.95rem; }
     .badge { padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
-    .badge.blue { background: rgba(37, 99, 235, 0.15); color: var(--accent-blue); }
-    .badge.purple { background: rgba(139, 92, 246, 0.15); color: var(--accent-violet); }
+    .badge.blue { background: var(--inner-card-bg); color: var(--text-heading); }
+    .badge.purple { background: var(--inner-card-bg); color: var(--text-heading); }
     .timeline-item ul { list-style: none; }
     .timeline-item li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; color: var(--text-main); }
     .timeline-item li i { color: var(--accent-emerald); margin-top: 4px; }
@@ -680,7 +666,6 @@
       border-radius: 30px;
       padding: 30px;
       position: relative;
-      /* Background handled by global .carousel-card glass class above */
     }
     @media (min-width: 768px) {
       .carousel-card { flex: 0 0 calc(50% - 10px); } 
@@ -688,8 +673,7 @@
 
     .carousel-btn {
       background: var(--glass-bg);
-      backdrop-filter: blur(25px) saturate(200%);
-      -webkit-backdrop-filter: blur(25px) saturate(200%);
+      backdrop-filter: blur(25px);
       border: 1px solid var(--glass-border);
       color: var(--text-heading);
       border-radius: 50%;
@@ -701,7 +685,6 @@
       cursor: pointer;
       z-index: 2;
       position: absolute;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       transition: background 0.3s, transform 0.2s;
     }
     .carousel-btn:hover { background: var(--accent-cyan); color: #fff; transform: scale(1.1); }
@@ -709,16 +692,13 @@
     #works-right { right: -15px; }
 
     /* Tags & Inner Typography */
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
     .card-tag { font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 8px; display: inline-block; margin-bottom: 16px; }
-    
-    /* Using darker opacity for tags so text is visible in light mode */
     .cyan-tag { background: rgba(2, 132, 199, 0.15); color: var(--accent-cyan); }
     .violet-tag { background: rgba(124, 58, 237, 0.15); color: var(--accent-violet); }
     .emerald-tag { background: rgba(5, 150, 105, 0.15); color: var(--accent-emerald); }
 
-    .card h3, .carousel-card h3 { font-size: 1.3rem; color: var(--text-heading); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-    .card p, .carousel-card p { color: var(--text-main); font-size: 0.95rem; line-height: 1.6; }
+    .carousel-card h3 { font-size: 1.3rem; color: var(--text-heading); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .carousel-card p { color: var(--text-main); font-size: 0.95rem; line-height: 1.6; }
 
     .border-cyan { border-left: 4px solid var(--accent-cyan); }
     .border-violet { border-left: 4px solid var(--accent-violet); }
@@ -731,37 +711,12 @@
     .tag-list li { background: var(--inner-card-bg); color: var(--text-main); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; border: 1px solid var(--glass-border); }
     .section-sub-title { margin: 32px 0 16px 0; color: var(--text-heading); display: flex; align-items: center; gap: 8px; }
 
-    /* Certifications Image Grid */
-    .cert-image-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
-      margin-top: 20px;
-    }
-    .cert-img-wrapper {
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .cert-img-wrapper:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    }
-    .cert-img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      border: 1px solid var(--glass-border);
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      background: rgba(0, 0, 0, 0.1);
-      display: block;
-    }
-    .cert-img-wrapper p {
-      font-weight: 600;
-      color: var(--text-heading);
-      font-size: 0.95rem;
-    }
+    /* Certifications */
+    .cert-image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 20px; }
+    .cert-img-wrapper { text-align: center; transition: transform 0.3s ease; }
+    .cert-img-wrapper:hover { transform: translateY(-5px); }
+    .cert-img { width: 100%; height: auto; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--glass-border); aspect-ratio: 4/3; object-fit: cover; background: rgba(0, 0, 0, 0.1); display: block; }
+    .cert-img-wrapper p { font-weight: 600; color: var(--text-heading); font-size: 0.95rem; }
 
     /* Education */
     .education-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
@@ -771,115 +726,37 @@
 
     /* Contact Box */
     .contact-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-    .contact-info p { margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 1.05rem; color: var(--text-main); }
+    .contact-info p { margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 1.05rem; color: var(--text-heading); }
     .contact-info i { color: var(--accent-cyan); font-size: 1.2rem; }
     .resume-download-box { text-align: center; }
     .resume-download-box h3 { color: var(--text-heading); }
     .resume-download-box p { color: var(--text-main); }
-    
-    .download-btn { 
-      display: inline-flex; align-items: center; gap: 10px; 
-      background: var(--accent-blue); border: 1px solid var(--glass-border); 
-      color: #ffffff; padding: 14px 28px; border-radius: 12px; 
-      text-decoration: none; margin-top: 16px; font-weight: 600; 
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.2s, background 0.3s;
-    }
-    .download-btn:hover { transform: translateY(-2px); background: var(--accent-cyan); }
+    .download-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--inner-card-bg); border: 1px solid var(--glass-border); color: var(--text-heading); padding: 14px 28px; border-radius: 12px; text-decoration: none; margin-top: 16px; font-weight: 600; }
+    .download-btn:hover { transform: translateY(-2px); background: var(--accent-cyan); color: #fff; }
 
     /* Footer */
-    .footer {
-      color: var(--text-main);
-      opacity: 0.7;
-      text-align: center;
-      padding: 40px 0;
-      font-size: 0.9rem;
-      margin-top: auto;
-    }
+    .footer { color: #94a3b8; text-align: center; padding: 40px 0; font-size: 0.9rem; margin-top: auto; }
 
     /* ========================================= */
     /* STRICT MOBILE OVERRIDES                   */
     /* ========================================= */
     @media (max-width: 900px) {
-      .hero {
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        padding-top: 40px !important; 
-        height: auto !important;
-        min-height: 100vh !important;
-      }
-      
-      .hero-top-bar {
-        position: relative !important; 
-        top: 0 !important;
-        padding: 0 20px !important;
-        flex-direction: column !important;
-        gap: 15px !important;
-        margin-bottom: 30px !important; 
-      }
-      
-      .hero-bg-group {
-        position: relative !important; 
-        top: 0 !important;
-        margin-bottom: 10px !important; 
-        gap: 5px !important;
-      }
-      
-      .hero-bg-subtext {
-        font-size: 1rem !important;
-        letter-spacing: 3px !important;
-      }
-
-      .hero-bg-text { 
-        font-size: 2.8rem !important; 
-      }
-      
-      .hero-portrait { 
-        position: relative !important; 
-        height: 50vh !important; 
-        min-width: unset !important;
-        width: 100% !important;
-        max-width: 380px !important;
-        margin: -20px auto 0 auto !important; 
-        left: 0 !important;
-        bottom: 0 !important; 
-        transform: none !important;
-        z-index: 5 !important;
-        object-fit: contain !important;
-        object-position: bottom center !important;
-      }
-      
-      .hero-card { 
-        position: relative !important; 
-        width: 90% !important; 
-        top: 0 !important; 
-        transform: none !important; 
-        margin: 15px auto !important; 
-        left: 0 !important; 
-        right: 0 !important; 
-        z-index: 6 !important; 
-      }
-      
-      .scroll-down-wrapper {
-        position: relative !important;
-        bottom: 0 !important;
-        margin-top: 10px !important;
-        margin-bottom: 30px !important;
-      }
-
-      .tab-btn { 
-        width: clamp(110px, 30vw, 160px) !important; 
-      }
-      
-      .tab-content {
-        padding: 24px !important;
-        border-radius: 28px !important;
-      }
-
+      .hero { flex-direction: column !important; justify-content: flex-start !important; padding-top: 40px !important; height: auto !important; min-height: 100vh !important; }
+      .hero-top-bar { position: relative !important; top: 0 !important; padding: 0 20px !important; flex-direction: column !important; gap: 15px !important; margin-bottom: 30px !important; }
+      .hero-bg-group { position: relative !important; top: 0 !important; margin-bottom: 10px !important; gap: 5px !important; }
+      .hero-bg-subtext { font-size: 1rem !important; letter-spacing: 3px !important; }
+      .hero-bg-text { font-size: 2.8rem !important; }
+      .hero-portrait { position: relative !important; height: 50vh !important; min-width: unset !important; width: 100% !important; max-width: 380px !important; margin: -20px auto 0 auto !important; left: 0 !important; bottom: 0 !important; transform: none !important; z-index: 5 !important; object-fit: contain !important; object-position: bottom center !important; }
+      .hero-card { position: relative !important; width: 90% !important; top: 0 !important; transform: none !important; margin: 15px auto !important; left: 0 !important; right: 0 !important; z-index: 6 !important; }
+      .scroll-down-wrapper { position: relative !important; bottom: 0 !important; margin-top: 10px !important; margin-bottom: 30px !important; }
+      .tab-btn { width: clamp(110px, 30vw, 160px) !important; }
+      .tab-content { padding: 24px !important; border-radius: 28px !important; }
       .cf-item.prev { transform: translateX(-20%) scale(0.85) translateZ(-100px) !important; }
       .cf-item.next { transform: translateX(20%) scale(0.85) translateZ(-100px) !important; }
     }
   </style>
 </head>
+
 <body class="dark-theme">
 
   <!-- FULL SCREEN HERO LANDING PAGE -->
@@ -901,7 +778,7 @@
       <h1 class="hero-bg-text">Scheduling<br>Analyst</h1>
     </div>
 
-    <img src="my%20portrait.png" alt="Sakaratees Marikannu" class="hero-portrait" id="parallax-portrait">
+    <img src="my portrait.png" alt="Sakaratees Marikannu" class="hero-portrait" id="parallax-portrait">
 
     <div class="hero-card hero-left" id="parallax-card-left">
       <p>Hey, I am Sakaratees. I help businesses turn complex data into accurate, streamlined broadcast schedules.</p>
@@ -956,7 +833,7 @@
         </div>
 
         <div class="cf-item">
-          <video src="Prototyping%20Seminar.mp4" controls class="cf-img" style="object-fit: cover; background: #000;"></video>
+          <video src="Prototyping Seminar.mp4" controls class="cf-img" style="object-fit: cover; background: #000;"></video>
           <div class="cf-caption">
             <h3>Prototyping Seminar</h3>
             <p>Interactive Workshop Session</p>
@@ -964,7 +841,7 @@
         </div>
 
         <div class="cf-item">
-          <img src="Startup%20expo%20-%202024.jpg" alt="Startup Expo 2024" class="cf-img">
+          <img src="Startup expo - 2024.jpg" alt="Startup Expo 2024" class="cf-img">
           <div class="cf-caption">
             <h3>Startup Expo 2024</h3>
             <p>Networking & Innovation</p>
@@ -972,7 +849,7 @@
         </div>
 
         <div class="cf-item">
-          <img src="Startup%20Meet.jpg" alt="Startup Meet" class="cf-img">
+          <img src="Startup Meet.jpg" alt="Startup Meet" class="cf-img">
           <div class="cf-caption">
             <h3>Startup Meet</h3>
             <p>E-Cell Foundation Event</p>
@@ -1200,22 +1077,22 @@
       <div class="cert-image-grid">
         
         <div class="cert-img-wrapper reveal">
-          <img src="Market%20Ka%20Eklavya.jpg" alt="Market Ka Eklavya" class="cert-img">
+          <img src="Market Ka Eklavya.jpg" alt="Market Ka Eklavya" class="cert-img">
           <p>Market Ka Eklavya</p>
         </div>
 
         <div class="cert-img-wrapper reveal">
-          <img src="Customeer%20Care%20Executive.jpg" alt="Customer Care Executive" class="cert-img">
+          <img src="Customeer Care Executive.jpg" alt="Customer Care Executive" class="cert-img">
           <p>Customer Care Executive</p>
         </div>
 
         <div class="cert-img-wrapper reveal">
-          <img src="Power%20BI%20for%20Beginners.jpg" alt="Power BI for Beginners" class="cert-img">
+          <img src="Power BI for Beginners.jpg" alt="Power BI for Beginners" class="cert-img">
           <p>Power BI for Beginners</p>
         </div>
 
         <div class="cert-img-wrapper reveal">
-          <img src="Power%20BI%20Projects.jpg" alt="Power BI Projects" class="cert-img">
+          <img src="Power BI Projects.jpg" alt="Power BI Projects" class="cert-img">
           <p>Power BI Projects</p>
         </div>
 
@@ -1428,8 +1305,8 @@
             }
           });
         }, { 
-          threshold: 0.15, 
-          rootMargin: "0px 0px -50px 0px" 
+          threshold: 0.15,
+          rootMargin: "0px 0px -50px 0px"
         });
 
         revealElements.forEach(el => revealObserver.observe(el));
