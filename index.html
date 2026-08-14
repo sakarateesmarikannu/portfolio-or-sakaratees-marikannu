@@ -1393,6 +1393,107 @@
       .tab-content { padding: 24px !important; border-radius: 28px !important; }
     }
 
+    /* ========================================= */
+    /* LIGHTBOX / ELEVATED PREVIEW               */
+    /* ========================================= */
+    .lightbox-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .lightbox-overlay.active .lightbox-content {
+      transform: scale(1);
+    }
+
+    .lightbox-close-btn {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .lightbox-close-btn:hover {
+      transform: scale(1.1);
+      color: var(--accent-cyan);
+    }
+
+    #lightbox-media-container img,
+    #lightbox-media-container video {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      display: block;
+      object-fit: contain;
+      background: #000;
+    }
+
+    /* ========================================= */
+    /* WORKS CAROUSEL - CLICK-TO-PREVIEW DETAIL  */
+    /* ========================================= */
+    .carousel-card {
+      cursor: pointer;
+    }
+
+    .detail-modal-content {
+      width: min(560px, 88vw);
+      max-height: 85vh;
+      overflow-y: auto;
+      border-radius: 30px;
+      padding: 36px;
+      position: relative;
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .detail-modal-content h3 {
+      font-size: 1.5rem;
+      color: var(--text-heading);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .detail-modal-content p {
+      color: var(--text-main);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
   </style>
 </head>
 
@@ -1603,10 +1704,19 @@
             <p>E-Cell Foundation Event</p>
           </div>
         </div>
+        
+        <!-- NEW PREVIEW ITEM ADDED HERE -->
+        <div class="cf-item">
+          <img src="preview-image.jpg" alt="Preview Highlight" class="cf-img">
+          <div class="cf-caption">
+            <h3>Preview</h3>
+            <p>Highlight Preview</p>
+          </div>
+        </div>
 
       </div>
 
-      <div class="coverflow-hint">Swipe or drag horizontally to explore</div>
+      <div class="coverflow-hint">Swipe, use the arrows, or tap a card to explore</div>
       <button class="coverflow-btn" id="cf-right"><i class="fas fa-chevron-right"></i></button>
     </div>
   </section>
@@ -1877,6 +1987,24 @@
     </div>
   </footer>
 
+  <!-- ========================================= -->
+  <!-- LIGHTBOX / ELEVATED PREVIEW MODAL         -->
+  <!-- ========================================= -->
+  <div id="lightbox-modal" class="lightbox-overlay">
+    <div class="lightbox-content">
+      <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close Preview"><i class="fas fa-times"></i></button>
+      <div id="lightbox-media-container"></div>
+    </div>
+  </div>
+
+  <!-- DETAIL PREVIEW MODAL FOR WORKS CAROUSEL CARDS -->
+  <div id="detail-modal" class="lightbox-overlay">
+    <div class="detail-modal-content">
+      <button id="detail-close" class="lightbox-close-btn" aria-label="Close Preview"><i class="fas fa-times"></i></button>
+      <div id="detail-modal-body"></div>
+    </div>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
 
@@ -1947,16 +2075,12 @@
       }
 
       // 5. Featured Highlights — stacked 3D carousel.
-      // No native scrolling: arrows, touch swipe and mouse drag advance one card.
+      // Arrows, touch swipe, and click advance/open the carousel (no mouse-drag).
       const cfTrack = document.getElementById('cf-track');
       const cfItems = Array.from(document.querySelectorAll('.cf-item'));
       const cfLeft = document.getElementById('cf-left');
       const cfRight = document.getElementById('cf-right');
       let cfIndex = 0;
-      let cfStartX = 0;
-      let cfCurrentX = 0;
-      let cfDragging = false;
-      let cfPointerId = null;
 
       function renderFeatured(index, animate = true) {
         if (!cfItems.length) return;
@@ -1983,49 +2107,104 @@
       if (cfLeft) cfLeft.addEventListener('click', () => moveFeatured(-1));
       if (cfRight) cfRight.addEventListener('click', () => moveFeatured(1));
 
+      // ==========================================
+      // LIGHTBOX LOGIC FOR ELEVATED PREVIEW
+      // ==========================================
+      const lightboxModal = document.getElementById('lightbox-modal');
+      const lightboxContainer = document.getElementById('lightbox-media-container');
+      const lightboxClose = document.getElementById('lightbox-close');
+
+      function openLightbox(mediaElement) {
+        lightboxContainer.innerHTML = ''; // clear previous
+        const isVideo = mediaElement.tagName.toLowerCase() === 'video';
+        let clonedMedia = mediaElement.cloneNode(true);
+        
+        if (isVideo) {
+          clonedMedia.setAttribute('controls', 'controls');
+        }
+        
+        lightboxContainer.appendChild(clonedMedia);
+        lightboxModal.classList.add('active');
+      }
+
+      function closeLightbox() {
+        lightboxModal.classList.remove('active');
+        // Wait for fade-out animation before deleting the element to stop audio
+        setTimeout(() => {
+          lightboxContainer.innerHTML = ''; 
+        }, 300);
+      }
+
+      if (lightboxModal && lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+        // Close if clicking the dark background outside the image
+        lightboxModal.addEventListener('click', (e) => {
+          if (e.target === lightboxModal) closeLightbox();
+        });
+      }
+
+      // ==========================================
+      // WORKS CAROUSEL - CLICK-TO-PREVIEW DETAIL
+      // ==========================================
+      const detailModal = document.getElementById('detail-modal');
+      const detailModalBody = document.getElementById('detail-modal-body');
+      const detailClose = document.getElementById('detail-close');
+
+      function openDetailPreview(card) {
+        if (!detailModal || !detailModalBody) return;
+        // Clone the card's content so the original layout/markup is untouched.
+        detailModalBody.innerHTML = card.innerHTML;
+        detailModal.classList.add('active');
+      }
+
+      function closeDetailPreview() {
+        if (!detailModal) return;
+        detailModal.classList.remove('active');
+        setTimeout(() => {
+          if (detailModalBody) detailModalBody.innerHTML = '';
+        }, 300);
+      }
+
+      document.querySelectorAll('.carousel-card').forEach((card) => {
+        card.addEventListener('click', () => openDetailPreview(card));
+      });
+
+      if (detailModal && detailClose) {
+        detailClose.addEventListener('click', closeDetailPreview);
+        detailModal.addEventListener('click', (e) => {
+          if (e.target === detailModal) closeDetailPreview();
+        });
+      }
+
+      // ==========================================
+      // CAROUSEL CLICK HANDLER
+      // ==========================================
       // Clicking the visible side cards moves them into the center.
+      // Clicking the active center card opens the elevated preview.
       cfItems.forEach((item, i) => {
         item.addEventListener('click', (event) => {
-          if (Math.abs(cfCurrentX - cfStartX) > 8) return;
           const relative = (i - cfIndex + cfItems.length) % cfItems.length;
-          if (relative === 1) moveFeatured(1);
-          else if (relative === cfItems.length - 1) moveFeatured(-1);
+
+          if (relative === 1) {
+            moveFeatured(1);
+          } else if (relative === cfItems.length - 1) {
+            moveFeatured(-1);
+          } else if (relative === 0) {
+            // It's the active center item! Open the elevated preview if an image/video was clicked.
+            const target = event.target;
+            if (target.classList.contains('cf-img') || target.tagName.toLowerCase() === 'img' || target.tagName.toLowerCase() === 'video') {
+               openLightbox(target);
+            }
+          }
         });
       });
 
-      // Pointer/touch horizontal gesture.
-      if (cfTrack) {
-        cfTrack.addEventListener('pointerdown', (event) => {
-          if (event.pointerType === 'mouse' && event.button !== 0) return;
-          cfDragging = true;
-          cfPointerId = event.pointerId;
-          cfStartX = event.clientX;
-          cfCurrentX = event.clientX;
-          cfTrack.setPointerCapture?.(event.pointerId);
-        });
-
-        cfTrack.addEventListener('pointermove', (event) => {
-          if (!cfDragging || event.pointerId !== cfPointerId) return;
-          cfCurrentX = event.clientX;
-        });
-
-        const finishFeaturedGesture = (event) => {
-          if (!cfDragging || (event && event.pointerId !== cfPointerId)) return;
-          const delta = cfCurrentX - cfStartX;
-          cfDragging = false;
-          cfPointerId = null;
-          if (Math.abs(delta) >= 45) {
-            // Swipe left = next, swipe right = previous.
-            moveFeatured(delta < 0 ? 1 : -1);
-          }
-        };
-
-        cfTrack.addEventListener('pointerup', finishFeaturedGesture);
-        cfTrack.addEventListener('pointercancel', finishFeaturedGesture);
-        cfTrack.addEventListener('lostpointercapture', () => {
-          if (cfDragging) finishFeaturedGesture();
-        });
-      }
+      // Touch swipe only (mouse-drag navigation removed so clicks register reliably).
+      attachSwipe(
+        cfTrack,
+        () => moveFeatured(1),
+        () => moveFeatured(-1)
+      );
 
       // Keyboard support when the carousel is focused.
       if (cfTrack) {
@@ -2097,11 +2276,11 @@
           setTimeout(() => {
             if (isDark) {
               themeIcon.className = 'fas fa-sun theme-icon-animate';
-              themeText.textContent = 'Light Mode';
+              if(themeText) themeText.textContent = 'Light Mode';
               localStorage.setItem('theme', 'dark');
             } else {
               themeIcon.className = 'fas fa-moon theme-icon-animate';
-              themeText.textContent = 'Dark Mode';
+              if(themeText) themeText.textContent = 'Dark Mode';
               localStorage.setItem('theme', 'light');
             }
           }, 150);
