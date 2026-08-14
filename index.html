@@ -24,12 +24,12 @@
       --bg-pattern: radial-gradient(rgba(160, 140, 110, 0.25) 2px, transparent 2px);
       --bg-size: 25px 25px;
 
-      /* New Contrasting Hero Background for Light Mode (Muted Steel/Slate) */
+      /* Contrasting Hero Background for Light Mode (Muted Steel/Slate) */
       --hero-bg: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
       --hero-title-color: rgba(15, 23, 42, 0.85);
       --hero-subtitle-color: #2563eb;
 
-      /* Pure Transparent Glass (No blue/dark tints!) */
+      /* Pure Transparent Glass for universal elements */
       --glass-bg: rgba(255, 255, 255, 0.35); 
       --glass-border: rgba(255, 255, 255, 0.6);
       --glass-shadow: 0 15px 35px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8);
@@ -56,7 +56,7 @@
       --hero-title-color: rgba(255, 255, 255, 0.7);
       --hero-subtitle-color: #4cc9f0;
 
-      /* Pure Transparent Glass (No hardcoded navy tints!) */
+      /* Pure Transparent Glass for universal elements */
       --glass-bg: rgba(255, 255, 255, 0.05);
       --glass-border: rgba(255, 255, 255, 0.15);
       --glass-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
@@ -255,7 +255,6 @@
     /* ========================================= */
     /* UNIVERSAL PURE GLASS CARDS                */
     /* ========================================= */
-    /* No hardcoded colors here! Strictly uses the transparent glass variables */
     .hero-card, .cf-item, .carousel-card, .tab-content, .tab-btn, .metric-card, .timeline-item, .skills-category, .edu-card, .cert-img-wrapper, .resume-download-box {
       background: var(--glass-bg);
       backdrop-filter: blur(25px) saturate(180%);
@@ -265,7 +264,7 @@
       color: var(--text-heading);
     }
 
-    /* Hero Side Panels */
+    /* Default Light Mode Hero Panels (Transparent Glass) */
     .hero-card {
       position: absolute;
       top: 55%;
@@ -274,11 +273,11 @@
       padding: 30px;
       border-radius: 30px; 
       z-index: 6; 
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
     }
     .hero-left { left: 8%; opacity: 0; animation: slideInLeftFade 1s forwards 0.7s; }
     .hero-right { right: 8%; opacity: 0; animation: slideInRightFade 1s forwards 0.7s; }
 
-    /* Dynamic font color applies perfectly here */
     .hero-card p {
       font-size: 1.05rem;
       line-height: 1.6;
@@ -336,6 +335,34 @@
       transform: translateY(-3px);
     }
 
+    /* --- DARK MODE EXCLUSIVE HERO CARD OVERRIDES --- */
+    body.dark-theme .hero-card {
+      background: rgba(28, 55, 120, 0.75); /* Deep Royal Blue Glass */
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    }
+    body.dark-theme .hero-card p {
+      color: #ffffff; /* Lock white text */
+    }
+    body.dark-theme .hero-cta {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+    body.dark-theme .hero-cta i {
+      background: #ffffff;
+      color: #1c3778; /* Match the dark background for the icon */
+    }
+    body.dark-theme .hero-socials a {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #ffffff;
+    }
+    body.dark-theme .hero-socials a:hover {
+      background: var(--accent-cyan);
+    }
+
+    /* Scroll Indicator */
     .scroll-down-wrapper {
       position: absolute;
       bottom: 20px;
@@ -798,7 +825,6 @@
       <h1 class="hero-bg-text">Scheduling<br>Analyst</h1>
     </div>
 
-    <!-- Your exact file names remain untouched -->
     <img src="my portrait.png" alt="Sakaratees Marikannu" class="hero-portrait" id="parallax-portrait">
 
     <div class="hero-card hero-left" id="parallax-card-left">
