@@ -546,7 +546,7 @@
       object-position: bottom center;
       pointer-events: none;
       filter: drop-shadow(0 24px 32px rgba(0,0,0,.34));
-      opacity: 0;
+      opacity: 1;
       animation: portraitSlideUpFade 1.05s forwards .25s;
     }
 
@@ -898,10 +898,6 @@
     }
     #cf-left { left: 0; }
     #cf-right { right: 0; }
-
-
-    .cf-item[data-preview-src], .cert-img-wrapper[data-preview-src] { cursor: pointer; }
-    .cf-item[data-preview-src] .cf-caption, .cert-img-wrapper[data-preview-src] { user-select: none; }
 
     /* ========================================= */
     /* GLASS UI TABS                             */
@@ -1355,83 +1351,6 @@
       pointer-events: none;
     }
 
-    /* Document / certification preview lightbox */
-    .preview-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 5000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 28px;
-      background: rgba(2, 7, 18, .86);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-    .preview-modal.open { display: flex; }
-    .preview-shell {
-      position: relative;
-      width: min(1100px, 94vw);
-      height: min(88vh, 820px);
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      overflow: hidden;
-      border: 1px solid rgba(120,180,255,.24);
-      border-radius: 24px;
-      background: rgba(8,18,35,.94);
-      box-shadow: 0 35px 100px rgba(0,0,0,.55), 0 0 70px rgba(39,108,255,.12);
-    }
-    .preview-head {
-      display:flex; align-items:center; justify-content:space-between; gap:18px;
-      padding: 16px 20px;
-      border-bottom: 1px solid rgba(120,180,255,.13);
-    }
-    .preview-title { min-width:0; }
-    .preview-title h3 { margin:0; color:#fff; font-size:1rem; }
-    .preview-title p { margin:4px 0 0; color:#9fb0c8; font-size:.72rem; }
-    .preview-close {
-      width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,.16);
-      background:rgba(255,255,255,.06); color:#fff; cursor:pointer; display:grid; place-items:center;
-    }
-    .preview-stage {
-      position:relative; min-height:0; display:flex; align-items:center; justify-content:center; padding:24px 72px;
-      overflow:hidden;
-    }
-    .preview-stage img, .preview-stage video, .preview-stage iframe {
-      max-width:100%; max-height:100%; width:auto; height:auto; border:0; border-radius:12px;
-      box-shadow:0 20px 60px rgba(0,0,0,.35); background:#050b15;
-    }
-    .preview-stage iframe { width:100%; height:100%; }
-    .preview-empty { color:#b6c2d5; text-align:center; max-width:520px; line-height:1.7; }
-    .preview-nav {
-      position:absolute; top:50%; transform:translateY(-50%); width:46px; height:46px; border-radius:50%;
-      border:1px solid rgba(120,180,255,.24); background:rgba(5,14,28,.78); color:#fff; cursor:pointer;
-      display:grid; place-items:center; z-index:2;
-    }
-    .preview-nav:hover { background:var(--accent-cyan); }
-    #preview-prev { left:18px; }
-    #preview-next { right:18px; }
-    .preview-foot {
-      display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 18px;
-      border-top:1px solid rgba(120,180,255,.13); color:#9fb0c8; font-size:.7rem;
-    }
-    .preview-counter { font-variant-numeric:tabular-nums; }
-    .preview-download {
-      display:inline-flex; align-items:center; gap:7px; padding:8px 12px; border-radius:9px;
-      background:var(--accent-cyan); color:#fff; text-decoration:none; font-weight:700;
-    }
-    .preview-btn {
-      display:inline-flex; align-items:center; gap:6px; margin-top:9px; padding:7px 12px; border:1px solid rgba(72,184,255,.3);
-      border-radius:999px; background:rgba(30,130,255,.12); color:var(--text-heading); cursor:pointer; font-size:.72rem; font-weight:700;
-    }
-    .cert-img-wrapper { cursor:pointer; }
-    .cert-preview-btn {
-      margin-top:8px; padding:7px 12px; border-radius:999px; border:1px solid var(--glass-border);
-      background:var(--inner-card-bg); color:var(--text-heading); cursor:pointer; font-weight:700;
-    }
-    .cert-preview-btn:hover, .preview-btn:hover { background:var(--accent-cyan); color:#fff; }
-
-
     @media (max-width: 1050px) {
       .hero-grid {
         grid-template-columns: minmax(380px, 43%) minmax(0, 57%);
@@ -1474,241 +1393,181 @@
       .tab-content { padding: 24px !important; border-radius: 28px !important; }
     }
 
-  
+    /* ========================================= */
+    /* LIGHTBOX / ELEVATED PREVIEW               */
+    /* ========================================= */
+    .lightbox-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
 
-/* =========================================================
-   FINAL RESPONSIVE + DOCUMENT VIEWER FIXES
-========================================================= */
-.preview-content-wrap,
-#preview-content {
-  width: 100%;
-  height: 100%;
-  min-width: 0;
-  min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .lightbox-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-.preview-stage #preview-content img,
-.preview-stage #preview-content video,
-.preview-stage #preview-content iframe {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
 
-.preview-fallback {
-  width: min(520px, 90%);
-  padding: 34px 28px;
-  text-align: center;
-  border: 1px solid rgba(120,180,255,.20);
-  border-radius: 18px;
-  background: rgba(255,255,255,.045);
-}
-.preview-fallback i {
-  font-size: 3rem;
-  color: #55a0ff;
-  margin-bottom: 14px;
-}
-.preview-fallback h4 { color:#fff; font-size:1.05rem; margin-bottom:7px; }
-.preview-fallback p { color:#9fb0c8; font-size:.78rem; line-height:1.6; margin-bottom:18px; }
+    .lightbox-overlay.active .lightbox-content {
+      transform: scale(1);
+    }
 
-/* Never allow the hero analytics canvas to create horizontal overflow. */
-.hero,
-.hero-grid,
-.hero-visual,
-.analytics-scene { max-width: 100%; }
+    .lightbox-close-btn {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.2s, color 0.2s;
+    }
 
-@media (max-width: 900px) {
-  body { overflow-x: hidden; }
+    .lightbox-close-btn:hover {
+      transform: scale(1.1);
+      color: var(--accent-cyan);
+    }
 
-  .hero {
-    min-height: auto;
-    height: auto;
-    max-height: none;
-    overflow: hidden;
-    padding-bottom: 12px;
-  }
+    #lightbox-media-container img,
+    #lightbox-media-container video {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      display: block;
+      object-fit: contain;
+      background: #000;
+    }
 
-  .hero-top-bar {
-    position: absolute;
-    top: 12px;
-    width: calc(100% - 24px);
-  }
+    /* ========================================= */
+    /* WORKS CAROUSEL - CLICK-TO-PREVIEW DETAIL  */
+    /* ========================================= */
+    .carousel-card {
+      cursor: pointer;
+    }
 
-  .hero-grid {
-    width: 100%;
-    min-height: 0;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    padding: 82px 14px 0;
-    gap: 0;
-  }
+    .detail-modal-content {
+      width: min(560px, 88vw);
+      max-height: 85vh;
+      overflow-y: auto;
+      border-radius: 30px;
+      padding: 36px;
+      position: relative;
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
 
-  .hero-copy {
-    width: 100%;
-    padding: 0 4px;
-    text-align: center;
-  }
+    .detail-modal-content h3 {
+      font-size: 1.5rem;
+      color: var(--text-heading);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  .hero-kicker { font-size: .58rem; padding: 6px 10px; }
-  .hero-copy h1 {
-    max-width: 680px;
-    margin: 0 auto 14px;
-    font-size: clamp(2.15rem, 8vw, 3.35rem);
-    line-height: 1.04;
-    letter-spacing: -2px;
-  }
-  .hero-copy > p {
-    max-width: 620px;
-    margin: 0 auto 18px;
-    font-size: .74rem;
-    line-height: 1.65;
-  }
-  .hero-cta-row,
-  .hero-socials { justify-content: center; }
+    .detail-modal-content p {
+      color: var(--text-main);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
 
-  .hero-visual {
-    position: relative;
-    width: min(760px, 100vw);
-    height: 470px;
-    margin: -8px auto 0;
-    transform: none !important;
-    overflow: visible;
-    flex: 0 0 470px;
-  }
-
-  .analytics-scene {
-    inset: 10px -7vw 0 -7vw;
-    transform: scale(.78);
-    transform-origin: center center;
-  }
-
-  .spotlight {
-    width: 420px;
-    height: 420px;
-    left: 50%;
-    top: 47%;
-  }
-
-  .portrait-glow {
-    width: 300px;
-    height: 420px;
-    left: 50%;
-    bottom: 5px;
-  }
-
-  .hero-portrait {
-    left: 50%;
-    bottom: 0;
-    height: 455px;
-    min-width: 0;
-    max-width: 88vw;
-    width: auto;
-    object-fit: contain;
-  }
-
-  .kpi-panel {
-    right: 1%;
-    top: 75px;
-    width: 145px;
-    gap: 6px;
-    transform: scale(.82);
-    transform-origin: top right;
-  }
-  .kpi-card { min-height: 62px; padding: 9px; }
-  .kpi-card strong { font-size: 15px; }
-  .kpi-card span { font-size: 6px; }
-  .kpi-icon { width: 28px; height: 28px; flex-basis: 28px; font-size: 11px; }
-
-  .hero-fade-bottom { height: 70px; min-height: 50px; }
-
-  .content { padding-left: 12px; padding-right: 12px; }
-  .tab-content { padding: 22px !important; }
-
-  .coverflow-carousel {
-    height: 380px;
-    min-height: 380px;
-    margin-left: -4px;
-    margin-right: -4px;
-  }
-  .coverflow-track { width: 100%; max-width: 100%; }
-  .cf-item,
-  .cf-item.active,
-  .cf-item.prev,
-  .cf-item.next,
-  .cf-item.hidden {
-    width: min(390px, 78vw);
-    height: 315px;
-  }
-  .cf-item.prev { transform: translate(-50%, -50%) translateX(-42%) scale(.78) rotateY(6deg) translateZ(-80px) !important; }
-  .cf-item.next { transform: translate(-50%, -50%) translateX(42%) scale(.78) rotateY(-6deg) translateZ(-80px) !important; }
-  .coverflow-btn { width: 38px; height: 38px; }
-  #cf-left { left: 0; }
-  #cf-right { right: 0; }
-
-  .preview-modal { padding: 8px; }
-  .preview-shell { width: 100%; height: 94vh; border-radius: 16px; }
-  .preview-stage { padding: 12px 44px; }
-  .preview-foot { flex-wrap: wrap; justify-content:center; text-align:center; }
-  .preview-foot > span:nth-child(2) { width:100%; order:3; }
-  .preview-download { order:2; }
-
-  .nav-image-container { justify-content: flex-start; padding-left: 12px; padding-right: 12px; gap: 12px; }
-  .tab-btn { width: 135px !important; border-radius: 20px; }
-  .tab-content-inner i { font-size: 1.7rem; }
-  .tab-content-inner span { font-size: .85rem; }
-}
-
-@media (max-width: 520px) {
-  .hero-top-bar { width: calc(100% - 16px); }
-  .hero-brand { font-size: .76rem; }
-  .hero-resume-btn { min-height: 32px; padding: 6px 9px; font-size: .58rem; }
-  .theme-toggle-btn { width: 34px; height: 32px; }
-
-  .hero-grid { padding-top: 76px; }
-  .hero-copy h1 { font-size: 2.05rem; }
-  .hero-copy > p { font-size: .69rem; }
-
-  .hero-visual {
-    width: 100%;
-    height: 410px;
-    flex-basis: 410px;
-  }
-  .analytics-scene { transform: scale(.61); }
-  .spotlight { width: 330px; height: 330px; }
-  .portrait-glow { width: 250px; height: 350px; }
-  .hero-portrait { height: 395px; max-width: 94vw; }
-  .kpi-panel { right: -2px; top: 66px; transform: scale(.68); }
-
-  .coverflow-carousel { height: 350px; min-height: 350px; }
-  .cf-item,
-  .cf-item.active,
-  .cf-item.prev,
-  .cf-item.next,
-  .cf-item.hidden {
-    width: 78vw;
-    height: 285px;
-  }
-  .cf-item.prev { transform: translate(-50%, -50%) translateX(-36%) scale(.72) rotateY(5deg) translateZ(-80px) !important; }
-  .cf-item.next { transform: translate(-50%, -50%) translateX(36%) scale(.72) rotateY(-5deg) translateZ(-80px) !important; }
-  .cf-caption h3 { font-size: .95rem; }
-  .cf-caption p { font-size: .72rem; }
-
-  .preview-head { padding: 12px 14px; }
-  .preview-title h3 { font-size: .88rem; }
-  .preview-stage { padding: 10px 38px; }
-  .preview-nav { width: 34px; height: 34px; }
-  #preview-prev { left: 7px; }
-  #preview-next { right: 7px; }
-}
-
-</style>
+    /* Reliable document preview viewer */
+    .preview-shell {
+      width: min(1100px, 94vw);
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .preview-title {
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .preview-title strong { font-size: 1.1rem; }
+    .preview-title span { font-size: .78rem; opacity: .72; }
+    .preview-media {
+      width: 100%;
+      height: min(74vh, 760px);
+      display: grid;
+      place-items: center;
+    }
+    .preview-media img,
+    .preview-media video {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 14px;
+      box-shadow: 0 25px 70px rgba(0,0,0,.55);
+      background: #050505;
+    }
+    .preview-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #fff;
+    }
+    .preview-controls button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.09);
+      color: #fff;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+    .preview-controls button:hover { background: var(--accent-cyan); }
+    .preview-error {
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      background: rgba(255,255,255,.06);
+    }
+    .preview-error i { font-size: 2.5rem; color: #60a5fa; margin-bottom: 12px; }
+    .preview-error p { color: #93c5fd; margin: 8px 0; word-break: break-word; }
+    .cert-preview-trigger { cursor: pointer; }
+    .cert-preview-trigger:hover { transform: scale(1.015); }
+    @media (max-width: 620px) {
+      .preview-shell { width: 96vw; }
+      .preview-media { height: 68vh; }
+      .preview-title strong { font-size: .95rem; }
+      .preview-title span { font-size: .68rem; }
+    }
+  </style>
 </head>
 
 <body class="dark-theme">
@@ -1874,51 +1733,49 @@
     <div class="coverflow-carousel reveal">
       <button class="coverflow-btn" id="cf-left"><i class="fas fa-chevron-left"></i></button>
       
-      <div class="coverflow-track" id="cf-track">
-        
-        <div class="cf-item" data-preview-type="image" data-preview-src="startup-cover.jpg" data-preview-title="Fundamentals of Startup" data-preview-subtitle="Entrepreneurship & Strategy" data-preview-download="Fundamentals_of_Startup.pptx">
+      <div class="coverflow-track" id="cf-track" tabindex="0" role="region" aria-label="Featured highlights carousel">
+        <div class="cf-item" tabindex="0" role="button"
+             data-preview-type="image" data-preview-src="startup-cover.jpg"
+             data-preview-title="Fundamentals of Startup"
+             data-preview-subtitle="Entrepreneurship & Strategy">
           <img src="startup-cover.jpg" alt="Fundamentals of Startup Cover" class="cf-img">
-          <div class="cf-caption">
-            <h3>Fundamentals of Startup</h3>
-            <p>Entrepreneurship & Strategy</p>
-          </div>
+          <div class="cf-caption"><h3>Fundamentals of Startup</h3><p>Entrepreneurship & Strategy</p></div>
         </div>
 
-        <div class="cf-item" data-preview-type="image" data-preview-src="Graduation.jpg" data-preview-title="B.Com Graduation" data-preview-subtitle="Perunthalaivar Kamarajar Arts College" data-preview-download="Graduation.jpg">
+        <div class="cf-item" tabindex="0" role="button"
+             data-preview-type="image" data-preview-src="Graduation.jpg"
+             data-preview-title="B.Com Graduation"
+             data-preview-subtitle="Perunthalaivar Kamarajar Arts College">
           <img src="Graduation.jpg" alt="Graduation" class="cf-img">
-          <div class="cf-caption">
-            <h3>B.Com Graduation</h3>
-            <p>Perunthalaivar Kamarajar Arts College</p>
-          </div>
+          <div class="cf-caption"><h3>B.Com Graduation</h3><p>Perunthalaivar Kamarajar Arts College</p></div>
         </div>
 
-        <div class="cf-item" data-preview-type="video" data-preview-src="Prototyping Seminar.mp4" data-preview-title="Prototyping Seminar" data-preview-subtitle="Interactive Workshop Session" data-preview-download="Prototyping Seminar.mp4">
-          <video src="Prototyping Seminar.mp4" muted class="cf-img" style="object-fit: cover; background: #000;"></video>
-          <div class="cf-caption">
-            <h3>Prototyping Seminar</h3>
-            <p>Interactive Workshop Session</p>
-          </div>
+        <div class="cf-item" tabindex="0" role="button"
+             data-preview-type="video" data-preview-src="Prototyping Seminar.mp4"
+             data-preview-title="Prototyping Seminar"
+             data-preview-subtitle="Interactive Workshop Session">
+          <video src="Prototyping Seminar.mp4" muted playsinline preload="metadata" class="cf-img"></video>
+          <div class="cf-caption"><h3>Prototyping Seminar</h3><p>Interactive Workshop Session</p></div>
         </div>
 
-        <div class="cf-item" data-preview-type="image" data-preview-src="Startup expo - 2024.jpg" data-preview-title="Startup Expo 2024" data-preview-subtitle="Networking & Innovation" data-preview-download="Startup expo - 2024.jpg">
+        <div class="cf-item" tabindex="0" role="button"
+             data-preview-type="image" data-preview-src="Startup expo - 2024.jpg"
+             data-preview-title="Startup Expo 2024"
+             data-preview-subtitle="Networking & Innovation">
           <img src="Startup expo - 2024.jpg" alt="Startup Expo 2024" class="cf-img">
-          <div class="cf-caption">
-            <h3>Startup Expo 2024</h3>
-            <p>Networking & Innovation</p>
-          </div>
+          <div class="cf-caption"><h3>Startup Expo 2024</h3><p>Networking & Innovation</p></div>
         </div>
 
-        <div class="cf-item" data-preview-type="image" data-preview-src="Startup Meet.jpg" data-preview-title="Startup Meet" data-preview-subtitle="E-Cell Foundation Event" data-preview-download="Startup Meet.jpg">
+        <div class="cf-item" tabindex="0" role="button"
+             data-preview-type="image" data-preview-src="Startup Meet.jpg"
+             data-preview-title="Startup Meet"
+             data-preview-subtitle="E-Cell Foundation Event">
           <img src="Startup Meet.jpg" alt="Startup Meet" class="cf-img">
-          <div class="cf-caption">
-            <h3>Startup Meet</h3>
-            <p>E-Cell Foundation Event</p>
-          </div>
+          <div class="cf-caption"><h3>Startup Meet</h3><p>E-Cell Foundation Event</p></div>
         </div>
-
       </div>
 
-      <div class="coverflow-hint">Swipe or drag horizontally to explore</div>
+      <div class="coverflow-hint">Swipe, use the arrows, or tap a card to explore</div>
       <button class="coverflow-btn" id="cf-right"><i class="fas fa-chevron-right"></i></button>
     </div>
   </section>
@@ -2137,23 +1994,23 @@
       
       <div class="cert-image-grid">
         
-        <div class="cert-img-wrapper reveal" data-preview-type="image" data-preview-src="Market Ka Eklavya.jpg" data-preview-title="Market Ka Eklavya" data-preview-subtitle="Professional Certification" data-preview-download="Market Ka Eklavya.jpg">
-          <img src="Market Ka Eklavya.jpg" alt="Market Ka Eklavya" class="cert-img">
+        <div class="cert-img-wrapper reveal">
+          <img src="Market Ka Eklavya.jpg" alt="Market Ka Eklavya" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Market Ka Eklavya.jpg" data-preview-title="Market Ka Eklavya" data-preview-subtitle="Professional Certification">
           <p>Market Ka Eklavya</p>
         </div>
 
-        <div class="cert-img-wrapper reveal" data-preview-type="image" data-preview-src="Customeer Care Executive.jpg" data-preview-title="Customer Care Executive" data-preview-subtitle="Professional Certification" data-preview-download="Customeer Care Executive.jpg">
-          <img src="Customeer Care Executive.jpg" alt="Customer Care Executive" class="cert-img">
+        <div class="cert-img-wrapper reveal">
+          <img src="Customeer Care Executive.jpg" alt="Customer Care Executive" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Customeer Care Executive.jpg" data-preview-title="Customer Care Executive" data-preview-subtitle="Professional Certification">
           <p>Customer Care Executive</p>
         </div>
 
-        <div class="cert-img-wrapper reveal" data-preview-type="image" data-preview-src="Power BI for Beginners.jpg" data-preview-title="Power BI for Beginners" data-preview-subtitle="Professional Certification" data-preview-download="Power BI for Beginners.jpg">
-          <img src="Power BI for Beginners.jpg" alt="Power BI for Beginners" class="cert-img">
+        <div class="cert-img-wrapper reveal">
+          <img src="Power BI for Beginners.jpg" alt="Power BI for Beginners" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Power BI for Beginners.jpg" data-preview-title="Power BI for Beginners" data-preview-subtitle="Professional Certification">
           <p>Power BI for Beginners</p>
         </div>
 
-        <div class="cert-img-wrapper reveal" data-preview-type="image" data-preview-src="Power BI Projects.jpg" data-preview-title="Power BI Projects" data-preview-subtitle="Professional Certification" data-preview-download="Power BI Projects.jpg">
-          <img src="Power BI Projects.jpg" alt="Power BI Projects" class="cert-img">
+        <div class="cert-img-wrapper reveal">
+          <img src="Power BI Projects.jpg" alt="Power BI Projects" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Power BI Projects.jpg" data-preview-title="Power BI Projects" data-preview-subtitle="Professional Certification">
           <p>Power BI Projects</p>
         </div>
 
@@ -2189,27 +2046,21 @@
     </div>
   </footer>
 
+  <!-- ========================================= -->
+  <!-- LIGHTBOX / ELEVATED PREVIEW MODAL         -->
+  <!-- ========================================= -->
+  <div id="lightbox-modal" class="lightbox-overlay">
+    <div class="lightbox-content">
+      <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close Preview"><i class="fas fa-times"></i></button>
+      <div id="lightbox-media-container"></div>
+    </div>
+  </div>
 
-  <!-- DOCUMENT / CERTIFICATION PREVIEW -->
-  <div class="preview-modal" id="preview-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Document viewer">
-    <div class="preview-shell">
-      <div class="preview-head">
-        <div class="preview-title">
-          <h3 id="preview-title">Document</h3>
-          <p id="preview-subtitle"></p>
-        </div>
-        <button class="preview-close" id="preview-close" type="button" aria-label="Close preview"><i class="fas fa-xmark"></i></button>
-      </div>
-      <div class="preview-stage" id="preview-stage">
-        <button class="preview-nav" id="preview-prev" type="button" aria-label="Previous document"><i class="fas fa-chevron-left"></i></button>
-        <div id="preview-content"></div>
-        <button class="preview-nav" id="preview-next" type="button" aria-label="Next document"><i class="fas fa-chevron-right"></i></button>
-      </div>
-      <div class="preview-foot">
-        <span class="preview-counter" id="preview-counter">1 / 1</span>
-        <span>Use <strong>←</strong> <strong>→</strong> or swipe to switch · <strong>Esc</strong> to close</span>
-        <a class="preview-download" id="preview-download" href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-download"></i> Open / Download</a>
-      </div>
+  <!-- DETAIL PREVIEW MODAL FOR WORKS CAROUSEL CARDS -->
+  <div id="detail-modal" class="lightbox-overlay">
+    <div class="detail-modal-content">
+      <button id="detail-close" class="lightbox-close-btn" aria-label="Close Preview"><i class="fas fa-times"></i></button>
+      <div id="detail-modal-body"></div>
     </div>
   </div>
 
@@ -2281,303 +2132,277 @@
         worksLeft.addEventListener('click', () => worksTrack.scrollBy({ left: -320, behavior: 'smooth' }));
         worksRight.addEventListener('click', () => worksTrack.scrollBy({ left: 320, behavior: 'smooth' }));
       }
-
-      // 5. Featured Highlights — stacked 3D carousel.
-      // No native scrolling: arrows, touch swipe and mouse drag advance one card.
-      const cfTrack = document.getElementById('cf-track');
-      const cfItems = Array.from(document.querySelectorAll('.cf-item'));
-      const cfLeft = document.getElementById('cf-left');
-      const cfRight = document.getElementById('cf-right');
-      let cfIndex = 0;
-      let cfStartX = 0;
-      let cfCurrentX = 0;
-      let cfDragging = false;
-      let cfPointerId = null;
-
-      function renderFeatured(index, animate = true) {
-        if (!cfItems.length) return;
-        cfIndex = (index + cfItems.length) % cfItems.length;
-
-        cfItems.forEach((item, i) => {
-          item.classList.remove('active', 'prev', 'next', 'hidden');
-          const relative = (i - cfIndex + cfItems.length) % cfItems.length;
-
-          if (relative === 0) item.classList.add('active');
-          else if (relative === 1) item.classList.add('next');
-          else if (relative === cfItems.length - 1) item.classList.add('prev');
-          else item.classList.add('hidden');
-
-          item.setAttribute('aria-hidden', relative === 0 ? 'false' : 'true');
-        });
-      }
-
-      function moveFeatured(direction) {
-        renderFeatured(cfIndex + direction);
-      }
-
-      if (cfItems.length) renderFeatured(0, false);
-      if (cfLeft) cfLeft.addEventListener('click', () => moveFeatured(-1));
-      if (cfRight) cfRight.addEventListener('click', () => moveFeatured(1));
-
-      // Clicking the visible side cards moves them into the center.
-      cfItems.forEach((item, i) => {
-        item.addEventListener('click', (event) => {
-          if (Math.abs(cfCurrentX - cfStartX) > 8) return;
-          const relative = (i - cfIndex + cfItems.length) % cfItems.length;
-          if (relative === 1) moveFeatured(1);
-          else if (relative === cfItems.length - 1) moveFeatured(-1);
-        });
-      });
-
-      // Pointer/touch horizontal gesture.
-      if (cfTrack) {
-        cfTrack.addEventListener('pointerdown', (event) => {
-          if (event.pointerType === 'mouse' && event.button !== 0) return;
-          cfDragging = true;
-          cfPointerId = event.pointerId;
-          cfStartX = event.clientX;
-          cfCurrentX = event.clientX;
-          cfTrack.setPointerCapture?.(event.pointerId);
-        });
-
-        cfTrack.addEventListener('pointermove', (event) => {
-          if (!cfDragging || event.pointerId !== cfPointerId) return;
-          cfCurrentX = event.clientX;
-        });
-
-        const finishFeaturedGesture = (event) => {
-          if (!cfDragging || (event && event.pointerId !== cfPointerId)) return;
-          const delta = cfCurrentX - cfStartX;
-          cfDragging = false;
-          cfPointerId = null;
-          if (Math.abs(delta) >= 45) {
-            // Swipe left = next, swipe right = previous.
-            moveFeatured(delta < 0 ? 1 : -1);
-          }
-        };
-
-        cfTrack.addEventListener('pointerup', finishFeaturedGesture);
-        cfTrack.addEventListener('pointercancel', finishFeaturedGesture);
-        cfTrack.addEventListener('lostpointercapture', () => {
-          if (cfDragging) finishFeaturedGesture();
-        });
-      }
-
-      // Keyboard support when the carousel is focused.
-      if (cfTrack) {
-        cfTrack.setAttribute('tabindex', '0');
-        cfTrack.setAttribute('role', 'region');
-        cfTrack.setAttribute('aria-label', 'Featured highlights carousel');
-        cfTrack.addEventListener('keydown', (event) => {
-          if (event.key === 'ArrowLeft') { event.preventDefault(); moveFeatured(-1); }
-          if (event.key === 'ArrowRight') { event.preventDefault(); moveFeatured(1); }
-        });
-      }
-
-      // Automatic Featured Highlights rotation every 3 seconds.
-      // It pauses while the user hovers/touches the carousel or a document is open.
-      let cfAutoTimer = null;
-      let cfPaused = false;
-      function startFeaturedAutoRotate() {
-        clearInterval(cfAutoTimer);
-        cfAutoTimer = setInterval(() => {
-          if (!cfPaused && !previewModal?.classList.contains('open') && !document.hidden) {
-            moveFeatured(1);
-          }
-        }, 3000);
-      }
-      function pauseFeaturedAuto() { cfPaused = true; }
-      function resumeFeaturedAuto() { cfPaused = false; }
-      if (cfTrack) {
-        cfTrack.addEventListener('mouseenter', pauseFeaturedAuto);
-        cfTrack.addEventListener('mouseleave', resumeFeaturedAuto);
-        cfTrack.addEventListener('pointerdown', pauseFeaturedAuto);
-        cfTrack.addEventListener('pointerup', resumeFeaturedAuto);
-        cfTrack.addEventListener('pointercancel', resumeFeaturedAuto);
-      }
-      startFeaturedAutoRotate();
-
-      // 6. Touch / swipe for the Works carousel
-      function attachSwipe(element, onLeft, onRight, threshold = 45) {
-        if (!element) return;
-        let startX = 0;
-        let startY = 0;
-        let tracking = false;
-
-        element.addEventListener('touchstart', (event) => {
-          if (!event.touches || !event.touches[0]) return;
-          startX = event.touches[0].clientX;
-          startY = event.touches[0].clientY;
-          tracking = true;
-        }, { passive: true });
-
-        element.addEventListener('touchend', (event) => {
-          if (!tracking || !event.changedTouches || !event.changedTouches[0]) return;
-          tracking = false;
-          const dx = event.changedTouches[0].clientX - startX;
-          const dy = event.changedTouches[0].clientY - startY;
-          if (Math.abs(dx) < threshold || Math.abs(dx) < Math.abs(dy)) return;
-          if (dx < 0) onLeft(); else onRight();
-        }, { passive: true });
-      }
-
       attachSwipe(
         worksTrack,
         () => worksTrack && worksTrack.scrollBy({ left: 320, behavior: 'smooth' }),
         () => worksTrack && worksTrack.scrollBy({ left: -320, behavior: 'smooth' })
       );
 
-      // 7. Unified document preview for Featured + Certifications.
-      // Clicking Preview opens the selected document, and the same modal can move
-      // through every document in that section using arrows, keyboard or swipe.
-      const previewModal = document.getElementById('preview-modal');
-      const previewContent = document.getElementById('preview-content');
-      const previewTitle = document.getElementById('preview-title');
-      const previewSubtitle = document.getElementById('preview-subtitle');
-      const previewCounter = document.getElementById('preview-counter');
-      const previewDownload = document.getElementById('preview-download');
-      const previewClose = document.getElementById('preview-close');
-      const previewPrev = document.getElementById('preview-prev');
-      const previewNext = document.getElementById('preview-next');
-      const previewStage = document.getElementById('preview-stage');
-      const previewTriggers = Array.from(document.querySelectorAll('.cf-item[data-preview-src], .cert-img-wrapper[data-preview-src]'));
-      let previewItems = [];
-      let previewIndex = 0;
-      let previewStartX = 0;
-      let previewStartY = 0;
+      // 5. Featured Highlights — stacked 3D carousel + file preview.
+      const cfTrack = document.getElementById('cf-track');
+      const cfItems = Array.from(document.querySelectorAll('.cf-item'));
+      const cfLeft = document.getElementById('cf-left');
+      const cfRight = document.getElementById('cf-right');
+      let cfIndex = 0;
+      let featuredTimer = null;
+      let previewOpen = false;
 
-      function buildPreviewItems(sourceTrigger) {
-        const section = sourceTrigger.closest('.tab-content') || sourceTrigger.closest('#featured') || document;
-        const local = Array.from(section.querySelectorAll('[data-preview-src]'));
-        previewItems = local.length ? local : previewTriggers;
+      // Resolve every asset relative to index.html. This works with filenames
+      // containing spaces and with normal web/local-server hosting.
+      const assetURL = filename => new URL(filename, document.baseURI).href;
+
+      function renderFeatured(index) {
+        if (!cfItems.length) return;
+        cfIndex = (index + cfItems.length) % cfItems.length;
+        cfItems.forEach((item, i) => {
+          item.classList.remove('active', 'prev', 'next', 'hidden');
+          const relative = (i - cfIndex + cfItems.length) % cfItems.length;
+          if (relative === 0) {
+            item.classList.add('active');
+            item.setAttribute('aria-hidden', 'false');
+          } else if (relative === 1) {
+            item.classList.add('next');
+            item.setAttribute('aria-hidden', 'true');
+          } else if (relative === cfItems.length - 1) {
+            item.classList.add('prev');
+            item.setAttribute('aria-hidden', 'true');
+          } else {
+            item.classList.add('hidden');
+            item.setAttribute('aria-hidden', 'true');
+          }
+        });
       }
 
-      function renderPreview(index) {
-        if (!previewItems.length) return;
+      function moveFeatured(direction, restart = true) {
+        renderFeatured(cfIndex + direction);
+        if (restart) startFeaturedTimer();
+      }
+
+      function startFeaturedTimer() {
+        clearInterval(featuredTimer);
+        featuredTimer = setInterval(() => {
+          if (!previewOpen && document.visibilityState === 'visible') moveFeatured(1, false);
+        }, 3000);
+      }
+
+      renderFeatured(0);
+      startFeaturedTimer();
+
+      if (cfLeft) cfLeft.addEventListener('click', e => {
+        e.stopPropagation();
+        moveFeatured(-1);
+      });
+      if (cfRight) cfRight.addEventListener('click', e => {
+        e.stopPropagation();
+        moveFeatured(1);
+      });
+
+      const lightboxModal = document.getElementById('lightbox-modal');
+      const lightboxContainer = document.getElementById('lightbox-media-container');
+      const lightboxClose = document.getElementById('lightbox-close');
+      let previewItems = [];
+      let previewIndex = 0;
+
+      function escapeHTML(value) {
+        return String(value || '').replace(/[&<>"']/g, ch => ({
+          '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;'
+        }[ch]));
+      }
+
+      function buildPreviewItems() {
+        previewItems = [
+          ...cfItems.map(item => ({
+            type: item.dataset.previewType,
+            src: item.dataset.previewSrc,
+            title: item.dataset.previewTitle,
+            subtitle: item.dataset.previewSubtitle
+          })),
+          ...Array.from(document.querySelectorAll('.cert-preview-trigger')).map(img => ({
+            type: 'image',
+            src: img.dataset.previewSrc,
+            title: img.dataset.previewTitle,
+            subtitle: img.dataset.previewSubtitle
+          }))
+        ];
+      }
+
+      function showPreview(index) {
+        buildPreviewItems();
+        if (!previewItems.length || !lightboxContainer || !lightboxModal) return;
+
         previewIndex = (index + previewItems.length) % previewItems.length;
         const item = previewItems[previewIndex];
-        const type = item.dataset.previewType || 'image';
-        const src = item.dataset.previewSrc;
-        const title = item.dataset.previewTitle || 'Document';
-        const subtitle = item.dataset.previewSubtitle || '';
-        const download = item.dataset.previewDownload || src;
+        const src = assetURL(item.src);
 
-        previewTitle.textContent = title;
-        previewSubtitle.textContent = subtitle;
-        previewCounter.textContent = `${previewIndex + 1} / ${previewItems.length}`;
-        previewDownload.href = download || '#';
-        previewDownload.style.display = download ? 'inline-flex' : 'none';
-        previewContent.innerHTML = '';
+        lightboxContainer.innerHTML = `
+          <div class="preview-shell">
+            <div class="preview-title">
+              <strong>${escapeHTML(item.title)}</strong>
+              <span>${escapeHTML(item.subtitle)}</span>
+            </div>
+            <div class="preview-media" id="preview-media"></div>
+            <div class="preview-controls">
+              <button type="button" id="preview-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+              <span>${previewIndex + 1} / ${previewItems.length}</span>
+              <button type="button" id="preview-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>`;
 
-        if (type === 'video') {
+        const media = document.getElementById('preview-media');
+
+        if (item.type === 'video') {
           const video = document.createElement('video');
           video.src = src;
           video.controls = true;
           video.autoplay = true;
           video.playsInline = true;
-          video.addEventListener('error', () => showPreviewFallback(src, title));
-          previewContent.appendChild(video);
-          return;
+          video.preload = 'auto';
+          media.appendChild(video);
+          video.addEventListener('error', () => showPreviewError(media, item.src));
+        } else {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = item.title || '';
+          media.appendChild(img);
+          img.addEventListener('error', () => showPreviewError(media, item.src));
         }
 
-        if (type === 'iframe') {
-          const iframe = document.createElement('iframe');
-          iframe.src = src;
-          iframe.title = title;
-          iframe.loading = 'eager';
-          previewContent.appendChild(iframe);
-          return;
-        }
+        document.getElementById('preview-prev').addEventListener('click', e => {
+          e.stopPropagation();
+          showPreview(previewIndex - 1);
+        });
+        document.getElementById('preview-next').addEventListener('click', e => {
+          e.stopPropagation();
+          showPreview(previewIndex + 1);
+        });
 
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = title;
-        img.draggable = false;
-        img.addEventListener('error', () => showPreviewFallback(download || src, title));
-        previewContent.appendChild(img);
+        lightboxModal.classList.add('active');
+        previewOpen = true;
+        clearInterval(featuredTimer);
       }
 
-      function showPreviewFallback(download, title) {
-        previewContent.innerHTML = `
-          <div class="preview-fallback">
+      function showPreviewError(container, filename) {
+        container.innerHTML = `
+          <div class="preview-error">
             <i class="fas fa-file-circle-exclamation"></i>
-            <h4>${escapeHtml(title)}</h4>
-            <p>The preview asset is not available beside the website file yet. Add the original document/image using the same filename, then it will open here automatically.</p>
-            ${download ? `<a class="preview-download" href="${encodeURI(download)}" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i> Open file</a>` : ''}
+            <h3>File could not be loaded</h3>
+            <p>${escapeHTML(filename)}</p>
+            <small>Keep this file in the same folder as index.html.</small>
           </div>`;
       }
 
-      function escapeHtml(value) {
-        return String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+      function closeLightbox() {
+        if (!lightboxModal) return;
+        lightboxModal.classList.remove('active');
+        previewOpen = false;
+        setTimeout(() => {
+          if (lightboxContainer) lightboxContainer.innerHTML = '';
+        }, 250);
+        startFeaturedTimer();
       }
 
-      function openPreview(trigger) {
-        buildPreviewItems(trigger);
-        const index = previewItems.indexOf(trigger);
-        renderPreview(index >= 0 ? index : 0);
-        previewModal.classList.add('open');
-        previewModal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        cfPaused = true;
-        previewClose.focus();
+      if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+      if (lightboxModal) {
+        lightboxModal.addEventListener('click', e => {
+          if (e.target === lightboxModal) closeLightbox();
+        });
       }
 
-      function closePreview() {
-        previewModal.classList.remove('open');
-        previewModal.setAttribute('aria-hidden', 'true');
-        previewContent.innerHTML = '';
-        document.body.style.overflow = '';
-        cfPaused = false;
-      }
-
-      function movePreview(direction) {
-        renderPreview(previewIndex + direction);
-      }
-
-      previewTriggers.forEach(trigger => {
-        trigger.addEventListener('click', event => {
-          // Side cards in the stacked carousel should first become active.
-          if (trigger.classList.contains('cf-item')) {
-            const relative = (cfItems.indexOf(trigger) - cfIndex + cfItems.length) % cfItems.length;
-            if (relative !== 0) {
-              event.stopPropagation();
-              moveFeatured(relative === 1 ? 1 : -1);
-              return;
-            }
+      // Featured cards: side card -> center; center card -> open preview.
+      cfItems.forEach((item, i) => {
+        const activateOrOpen = e => {
+          e.preventDefault();
+          const relative = (i - cfIndex + cfItems.length) % cfItems.length;
+          if (relative === 0) {
+            showPreview(i);
+          } else if (relative === 1) {
+            moveFeatured(1);
+          } else if (relative === cfItems.length - 1) {
+            moveFeatured(-1);
           }
-          event.stopPropagation();
-          openPreview(trigger);
+        };
+        item.addEventListener('click', activateOrOpen);
+        item.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') activateOrOpen(e);
         });
       });
 
-      previewClose.addEventListener('click', closePreview);
-      previewPrev.addEventListener('click', () => movePreview(-1));
-      previewNext.addEventListener('click', () => movePreview(1));
-      previewModal.addEventListener('click', event => {
-        if (event.target === previewModal) closePreview();
+      // Certification images open automatically.
+      document.querySelectorAll('.cert-preview-trigger').forEach(img => {
+        const openCert = e => {
+          e.preventDefault();
+          buildPreviewItems();
+          const index = previewItems.findIndex(x => x.src === img.dataset.previewSrc);
+          showPreview(index >= 0 ? index : 0);
+        };
+        img.addEventListener('click', openCert);
+        img.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') openCert(e);
+        });
       });
 
-      document.addEventListener('keydown', event => {
-        if (!previewModal.classList.contains('open')) return;
-        if (event.key === 'Escape') { event.preventDefault(); closePreview(); }
-        if (event.key === 'ArrowLeft') { event.preventDefault(); movePreview(-1); }
-        if (event.key === 'ArrowRight') { event.preventDefault(); movePreview(1); }
+      // Touch/swipe for stacked Featured carousel.
+      function attachSwipe(element, onLeft, onRight, threshold = 45) {
+        if (!element) return;
+        let startX = 0, startY = 0, tracking = false;
+        element.addEventListener('touchstart', e => {
+          if (!e.touches[0]) return;
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+          tracking = true;
+        }, { passive: true });
+        element.addEventListener('touchend', e => {
+          if (!tracking || !e.changedTouches[0]) return;
+          tracking = false;
+          const dx = e.changedTouches[0].clientX - startX;
+          const dy = e.changedTouches[0].clientY - startY;
+          if (Math.abs(dx) < threshold || Math.abs(dx) < Math.abs(dy)) return;
+          if (dx < 0) onLeft(); else onRight();
+        }, { passive: true });
+      }
+
+      attachSwipe(cfTrack, () => moveFeatured(1), () => moveFeatured(-1));
+
+      if (cfTrack) {
+        cfTrack.addEventListener('keydown', e => {
+          if (e.key === 'ArrowLeft') { e.preventDefault(); moveFeatured(-1); }
+          if (e.key === 'ArrowRight') { e.preventDefault(); moveFeatured(1); }
+          if (e.key === 'Enter') showPreview(cfIndex);
+        });
+        cfTrack.addEventListener('mouseenter', () => clearInterval(featuredTimer));
+        cfTrack.addEventListener('mouseleave', () => { if (!previewOpen) startFeaturedTimer(); });
+      }
+
+      // Viewer keyboard navigation and touch swipe.
+      document.addEventListener('keydown', e => {
+        if (!previewOpen) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPreview(previewIndex - 1);
+        if (e.key === 'ArrowRight') showPreview(previewIndex + 1);
       });
+      attachSwipe(lightboxModal, () => showPreview(previewIndex + 1), () => showPreview(previewIndex - 1), 50);
 
-      previewStage.addEventListener('touchstart', event => {
-        const t = event.touches[0];
-        previewStartX = t.clientX;
-        previewStartY = t.clientY;
-      }, { passive: true });
 
-      previewStage.addEventListener('touchend', event => {
-        const t = event.changedTouches[0];
-        const dx = t.clientX - previewStartX;
-        const dy = t.clientY - previewStartY;
-        if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy)) return;
-        movePreview(dx < 0 ? 1 : -1);
-      }, { passive: true });
+      // Works detail modal.
+      const detailModal = document.getElementById('detail-modal');
+      const detailModalBody = document.getElementById('detail-modal-body');
+      const detailClose = document.getElementById('detail-close');
 
+      function openDetailPreview(card) {
+        if (!detailModal || !detailModalBody) return;
+        detailModalBody.innerHTML = card.innerHTML;
+        detailModal.classList.add('active');
+      }
+      function closeDetailPreview() {
+        if (!detailModal) return;
+        detailModal.classList.remove('active');
+        setTimeout(() => { if (detailModalBody) detailModalBody.innerHTML = ''; }, 250);
+      }
+      document.querySelectorAll('.carousel-card').forEach(card => card.addEventListener('click', () => openDetailPreview(card)));
+      if (detailModal && detailClose) {
+        detailClose.addEventListener('click', closeDetailPreview);
+        detailModal.addEventListener('click', e => { if (e.target === detailModal) closeDetailPreview(); });
+      }
 
       // 7. Theme Toggle with Icon Pop Animation
       const themeToggleBtn = document.getElementById('theme-toggle');
@@ -2608,11 +2433,11 @@
           setTimeout(() => {
             if (isDark) {
               themeIcon.className = 'fas fa-sun theme-icon-animate';
-              themeText.textContent = 'Light Mode';
+              if(themeText) themeText.textContent = 'Light Mode';
               localStorage.setItem('theme', 'dark');
             } else {
               themeIcon.className = 'fas fa-moon theme-icon-animate';
-              themeText.textContent = 'Dark Mode';
+              if(themeText) themeText.textContent = 'Dark Mode';
               localStorage.setItem('theme', 'light');
             }
           }, 150);
