@@ -1262,6 +1262,8 @@
 
     /* =========================================================
        STACKED / 3D FEATURED CAROUSEL
+       No native horizontal scrolling. Cards are positioned as a
+       layered deck and advanced with arrows, touch swipe or drag.
        ========================================================= */
     .coverflow-carousel {
       position: relative;
@@ -1617,6 +1619,9 @@
 
 
     @media (max-width: 900px) {
+
+
+  
     /* World map: visible analytics layer behind the portrait */
     .analytics-scene .world-map-svg{
       position:absolute !important;
@@ -1700,6 +1705,10 @@
 
     /* =========================================================
        TOUCH-DEVICE DESKTOP MODE FIX
+       Phones using "Desktop site" can report ~980px width.
+       This media query catches those devices without relying
+       only on viewport width, eliminating the desktop canvas
+       and its empty side/bottom spaces.
        ========================================================= */
     @media (hover: none) and (pointer: coarse) and (max-width: 1200px){
       html, body{
@@ -2563,7 +2572,6 @@ body:not(.dark-theme) .hero-copy .hero-role-subline { color: #475569 !important;
       
       <div class="coverflow-track" id="cf-track" tabindex="0" role="region" aria-label="Featured highlights carousel">
         
-        <!-- FIXED: PowerPoint handling added. Setting type to 'ppt' opens interactive file viewer UI. -->
         <div class="cf-item" tabindex="0" role="button"
              data-preview-type="ppt" data-preview-src="Fundamentals of Startup.pptx"
              data-preview-title="Fundamentals of Startup"
@@ -2843,16 +2851,10 @@ body:not(.dark-theme) .hero-copy .hero-role-subline { color: #475569 !important;
           <img src="Power BI Projects.jpg" alt="Power BI Projects" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-type="image" data-preview-src="Power BI Projects.jpg" data-preview-title="Power BI Projects" data-preview-subtitle="Professional Certification">
           <p>Power BI Projects</p>
         </div>
-        
-        <!-- FIXED: Certificate correctly renamed to AI Enthusiast -->
+
+        <!-- FIXED: Replaced PDF icon with an actual image preview thumbnail -->
         <div class="cert-img-wrapper reveal">
-          <div class="cert-img cert-preview-trigger" tabindex="0" role="button" 
-               style="display:flex; align-items:center; justify-content:center; font-size:4rem; color:var(--accent-cyan); background:rgba(0,0,0,0.05); text-decoration:none;"
-               data-preview-type="pdf" data-preview-src="AI Enthusiast.pdf" 
-               data-preview-title="AI Enthusiast" 
-               data-preview-subtitle="Straive Internal Programs">
-            <i class="fas fa-file-pdf"></i>
-          </div>
+          <img src="AI Enthusiast.jpg" alt="AI Enthusiast" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-type="pdf" data-preview-src="AI Enthusiast.pdf" data-preview-title="AI Enthusiast" data-preview-subtitle="Straive Internal Programs">
           <p>AI Enthusiast</p>
         </div>
 
@@ -3050,6 +3052,7 @@ body:not(.dark-theme) .hero-copy .hero-role-subline { color: #475569 !important;
         }[ch]));
       }
 
+      // FIXED: Safely builds preview items respecting 'data-preview-type'
       function buildPreviewItems() {
         previewItems = [
           ...cfItems.map(item => ({
@@ -3059,7 +3062,7 @@ body:not(.dark-theme) .hero-copy .hero-role-subline { color: #475569 !important;
             subtitle: item.dataset.previewSubtitle
           })),
           ...Array.from(document.querySelectorAll('.cert-preview-trigger')).map(trigger => ({
-            type: trigger.dataset.previewType || 'image',
+            type: trigger.dataset.previewType || 'image', // FIX: Dynamically grabs dataset previewType
             src: trigger.dataset.previewSrc,
             title: trigger.dataset.previewTitle,
             subtitle: trigger.dataset.previewSubtitle
@@ -3067,6 +3070,7 @@ body:not(.dark-theme) .hero-copy .hero-role-subline { color: #475569 !important;
         ];
       }
 
+      // FIXED: Display logic now checks for 'ppt' and 'pdf' exactly
       function showPreview(index) {
         buildPreviewItems();
         if (!previewItems.length || !lightboxContainer || !lightboxModal) return;
@@ -3101,16 +3105,16 @@ body:not(.dark-theme) .hero-copy .hero-role-subline { color: #475569 !important;
           media.appendChild(video);
           video.addEventListener('error', () => showPreviewError(media, item.src));
         } else if (item.type === 'ppt' || item.type === 'pdf') {
-          // FIXED: Now properly handles document formats, creating an actionable download/open box.
+          // Document viewer UI for files we can't natively image-tag
           media.innerHTML = `
             <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; background:#1e293b; border-radius:14px; padding:20px; box-sizing:border-box;">
               <i class="fas ${item.type === 'ppt' ? 'fa-file-powerpoint' : 'fa-file-pdf'}" style="font-size:4.5rem; color:#60a5fa; margin-bottom:20px;"></i>
               <h3 style="color:#fff; margin-bottom:10px; font-size:1.4rem;">${escapeHTML(item.title)}</h3>
-              <p style="color:#94a3b8; margin-bottom:24px; font-size:0.95rem;">Click the button below to view or download the presentation file.</p>
-              <a href="${src}" target="_blank" rel="noopener noreferrer" style="background:#2563eb; color:#fff; padding:12px 28px; border-radius:8px; text-decoration:none; font-weight:bold; transition:0.3s;">
-                <i class="fas fa-download"></i> Open / Download Presentation
+              <p style="color:#94a3b8; margin-bottom:24px; font-size:0.95rem;">Click the button below to view or download the file.</p>
+              <a href="${src}" target="_blank" rel="noopener noreferrer" style="background:#2563eb; color:#fff; padding:12px 28px; border-radius:8px; text-decoration:none; font-weight:bold; transition:0.3s; margin-bottom: 20px;">
+                <i class="fas fa-download"></i> Open / Download File
               </a>
-              ${item.type === 'pdf' ? `<iframe src="${src}" style="width:100%; height:300px; margin-top:20px; border:none; border-radius:8px; background:#fff;"></iframe>` : ''}
+              ${item.type === 'pdf' ? `<iframe src="${src}" style="width:100%; height:400px; border:none; border-radius:8px; background:#fff;"></iframe>` : ''}
             </div>
           `;
         } else {
