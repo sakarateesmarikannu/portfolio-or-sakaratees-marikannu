@@ -1262,8 +1262,6 @@
 
     /* =========================================================
        STACKED / 3D FEATURED CAROUSEL
-       No native horizontal scrolling. Cards are positioned as a
-       layered deck and advanced with arrows, touch swipe or drag.
        ========================================================= */
     .coverflow-carousel {
       position: relative;
@@ -1619,9 +1617,6 @@
 
 
     @media (max-width: 900px) {
-
-
-  
     /* World map: visible analytics layer behind the portrait */
     .analytics-scene .world-map-svg{
       position:absolute !important;
@@ -1703,17 +1698,8 @@
       margin-right: 0;
     }
 
-    
-
-    
-
-
     /* =========================================================
        TOUCH-DEVICE DESKTOP MODE FIX
-       Phones using "Desktop site" can report ~980px width.
-       This media query catches those devices without relying
-       only on viewport width, eliminating the desktop canvas
-       and its empty side/bottom spaces.
        ========================================================= */
     @media (hover: none) and (pointer: coarse) and (max-width: 1200px){
       html, body{
@@ -1854,11 +1840,8 @@
       }
     }
 
-
     /* =========================================================
-       HERO ROLE — restored previous design with stronger
-       Scheduling Analyst + Data & Analytics, then subtle
-       Broadcast Operations + Experience underneath.
+       HERO ROLE 
        ========================================================= */
     .hero-role-block{
       position:relative;
@@ -1914,63 +1897,10 @@
       color:rgba(91,140,255,.7);
       letter-spacing:0;
     }
-
-    
-
-    
-
-
-    /* =========================================================
-       REFERENCE ROLE BADGE
-       Compact pill: Scheduling Analyst | Data & Analytics
-       Subtle line below: Broadcast Operations • Experience
-       ========================================================= */
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    @media (max-width:900px){
-      
-
-      
-
-      
-    }
-
-    
-
-
-    /* Premium blue glow for the role badge */
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-
+  }
 
 /* =========================================================
-   HERO ROLE BADGE — authoritative styles
+   HERO ROLE BADGE
    ========================================================= */
 .hero .hero-copy .hero-role-reference{
   display:block !important;
@@ -2099,12 +2029,10 @@
     text-align:center !important;
     margin-bottom:16px !important;
   }
-
   .hero .hero-copy .hero-role-pill{
     min-height:39px !important;
     padding:9px 15px 9px 11px !important;
   }
-
   .hero .hero-copy .hero-role-subline{
     justify-content:center !important;
     margin-left:0 !important;
@@ -2119,12 +2047,10 @@
     padding:9px 13px 9px 10px !important;
     gap:6px !important;
   }
-
   .hero .hero-copy .hero-role-primary,
   .hero .hero-copy .hero-role-secondary{
     font-size:.72rem !important;
   }
-
   .hero .hero-copy .hero-role-subline{
     margin-top:7px !important;
     gap:6px !important;
@@ -2133,142 +2059,149 @@
   }
 }
 
-    #interactive-world-map{
-      position:absolute;
-      inset:8% 6% 8% 6%;
-      z-index:4;
-      pointer-events:auto;
-    }
-
-
-/* Disable all legacy map layers; the D3 GeoJSON layer below is authoritative. */
-
-
-
 /* =========================================================
-   RECTANGULAR INTERACTIVE MAP — INDIA CENTERED
-   No globe/oval treatment.
+   RECTANGULAR INTERACTIVE MAP — UPDATED TO MATCH IMAGE
    ========================================================= */
-.analytics-scene #interactive-world-map{
-  position:absolute !important;
-  left:4% !important;
-  right:4% !important;
-  top:10% !important;
-  bottom:7% !important;
-  width:auto !important;
-  height:auto !important;
-  overflow:hidden !important;
-  border-radius:0 !important;
-  z-index:4 !important;
-  pointer-events:auto !important;
+.analytics-scene .interactive-map-host {
+  position: absolute !important;
+  left: 20px !important;
+  bottom: 25% !important; /* Adjusted to sit nicely beside the portrait */
+  top: auto !important;
+  width: 400px !important; 
+  height: 240px !important; 
+  z-index: 4 !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(255,255,255,0.08) !important; 
+  background: rgba(15, 23, 42, 0.5) !important; /* Deeper transparent navy card */
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+  pointer-events: auto !important;
+  overflow: hidden !important;
 }
 
-.interactive-world-svg{
-  display:block;
-  width:100%;
-  height:100%;
-  overflow:visible;
+body:not(.dark-theme) .analytics-scene .interactive-map-host {
+  background: rgba(226, 232, 240, 0.7) !important;
+  border: 1px solid rgba(148, 163, 184, 0.4) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
 }
 
-.country-shape{
-  fill:rgba(48,105,180,.10);
-  stroke:rgba(111,166,232,.34);
-  stroke-width:.55;
+.analytics-scene .india-centered-map {
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  overflow:visible !important;
+}
+
+.interactive-country {
+  fill: rgba(30, 58, 138, 0.3); /* Dark transparent blue land */
+  stroke: rgba(147, 197, 253, 0.4); /* Thin light blue stroke */
+  stroke-width: 0.5;
   vector-effect:non-scaling-stroke;
-  transition:fill .18s ease, stroke .18s ease, filter .18s ease;
   cursor:pointer;
+  transition:fill .18s ease,stroke .18s ease,filter .18s ease;
 }
 
-.country-shape:hover,
-.country-shape.country-hover{
-  fill:rgba(74,144,226,.28);
-  stroke:rgba(137,196,255,.85);
-  filter:drop-shadow(0 0 4px rgba(70,150,255,.45));
+.interactive-country.country-hover {
+  fill: rgba(59, 130, 246, 0.5);
+  stroke: rgba(191, 219, 254, 0.9);
+  filter: drop-shadow(0 0 5px rgba(65,145,255,.48));
 }
 
-.country-shape.country-active{
-  fill:rgba(76,150,255,.36);
-  stroke:rgba(164,216,255,.95);
+.interactive-country.country-active {
+  fill: rgba(74, 145, 245, 0.40);
+  stroke: rgba(176, 222, 255, 0.98);
 }
 
-.map-route{
-  fill:none;
-  stroke:rgba(72,154,255,.46);
-  stroke-width:1;
-  stroke-dasharray:4 7;
+.city-route {
+  fill: none;
+  stroke: rgba(147, 197, 253, 0.7);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 6;
   vector-effect:non-scaling-stroke;
-  animation:mapRouteFlow 3.2s linear infinite;
+  animation:cleanMapFlow 4s linear infinite;
 }
 
-@keyframes mapRouteFlow{
-  to{stroke-dashoffset:-44}
+@keyframes cleanMapFlow {
+  to{stroke-dashoffset:-48}
 }
 
-.city-node{
-  cursor:pointer;
-  outline:none;
+.city-halo {
+  fill: rgba(96, 165, 250, 0.25);
+  animation: cleanCityPulse 2s ease-in-out infinite;
 }
 
-.city-node-halo{
-  fill:rgba(78,163,255,.20);
-  filter:url(#map-node-glow);
-  animation:cityPulse 2.2s ease-in-out infinite;
+.city-dot {
+  fill: #bfdbfe;
+  stroke: #ffffff;
+  stroke-width: 1.5;
 }
 
-.city-node-dot{
-  fill:#7dc4ff;
-  stroke:rgba(221,242,255,.9);
-  stroke-width:.7;
-  vector-effect:non-scaling-stroke;
+.map-country-tooltip {
+  position:absolute;
+  z-index:100;
+  pointer-events:none;
+  padding:6px 9px;
+  border:1px solid rgba(108,166,239,.45);
+  border-radius:7px;
+  background:rgba(4,13,29,.92);
+  color:#dbeafe;
+  font:600 11px/1.2 Inter,Arial,sans-serif;
+  white-space:nowrap;
+  box-shadow:0 5px 20px rgba(0,0,0,.25);
 }
 
-.city-node.active .city-node-dot{
-  fill:#fff;
-  stroke:#7dc4ff;
-  stroke-width:1.5;
+@keyframes cleanCityPulse {
+  0%,100%{opacity:.38;transform:scale(.85)}
+  50%{opacity:1;transform:scale(1.15)}
 }
 
-.india-focus{
-  fill:none;
-  stroke:rgba(72,163,255,.26);
-  stroke-width:1;
-  stroke-dasharray:2 5;
-  animation:indiaPulse 2.6s ease-in-out infinite;
+body:not(.dark-theme) .interactive-country{
+  fill:rgba(45,106,190,.08);
+  stroke:rgba(62,116,190,.30);
 }
 
-.india-focus-inner{
-  fill:rgba(95,180,255,.22);
-  stroke:rgba(164,220,255,.9);
-  stroke-width:1;
-  filter:url(#map-node-glow);
+body:not(.dark-theme) .interactive-country.country-hover{
+  fill:rgba(55,126,215,.25);
+  stroke:rgba(47,107,193,.75);
 }
 
-@keyframes cityPulse{
-  0%,100%{opacity:.45;transform:scale(.88)}
-  50%{opacity:1;transform:scale(1.12)}
-}
-
-@keyframes indiaPulse{
-  0%,100%{opacity:.45;transform:scale(.88);transform-origin:center}
-  50%{opacity:1;transform:scale(1.14);transform-origin:center}
+body:not(.dark-theme) .map-country-tooltip{
+  background:rgba(255,255,255,.96);
+  color:#17345e;
+  border-color:rgba(61,112,187,.30);
 }
 
 @media (max-width:900px){
-  .analytics-scene #interactive-world-map{
-    left:2% !important;
-    right:2% !important;
-    top:11% !important;
-    bottom:6% !important;
+  .analytics-scene .interactive-map-host{
+    width: 90% !important;
+    height: 220px !important;
+    left: 5% !important;
+    bottom: 20px !important;
   }
 }
 
 @media (max-width:620px){
-  .analytics-scene #interactive-world-map{
-    left:0 !important;
-    right:0 !important;
-    top:12% !important;
-    bottom:7% !important;
+  .analytics-scene .interactive-map-host{
+    width: 100% !important;
+    left: 0 !important;
+    bottom: 10px !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
   }
+}
+
+/* Remove old leftover maps */
+.geo-map-layer,
+#geo-map-layer,
+#geo-world-map,
+.connection-network,
+.world-map-interactive-wrap,
+.world-map-interactive,
+.geo-map-status,
+.geo-map-tooltip {
+  display:none !important;
 }
 
 </style>
@@ -2463,219 +2396,7 @@ body:not(.dark-theme) .hero-copy .hero-role-subline { color: #475569 !important;
 }
 </style>
 
-\n<style id="interactive-world-map-final">\n/* Uploaded MapSVG world map — inline and interactive */\n.world-map-interactive-wrap{\n  position:absolute; inset:0; z-index:4; width:100%; height:100%;\n  display:flex; align-items:center; justify-content:center;\n  pointer-events:auto;\n}\n.world-map-interactive{\n  display:block; width:100%; height:100%; max-width:none;\n  overflow:visible; pointer-events:auto;\n  opacity:.82;\n  filter:drop-shadow(0 0 12px rgba(57,125,255,.12));\n}\n.world-map-interactive path{\n  fill:rgba(74,135,255,.12) !important;\n  stroke:rgba(110,166,255,.28) !important;\n  stroke-width:.7 !important;\n  vector-effect:non-scaling-stroke;\n  cursor:pointer;\n  transition:fill .2s ease, stroke .2s ease, filter .2s ease;\n  pointer-events:all;\n}\n.world-map-interactive path:hover,\n.world-map-interactive path.map-active{\n  fill:rgba(72,137,255,.42) !important;\n  stroke:rgba(126,184,255,.95) !important;\n  filter:drop-shadow(0 0 7px rgba(70,140,255,.75));\n}\nbody:not(.dark-theme) .world-map-interactive{ opacity:.88; }\nbody:not(.dark-theme) .world-map-interactive path{\n  fill:rgba(15,45,92,.78) !important;\n  stroke:rgba(64,110,178,.38) !important;\n}\nbody:not(.dark-theme) .world-map-interactive path:hover,\nbody:not(.dark-theme) .world-map-interactive path.map-active{\n  fill:rgba(42,104,190,.92) !important;\n  stroke:rgba(49,112,218,1) !important;\n}\n.connection-network{\n  position:absolute; inset:0; width:100%; height:100%; z-index:6;\n  overflow:visible; pointer-events:none;\n}\n.connection-lines path{\n  fill:none; stroke:#4e8fff; stroke-width:1.25; stroke-dasharray:5 8;\n  opacity:.58; animation:networkFlow 7s linear infinite;\n  filter:drop-shadow(0 0 4px rgba(66,136,255,.5));\n}\n.connection-dots circle{\n  fill:#73aaff; stroke:#c2dcff; stroke-width:1;\n  opacity:.82; animation:networkPulse 2.3s ease-in-out infinite;\n}\n.connection-dots circle:nth-child(2){animation-delay:.25s}\n.connection-dots circle:nth-child(3){animation-delay:.5s}\n.connection-dots circle:nth-child(4){animation-delay:.75s}\n.connection-dots circle:nth-child(5){animation-delay:1s}\n.connection-dots circle:nth-child(6){animation-delay:1.25s}\n@keyframes networkFlow{to{stroke-dashoffset:-90}}\n@keyframes networkPulse{0%,100%{opacity:.45;transform-origin:center;transform:scale(.85)}50%{opacity:1;transform:scale(1.3)}}\n.map-tooltip{\n  position:absolute; left:0; top:0; z-index:90; display:none;\n  padding:7px 10px; border-radius:8px; font-size:11px; font-weight:700;\n  color:#dbeafe; background:rgba(3,12,28,.9); border:1px solid rgba(96,165,250,.35);\n  box-shadow:0 8px 24px rgba(0,0,0,.22),0 0 18px rgba(37,99,235,.16);\n  pointer-events:none; white-space:nowrap; transform:translate(12px,12px);\n}\nbody:not(.dark-theme) .map-tooltip{color:#17305d;background:rgba(255,255,255,.96);border-color:rgba(59,130,246,.3);box-shadow:0 8px 24px rgba(35,65,110,.14)}\n/* Role pill adapts to the daylight theme instead of staying dark */\nbody:not(.dark-theme) .hero .hero-copy .hero-role-pill{\n  background:rgba(255,255,255,.82) !important;\n  border-color:rgba(37,99,235,.36) !important;\n  box-shadow:0 0 0 1px rgba(59,130,246,.05),0 0 18px rgba(37,99,235,.12),inset 0 0 12px rgba(59,130,246,.035) !important;\n}\nbody:not(.dark-theme) .hero .hero-copy .hero-role-primary{color:#174ea6 !important;text-shadow:none !important}\nbody:not(.dark-theme) .hero .hero-copy .hero-role-secondary{color:#3975cc !important;text-shadow:none !important}\nbody:not(.dark-theme) .hero .hero-copy .hero-role-separator{color:rgba(37,99,235,.48) !important}\nbody:not(.dark-theme) .hero .hero-copy .hero-role-icon{color:#2563eb !important;text-shadow:0 0 6px rgba(37,99,235,.35) !important}\nbody:not(.dark-theme) .hero .hero-copy .hero-role-subline{color:rgba(51,70,100,.68) !important;text-shadow:none !important}\n@media(max-width:900px){\n  .world-map-interactive{opacity:.7}\n  body:not(.dark-theme) .world-map-interactive{opacity:.8}\n}\n@media(max-width:620px){\n  .world-map-interactive{opacity:.56}\n  body:not(.dark-theme) .world-map-interactive{opacity:.68}\n  .connection-network{opacity:.72}\n}\n</style>\n
-<style id="geojson-world-map-css">
-.geo-map-layer{
-  position:absolute; inset:4% 4% 4% 4%; z-index:4;
-  pointer-events:auto; overflow:visible;
-}
-.geo-world-map{width:100%;height:100%;display:block;overflow:visible;pointer-events:auto;}
-.geo-world-map .country{
-  fill:rgba(74,135,255,.10);stroke:rgba(110,166,255,.34);stroke-width:.55px;
-  vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .18s ease,stroke .18s ease,filter .18s ease;
-}
-.geo-world-map .country:hover,.geo-world-map .country.active{
-  fill:rgba(76,139,255,.42);stroke:rgba(145,195,255,.95);filter:drop-shadow(0 0 6px rgba(70,140,255,.7));
-}
-body:not(.dark-theme) .geo-world-map .country{fill:rgba(24,74,142,.23);stroke:rgba(63,112,184,.45)}
-body:not(.dark-theme) .geo-world-map .country:hover,body:not(.dark-theme) .geo-world-map .country.active{fill:rgba(42,104,190,.58);stroke:#3977d3}
-.geo-network{pointer-events:none;overflow:visible}
-.geo-network .route{fill:none;stroke:#5c99ff;stroke-width:1.1px;stroke-dasharray:4 7;opacity:.58;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 4px rgba(67,137,255,.55));animation:geoRouteFlow 7s linear infinite}
-.geo-network .city-dot{fill:#75adff;stroke:#d5e6ff;stroke-width:1.1px;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 5px rgba(71,139,255,.9));animation:geoCityPulse 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
-.geo-network .city-halo{fill:#5c99ff;opacity:.16;filter:blur(4px);animation:geoHaloPulse 2.2s ease-in-out infinite}
-.geo-network .city-label{font:600 9px/1 Arial,sans-serif;fill:rgba(205,225,255,.82);paint-order:stroke;stroke:rgba(3,12,28,.75);stroke-width:3px;stroke-linejoin:round}
-body:not(.dark-theme) .geo-network .city-label{fill:#244b83;stroke:rgba(255,255,255,.85)}
-.geo-map-tooltip{position:absolute;display:none;z-index:90;pointer-events:none;padding:7px 10px;border-radius:8px;color:#dbeafe;background:rgba(3,12,28,.92);border:1px solid rgba(96,165,250,.38);box-shadow:0 8px 24px rgba(0,0,0,.2),0 0 18px rgba(37,99,235,.18);font:700 11px/1.2 Arial,sans-serif;white-space:nowrap}
-body:not(.dark-theme) .geo-map-tooltip{color:#17305d;background:rgba(255,255,255,.96);border-color:rgba(59,130,246,.3)}
-.geo-map-status{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:20;color:rgba(147,197,253,.5);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;pointer-events:none;transition:opacity .25s}
-.geo-map-status.hidden{opacity:0}
-@keyframes geoRouteFlow{to{stroke-dashoffset:-77}}
-@keyframes geoCityPulse{0%,100%{transform:scale(.82);opacity:.72}50%{transform:scale(1.18);opacity:1}}
-@keyframes geoHaloPulse{0%,100%{opacity:.10;transform:scale(.8)}50%{opacity:.28;transform:scale(1.4)}}
-@media(max-width:900px){.geo-map-layer{inset:8% 2% 4%}.geo-network .city-label{font-size:7px}.geo-map-status{font-size:8px}}
-@media(max-width:620px){.geo-map-layer{inset:10% -2% 4%}.geo-network .city-label{display:none}.geo-network .route{opacity:.55}.geo-map-status{font-size:7px}}
-</style>
-
-
-<style id="johan-geojson-final-overrides">
-.geo-map-layer{display:block!important;visibility:visible!important;opacity:1!important;z-index:5!important;}
-#geo-world-map{display:block!important;visibility:visible!important;pointer-events:auto!important;}
-#geo-world-map .country{pointer-events:all!important;}
-</style>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-
-<style id="final-map-cleanup">
-/* Remove all legacy/fake map layers and the black hard-coded network. */
-.geo-map-layer,
-#geo-map-layer,
-#geo-world-map,
-.connection-network,
-.world-map-interactive-wrap,
-.world-map-interactive,
-.geo-map-status,
-.geo-map-tooltip {
-  display:none !important;
-}
-
-/* New flat rectangular map card */
-.analytics-scene .interactive-map-host{
-  position: absolute !important;
-  left: 15px !important;
-  bottom: 40px !important; 
-  top: auto !important;
-  right: auto !important;
-  width: 440px !important; 
-  height: 270px !important; 
-  z-index: 4 !important;
-  display: block !important;
-  overflow: hidden !important;
-  border-radius: 14px !important;
-  border: 1px solid rgba(78,143,255,.15) !important; 
-  background: rgba(4, 17, 35, 0.45) !important; 
-  backdrop-filter: blur(6px) !important;
-  -webkit-backdrop-filter: blur(6px) !important;
-  pointer-events: auto !important;
-}
-
-body:not(.dark-theme) .analytics-scene .interactive-map-host {
-  background: rgba(226, 232, 240, 0.7) !important;
-  border: 1px solid rgba(148, 163, 184, 0.4) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
-}
-
-.analytics-scene .india-centered-map{
-  display:block !important;
-  width:100% !important;
-  height:100% !important;
-  overflow:visible !important;
-}
-
-.interactive-country{
-  fill:rgba(69,130,220,.09);
-  stroke:rgba(117,172,238,.34);
-  stroke-width:.55;
-  vector-effect:non-scaling-stroke;
-  cursor:pointer;
-  transition:fill .18s ease,stroke .18s ease,filter .18s ease;
-}
-
-.interactive-country.country-hover{
-  fill:rgba(76,145,240,.30);
-  stroke:rgba(157,211,255,.95);
-  filter:drop-shadow(0 0 5px rgba(65,145,255,.48));
-}
-
-.interactive-country.country-active{
-  fill:rgba(74,145,245,.40);
-  stroke:rgba(176,222,255,.98);
-}
-
-.city-route{
-  fill:none;
-  stroke:rgba(76,153,255,.42);
-  stroke-width:1;
-  stroke-dasharray:4 8;
-  vector-effect:non-scaling-stroke;
-  animation:cleanMapFlow 4s linear infinite;
-}
-
-@keyframes cleanMapFlow{
-  to{stroke-dashoffset:-48}
-}
-
-.city-halo{
-  fill:rgba(91,168,255,.20);
-  filter:url(#city-glow);
-  animation:cleanCityPulse 2.3s ease-in-out infinite;
-}
-
-.city-dot{
-  fill:#7bc4ff;
-  stroke:#d9f1ff;
-  stroke-width:.8;
-}
-
-.city-active .city-dot{
-  fill:#ffffff;
-  stroke:#6db5ff;
-  stroke-width:1.4;
-}
-
-.india-halo{
-  fill:none;
-  stroke:rgba(91,178,255,.32);
-  stroke-width:1;
-  stroke-dasharray:3 5;
-  animation:cleanIndiaPulse 2.5s ease-in-out infinite;
-}
-
-.india-core{
-  fill:rgba(101,191,255,.32);
-  stroke:#d8f2ff;
-  stroke-width:1;
-  filter:url(#city-glow);
-}
-
-.map-country-tooltip{
-  position:absolute;
-  z-index:100;
-  pointer-events:none;
-  padding:6px 9px;
-  border:1px solid rgba(108,166,239,.45);
-  border-radius:7px;
-  background:rgba(4,13,29,.92);
-  color:#dbeafe;
-  font:600 11px/1.2 Inter,Arial,sans-serif;
-  white-space:nowrap;
-  box-shadow:0 5px 20px rgba(0,0,0,.25);
-}
-
-@keyframes cleanCityPulse{
-  0%,100%{opacity:.38;transform:scale(.85)}
-  50%{opacity:1;transform:scale(1.15)}
-}
-
-@keyframes cleanIndiaPulse{
-  0%,100%{opacity:.35;transform:scale(.88);transform-origin:center}
-  50%{opacity:1;transform:scale(1.14);transform-origin:center}
-}
-
-body:not(.dark-theme) .interactive-country{
-  fill:rgba(45,106,190,.08);
-  stroke:rgba(62,116,190,.30);
-}
-
-body:not(.dark-theme) .interactive-country.country-hover{
-  fill:rgba(55,126,215,.25);
-  stroke:rgba(47,107,193,.75);
-}
-
-body:not(.dark-theme) .map-country-tooltip{
-  background:rgba(255,255,255,.96);
-  color:#17345e;
-  border-color:rgba(61,112,187,.30);
-}
-
-@media (max-width:900px){
-  .analytics-scene .interactive-map-host{
-    width: 90% !important;
-    height: 220px !important;
-    left: 5% !important;
-    bottom: 20px !important;
-  }
-}
-
-@media (max-width:620px){
-  .analytics-scene .interactive-map-host{
-    width: 100% !important;
-    left: 0 !important;
-    bottom: 10px !important;
-    border-radius: 0 !important;
-    border-left: none !important;
-    border-right: none !important;
-  }
-}
-</style>
 
 </head>
 
@@ -2683,7 +2404,6 @@ body:not(.dark-theme) .map-country-tooltip{
 
   <!-- =====================================================
        NEW ANALYTICS LANDING HERO
-       No top navigation tabs: the existing tab system remains below.
        ===================================================== -->
   <header class="hero" id="home">
 
@@ -2733,7 +2453,6 @@ body:not(.dark-theme) .map-country-tooltip{
           </a>
         </div>
 
-        <!-- Schedule validation removed from the landing-page CTA area because the same metric is already shown in the analytics dashboard. -->
         <div class="hero-socials">
           <span>Let's connect</span>
           <a href="https://www.linkedin.com/in/sakaratees-marikannu/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -2750,9 +2469,11 @@ body:not(.dark-theme) .map-country-tooltip{
 
         <!-- ALL analytics visuals live behind the portrait -->
         <div class="analytics-scene">
+          
+          <!-- FIXED MAP CONTAINER -->
           <div class="interactive-map-host" id="interactive-world-map" aria-label="Interactive world map"></div>
           
-<div class="scene-grid"></div>
+          <div class="scene-grid"></div>
 
           <!-- Area / line graph -->
           <div class="area-chart">
@@ -2841,8 +2562,10 @@ body:not(.dark-theme) .map-country-tooltip{
       <button class="coverflow-btn" id="cf-left"><i class="fas fa-chevron-left"></i></button>
       
       <div class="coverflow-track" id="cf-track" tabindex="0" role="region" aria-label="Featured highlights carousel">
+        
+        <!-- FIXED: PowerPoint handling added. Setting type to 'ppt' opens interactive file viewer UI. -->
         <div class="cf-item" tabindex="0" role="button"
-             data-preview-type="image" data-preview-src="startup-cover.jpg"
+             data-preview-type="ppt" data-preview-src="Fundamentals of Startup.pptx"
              data-preview-title="Fundamentals of Startup"
              data-preview-subtitle="Entrepreneurship & Strategy">
           <img src="startup-cover.jpg" alt="Fundamentals of Startup Cover" class="cf-img">
@@ -3102,23 +2825,35 @@ body:not(.dark-theme) .map-country-tooltip{
       <div class="cert-image-grid">
         
         <div class="cert-img-wrapper reveal">
-          <img src="Market Ka Eklavya.jpg" alt="Market Ka Eklavya" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Market Ka Eklavya.jpg" data-preview-title="Market Ka Eklavya" data-preview-subtitle="Professional Certification">
+          <img src="Market Ka Eklavya.jpg" alt="Market Ka Eklavya" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-type="image" data-preview-src="Market Ka Eklavya.jpg" data-preview-title="Market Ka Eklavya" data-preview-subtitle="Professional Certification">
           <p>Market Ka Eklavya</p>
         </div>
 
         <div class="cert-img-wrapper reveal">
-          <img src="Customeer Care Executive.jpg" alt="Customer Care Executive" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Customeer Care Executive.jpg" data-preview-title="Customer Care Executive" data-preview-subtitle="Professional Certification">
+          <img src="Customeer Care Executive.jpg" alt="Customer Care Executive" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-type="image" data-preview-src="Customeer Care Executive.jpg" data-preview-title="Customer Care Executive" data-preview-subtitle="Professional Certification">
           <p>Customer Care Executive</p>
         </div>
 
         <div class="cert-img-wrapper reveal">
-          <img src="Power BI for Beginners.jpg" alt="Power BI for Beginners" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Power BI for Beginners.jpg" data-preview-title="Power BI for Beginners" data-preview-subtitle="Professional Certification">
+          <img src="Power BI for Beginners.jpg" alt="Power BI for Beginners" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-type="image" data-preview-src="Power BI for Beginners.jpg" data-preview-title="Power BI for Beginners" data-preview-subtitle="Professional Certification">
           <p>Power BI for Beginners</p>
         </div>
 
         <div class="cert-img-wrapper reveal">
-          <img src="Power BI Projects.jpg" alt="Power BI Projects" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Power BI Projects.jpg" data-preview-title="Power BI Projects" data-preview-subtitle="Professional Certification">
+          <img src="Power BI Projects.jpg" alt="Power BI Projects" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-type="image" data-preview-src="Power BI Projects.jpg" data-preview-title="Power BI Projects" data-preview-subtitle="Professional Certification">
           <p>Power BI Projects</p>
+        </div>
+        
+        <!-- FIXED: Certificate correctly renamed to AI Enthusiast -->
+        <div class="cert-img-wrapper reveal">
+          <div class="cert-img cert-preview-trigger" tabindex="0" role="button" 
+               style="display:flex; align-items:center; justify-content:center; font-size:4rem; color:var(--accent-cyan); background:rgba(0,0,0,0.05); text-decoration:none;"
+               data-preview-type="pdf" data-preview-src="AI Enthusiast.pdf" 
+               data-preview-title="AI Enthusiast" 
+               data-preview-subtitle="Straive Internal Programs">
+            <i class="fas fa-file-pdf"></i>
+          </div>
+          <p>AI Enthusiast</p>
         </div>
 
       </div>
@@ -3171,11 +2906,7 @@ body:not(.dark-theme) .map-country-tooltip{
     </div>
   </div>
 
-  
-
-
 <script>
-
     document.addEventListener('DOMContentLoaded', () => {
 
       // 1. Calculate Experience
@@ -3258,8 +2989,7 @@ body:not(.dark-theme) .map-country-tooltip{
       let featuredTimer = null;
       let previewOpen = false;
 
-      // Resolve every asset relative to index.html. This works with filenames
-      // containing spaces and with normal web/local-server hosting.
+      // Resolve every asset relative to index.html.
       const assetURL = filename => new URL(filename, document.baseURI).href;
 
       function renderFeatured(index) {
@@ -3323,16 +3053,16 @@ body:not(.dark-theme) .map-country-tooltip{
       function buildPreviewItems() {
         previewItems = [
           ...cfItems.map(item => ({
-            type: item.dataset.previewType,
+            type: item.dataset.previewType || 'image',
             src: item.dataset.previewSrc,
             title: item.dataset.previewTitle,
             subtitle: item.dataset.previewSubtitle
           })),
-          ...Array.from(document.querySelectorAll('.cert-preview-trigger')).map(img => ({
-            type: 'image',
-            src: img.dataset.previewSrc,
-            title: img.dataset.previewTitle,
-            subtitle: img.dataset.previewSubtitle
+          ...Array.from(document.querySelectorAll('.cert-preview-trigger')).map(trigger => ({
+            type: trigger.dataset.previewType || 'image',
+            src: trigger.dataset.previewSrc,
+            title: trigger.dataset.previewTitle,
+            subtitle: trigger.dataset.previewSubtitle
           }))
         ];
       }
@@ -3370,6 +3100,19 @@ body:not(.dark-theme) .map-country-tooltip{
           video.preload = 'auto';
           media.appendChild(video);
           video.addEventListener('error', () => showPreviewError(media, item.src));
+        } else if (item.type === 'ppt' || item.type === 'pdf') {
+          // FIXED: Now properly handles document formats, creating an actionable download/open box.
+          media.innerHTML = `
+            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; background:#1e293b; border-radius:14px; padding:20px; box-sizing:border-box;">
+              <i class="fas ${item.type === 'ppt' ? 'fa-file-powerpoint' : 'fa-file-pdf'}" style="font-size:4.5rem; color:#60a5fa; margin-bottom:20px;"></i>
+              <h3 style="color:#fff; margin-bottom:10px; font-size:1.4rem;">${escapeHTML(item.title)}</h3>
+              <p style="color:#94a3b8; margin-bottom:24px; font-size:0.95rem;">Click the button below to view or download the presentation file.</p>
+              <a href="${src}" target="_blank" rel="noopener noreferrer" style="background:#2563eb; color:#fff; padding:12px 28px; border-radius:8px; text-decoration:none; font-weight:bold; transition:0.3s;">
+                <i class="fas fa-download"></i> Open / Download Presentation
+              </a>
+              ${item.type === 'pdf' ? `<iframe src="${src}" style="width:100%; height:300px; margin-top:20px; border:none; border-radius:8px; background:#fff;"></iframe>` : ''}
+            </div>
+          `;
         } else {
           const img = document.createElement('img');
           img.src = src;
@@ -3578,43 +3321,98 @@ body:not(.dark-theme) .map-country-tooltip{
 </script>
 
 <script>
+// FIXED D3 WORLD MAP RENDERING TO MATCH THE PROVIDED IMAGE
 (function () {
   "use strict";
   const MAP_URL = "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json";
   const host = document.getElementById("interactive-world-map");
   if (!host || typeof d3 === "undefined") return;
+  
+  // Specific cities from the visual example.
   const cities = [
-    {name:"New York",lon:-74.0060,lat:40.7128},
-    {name:"Toronto",lon:-79.3832,lat:43.6532},
-    {name:"London",lon:-0.1276,lat:51.5072},
-    {name:"Frankfurt",lon:8.6821,lat:50.1109},
-    {name:"Dubai",lon:55.2708,lat:25.2048},
-    {name:"Mumbai",lon:72.8777,lat:19.0760},
-    {name:"Singapore",lon:103.8198,lat:1.3521},
-    {name:"Sydney",lon:151.2093,lat:-33.8688}
+    {name:"London", lon:-0.1276, lat:51.5072},
+    {name:"Frankfurt", lon:8.6821, lat:50.1109},
+    {name:"Dubai", lon:55.2708, lat:25.2048},
+    {name:"Mumbai", lon:72.8777, lat:19.0760}
   ];
-  function renderMap(world){
+
+  function renderMap(world) {
     host.innerHTML="";
-    const box=host.getBoundingClientRect();
-    const width=Math.max(600,Math.round(box.width||800));
-    const height=Math.max(320,Math.round(box.height||430));
-    const projection=d3.geoEquirectangular().center([72,18]).scale(Math.min(width/2.85,height/1.65)).translate([width*.52,height*.53]);
-    const path=d3.geoPath(projection);
-    const svg=d3.select(host).append("svg").attr("class","india-centered-map").attr("viewBox",`0 0 ${width} ${height}`).attr("preserveAspectRatio","xMidYMid meet").attr("role","img").attr("aria-label","Interactive rectangular world map centered on India");
-    const countryLayer=svg.append("g").attr("class","countries");
-    countryLayer.selectAll("path").data(world.features||[]).join("path").attr("class","interactive-country").attr("d",path).attr("tabindex",0).attr("role","button").attr("aria-label",d=>d.properties?.name||d.properties?.NAME||"Country").on("mouseenter",function(_,d){d3.select(this).classed("country-hover",true);showTooltip(d);}).on("mouseleave",function(){d3.select(this).classed("country-hover",false);hideTooltip();}).on("click",function(){countryLayer.selectAll(".interactive-country").classed("country-active",false);d3.select(this).classed("country-active",true);}).on("keydown",function(event){if(event.key==="Enter"||event.key===" "){event.preventDefault();d3.select(this).dispatch("click");}});
-    const cityPoints=cities.map(c=>{const p=projection([c.lon,c.lat]);return {...c,x:p[0],y:p[1]};});
-    const network=svg.append("g").attr("class","city-network");
-    for(let i=0;i<cityPoints.length-1;i++){const a=cityPoints[i],b=cityPoints[i+1],mx=(a.x+b.x)/2,my=(a.y+b.y)/2-Math.min(34,Math.abs(a.x-b.x)*.06);network.append("path").attr("class","city-route").attr("d",`M${a.x},${a.y} Q${mx},${my} ${b.x},${b.y}`);}
-    const india=cityPoints.find(c=>c.name==="Mumbai");
-    if(india){network.append("circle").attr("class","india-halo").attr("cx",india.x).attr("cy",india.y).attr("r",28);network.append("circle").attr("class","india-core").attr("cx",india.x).attr("cy",india.y).attr("r",7);}
-    const nodes=network.selectAll(".city").data(cityPoints).join("g").attr("class",d=>`city ${d.name==="Mumbai"?"city-india":""}`).attr("transform",d=>`translate(${d.x},${d.y})`).attr("tabindex",0).attr("role","button").attr("aria-label",d=>d.name);
-    nodes.append("circle").attr("class","city-halo").attr("r",d=>d.name==="Mumbai"?10:7);nodes.append("circle").attr("class","city-dot").attr("r",d=>d.name==="Mumbai"?4.5:3.2);nodes.append("title").text(d=>d.name);
-    const tooltip=d3.select(host).append("div").attr("class","map-country-tooltip").style("display","none");
-    function showTooltip(d){tooltip.text(d.properties?.name||d.properties?.NAME||"Country").style("display","block");}
-    function hideTooltip(){tooltip.style("display","none");}
+    const box = host.getBoundingClientRect();
+    const width = Math.max(600, Math.round(box.width || 800));
+    const height = Math.max(320, Math.round(box.height || 430));
+    
+    // Shift map to center heavily on the Europe / Middle East / India region exactly like the image
+    const projection = d3.geoEquirectangular()
+      .center([45, 25])
+      .scale(width / 3.5)
+      .translate([width / 2, height / 2]);
+      
+    const path = d3.geoPath(projection);
+    
+    const svg = d3.select(host).append("svg")
+      .attr("class", "india-centered-map")
+      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img")
+      .attr("aria-label", "Interactive world map centered on Middle East & India");
+      
+    const countryLayer = svg.append("g").attr("class","countries");
+    countryLayer.selectAll("path")
+      .data(world.features||[])
+      .join("path")
+      .attr("class","interactive-country")
+      .attr("d",path)
+      .attr("tabindex",0)
+      .attr("role","button")
+      .attr("aria-label", d => d.properties?.name || d.properties?.NAME || "Country")
+      .on("mouseenter", function(_,d){
+        d3.select(this).classed("country-hover",true);
+        showTooltip(d);
+      })
+      .on("mouseleave", function(){
+        d3.select(this).classed("country-hover",false);
+        hideTooltip();
+      });
+
+    const cityPoints = cities.map(c => {
+      const p = projection([c.lon, c.lat]);
+      return { ...c, x: p[0], y: p[1] };
+    });
+    
+    const network = svg.append("g").attr("class","city-network");
+    
+    // Add arced dashed lines connecting nodes
+    for (let i=0; i < cityPoints.length - 1; i++) {
+      const a = cityPoints[i];
+      const b = cityPoints[i+1];
+      const mx = (a.x + b.x) / 2;
+      const my = (a.y + b.y) / 2 - 30; // Creates an upward arc
+      network.append("path")
+        .attr("class","city-route")
+        .attr("d",`M${a.x},${a.y} Q${mx},${my} ${b.x},${b.y}`);
+    }
+    
+    // Add glowing nodes identical to reference
+    const nodes = network.selectAll(".city")
+      .data(cityPoints)
+      .join("g")
+      .attr("class", "city")
+      .attr("transform", d => `translate(${d.x},${d.y})`);
+      
+    nodes.append("circle").attr("class","city-halo").attr("r", 10);
+    nodes.append("circle").attr("class","city-dot").attr("r", 3.5);
+    nodes.append("title").text(d => d.name);
+    
+    const tooltip = d3.select(host).append("div").attr("class","map-country-tooltip").style("display","none");
+    function showTooltip(d){ tooltip.text(d.properties?.name || d.properties?.NAME || "Country").style("display","block"); }
+    function hideTooltip(){ tooltip.style("display","none"); }
   }
-  fetch(MAP_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("GeoJSON request failed: "+r.status);return r.json();}).then(renderMap).catch(e=>{console.error(e);host.innerHTML="";});
+  
+  fetch(MAP_URL, {cache:"force-cache"})
+    .then(r => { if(!r.ok) throw new Error("GeoJSON request failed: "+r.status); return r.json(); })
+    .then(renderMap)
+    .catch(e => { console.error(e); host.innerHTML=""; });
 })();
 </script>
 </body>
