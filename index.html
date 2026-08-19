@@ -2810,6 +2810,26 @@ body:not(.dark-theme) .map-country-tooltip{
     scroll-behavior: auto !important;
   }
 }
+
+    /* =========================================================
+       HERO ENTRANCE OPTIMIZATION
+       Keep the live hero effects (spotlight, world map, routes,
+       glowing separator and scroll indicator). Only disable the
+       one-time entrance animations so the hero appears immediately.
+       ========================================================= */
+    .hero .hero-portrait {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: translateX(-50%) translateY(0) !important;
+    }
+
+    .hero .hero-left,
+    .hero .hero-right {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
 </style>
 </head>
 
@@ -3349,22 +3369,7 @@ body:not(.dark-theme) .map-country-tooltip{
         expCounter.textContent = expString;
       }
 
-      // 2. Subtle hero parallax / fade
-      let scrollTicking = false;
-      window.addEventListener('scroll', () => {
-        if (scrollTicking) return;
-        scrollTicking = true;
-        requestAnimationFrame(() => {
-          const scrollY = Math.min(window.scrollY, 500);
-          const heroBgLayer = document.getElementById('hero-bg-layer');
-          const visual = document.getElementById('hero-visual');
-          if (heroBgLayer) heroBgLayer.style.opacity = String(1 - scrollY / 1100);
-          if (visual && window.innerWidth > 900) {
-            visual.style.transform = `translate3d(0, ${Math.round(scrollY * 0.045)}px, 0)`;
-          }
-          scrollTicking = false;
-        });
-      }, { passive: true });
+      // Hero motion disabled for a fully static, smooth landing section.
 
       // 3. Tab Switching Logic
       const tabButtons = document.querySelectorAll('.tab-btn');
