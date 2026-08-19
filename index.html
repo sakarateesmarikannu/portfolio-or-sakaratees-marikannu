@@ -4,38 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sakaratees Marikannu | Portfolio</title>
-  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   
   <style>
-    /* Smooth scrolling for anchor links */
     html {
       scroll-behavior: smooth;
     }
 
-    /* ========================================= */
-    /* DYNAMIC THEME & GLASSMORPHISM VARIABLES   */
-    /* ========================================= */
     :root {
-      /* LIGHT MODE SETTINGS */
-      --bg-color: #FDF5E6; /* Warm Sand bottom background */
-      --bg-pattern: radial-gradient(rgba(160, 140, 110, 0.25) 2px, transparent 2px);
+      --bg-color: #FDF5E6; --bg-pattern: radial-gradient(rgba(160, 140, 110, 0.25) 2px, transparent 2px);
       --bg-size: 25px 25px;
 
-      /* Contrasting Hero Background for Light Mode (Muted Steel/Slate) */
       --hero-bg: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
       --hero-title-color: rgba(15, 23, 42, 0.85);
       --hero-subtitle-color: #2563eb;
 
-      /* Pure Transparent Glass for universal elements */
       --glass-bg: rgba(255, 255, 255, 0.35); 
       --glass-border: rgba(255, 255, 255, 0.6);
       --glass-shadow: 0 15px 35px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8);
       --inner-card-bg: rgba(255, 255, 255, 0.3);
       
-      /* Dynamic Text Colors - Dark for readability in Light Mode */
       --text-main: #334155;     
       --text-heading: #0f172a;  
       
@@ -46,23 +35,18 @@
     }
 
     body.dark-theme {
-      /* DARK MODE SETTINGS */
-      --bg-color: #0b132b; /* Deep Space bottom background */
-      --bg-pattern: radial-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px);
+      --bg-color: #0b132b; --bg-pattern: radial-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px);
       --bg-size: 25px 25px;
 
-      /* Original Vibrant Blue Hero Background for Dark Mode */
       --hero-bg: linear-gradient(135deg, #4da4f7 0%, #1e45b8 100%);
       --hero-title-color: rgba(255, 255, 255, 0.7);
       --hero-subtitle-color: #4cc9f0;
 
-      /* Pure Transparent Glass for universal elements */
       --glass-bg: rgba(255, 255, 255, 0.05);
       --glass-border: rgba(255, 255, 255, 0.15);
       --glass-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
       --inner-card-bg: rgba(255, 255, 255, 0.03);
 
-      /* Dynamic Text Colors - Light for Dark Mode */
       --text-main: #e2e8f0;
       --text-heading: #ffffff;
       
@@ -78,9 +62,9 @@
       padding: 0;
     }
 
-    /* Keep transitions scoped to controls; cards already define their own motion. */
-    button, a, .tab-btn, .hero-cta, .hero-socials a, .theme-toggle-btn,
-    .coverflow-btn, .carousel-btn {
+    button, a, .tab-btn, .hero-card, .hero-cta, .hero-socials a, .theme-toggle-btn,
+    .metric-card, .timeline-item, .skills-category, .edu-card, .cert-img-wrapper,
+    .resume-download-box, .carousel-card, .cf-item, .coverflow-btn, .carousel-btn {
       transition: background-color .3s ease, color .3s ease, border-color .3s ease,
                   transform .3s ease, box-shadow .3s ease, opacity .3s ease;
     }
@@ -94,11 +78,8 @@
       background-attachment: fixed;
       color: var(--text-main);
       line-height: 1.6;
-      overflow-x: hidden;
       position: relative;
     }
-
-    /* Full-page backdrop blur removed for performance. */
 
     .container {
       max-width: 1050px;
@@ -106,9 +87,6 @@
       padding: 0 24px;
     }
 
-    /* ========================================= */
-    /* NEW ANALYTICS HERO LANDING PAGE           */
-    /* ========================================= */
     .hero {
       min-height: 760px;
       height: 100vh;
@@ -333,7 +311,6 @@
       transform: translateY(-2px);
     }
 
-    /* Analytics scene behind the portrait */
     .hero-visual {
       position: relative;
       height: 650px;
@@ -631,11 +608,6 @@
 
     @keyframes bounce { 0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)} 40%{transform:translateX(-50%) translateY(-8px)} 60%{transform:translateX(-50%) translateY(-4px)} }
 
-    @keyframes portraitSlideUpFade {
-      from { opacity:0; transform:translateX(-50%) translateY(45px); }
-      to { opacity:1; transform:translateX(-50%) translateY(0); }
-    }
-
     @keyframes slideDownFade {
       from { opacity:0; transform:translateY(-25px); }
       to { opacity:1; transform:translateY(0); }
@@ -670,9 +642,6 @@
       .hero-visual { width:720px; height:530px; transform:scale(.60); margin:-25px auto 0; }
       .kpi-panel { right:0; }
     }
-    /* ========================================= */
-    /* UNIVERSAL PURE GLASS CARDS                */
-    /* ========================================= */
     .hero-card, .cf-item, .carousel-card, .tab-content, .tab-btn, .metric-card, .timeline-item, .skills-category, .edu-card, .cert-img-wrapper, .resume-download-box {
       background: var(--glass-bg);
       backdrop-filter: blur(8px);
@@ -682,7 +651,6 @@
       color: var(--text-heading);
     }
 
-    /* Default Light Mode Hero Panels (Transparent Glass) */
     .hero-card {
       position: absolute;
       top: 55%;
@@ -753,15 +721,12 @@
       transform: translateY(-3px);
     }
 
-    /* --- DARK MODE EXCLUSIVE HERO CARD OVERRIDES --- */
     body.dark-theme .hero-card {
-      background: rgba(28, 55, 120, 0.75); /* Deep Royal Blue Glass */
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(28, 55, 120, 0.75); border: 1px solid rgba(255, 255, 255, 0.2);
       box-shadow: 0 15px 35px rgba(0,0,0,0.15), inset 0 1px 1px rgba(255, 255, 255, 0.25);
     }
     body.dark-theme .hero-card p {
-      color: #ffffff; /* Lock white text */
-    }
+      color: #ffffff; }
     body.dark-theme .hero-cta {
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -769,8 +734,7 @@
     }
     body.dark-theme .hero-cta i {
       background: #ffffff;
-      color: #1c3778; /* Match the dark background for the icon */
-    }
+      color: #1c3778; }
     body.dark-theme .hero-socials a {
       background: rgba(255, 255, 255, 0.15);
       border: none;
@@ -780,7 +744,6 @@
       background: var(--accent-cyan);
     }
 
-    /* Scroll Indicator */
     .scroll-down-wrapper {
       position: absolute;
       bottom: 20px;
@@ -798,14 +761,6 @@
     }
     .scroll-down-wrapper a:hover { color: var(--accent-cyan); opacity: 1; }
 
-    /* ========================================= */
-    /* PERFORMANCE-FRIENDLY SECTION ANIMATIONS  */
-    /* ========================================= */
-    .tab-content.active > *, .tab-content.active .metric-card, .tab-content.active .timeline-item,
-    .tab-content.active .skills-category, .tab-content.active .edu-card,
-    .tab-content.active .cert-img-wrapper, .tab-content.active .carousel-card {
-    }
-
     .section-enter {
       animation: sectionEnter .55s cubic-bezier(.2,.8,.2,1) both;
     }
@@ -818,9 +773,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ========================================= */
-    /* SCROLL REVEAL ANIMATIONS                  */
-    /* ========================================= */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -848,9 +800,6 @@
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* ========================================= */
-    /* 3D COVERFLOW CAROUSEL (FEATURED)          */
-    /* ========================================= */
     .coverflow-carousel {
       position: relative;
       width: 100%;
@@ -959,9 +908,6 @@
     #cf-left { left: 0; }
     #cf-right { right: 0; }
 
-    /* ========================================= */
-    /* GLASS UI TABS                             */
-    /* ========================================= */
     .image-nav-area {
       position: relative;
       z-index: 10;
@@ -1037,9 +983,6 @@
       color: var(--accent-blue);
     }
 
-    /* ========================================= */
-    /* CONTENT AREA (TABS)                       */
-    /* ========================================= */
     .content {
       padding: 30px 24px 60px 24px;
       min-height: 50vh;
@@ -1084,7 +1027,6 @@
     }
     .quote-icon { color: var(--accent-cyan); margin-right: 6px; }
 
-    /* Inner Sub-Cards styling */
     .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
     .metric-card, .timeline-item, .skills-category, .edu-card, .cert-img-wrapper, .resume-download-box { 
       padding: 24px; 
@@ -1102,7 +1044,6 @@
     .metric-card h3 { font-size: 1.8rem; color: var(--text-heading); }
     .metric-card p { font-size: 0.9rem; margin-top: 6px; color: var(--text-main); }
 
-    /* Timeline */
     .timeline { display: flex; flex-direction: column; gap: 20px; }
     .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
     .company { color: var(--accent-cyan); font-weight: 600; font-size: 0.95rem; }
@@ -1113,10 +1054,6 @@
     .timeline-item li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; color: var(--text-main); }
     .timeline-item li i { color: var(--accent-emerald); margin-top: 4px; }
 
-
-    /* ========================================= */
-    /* REGULAR CAROUSEL (WORKS TAB)              */
-    /* ========================================= */
     .carousel-wrapper {
       position: relative;
       display: flex;
@@ -1167,7 +1104,6 @@
     #works-left { left: -15px; }
     #works-right { right: -15px; }
 
-    /* Tags & Inner Typography */
     .card-tag { font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 8px; display: inline-block; margin-bottom: 16px; border: 1px solid var(--glass-border); }
     .cyan-tag { background: rgba(2, 132, 199, 0.1); color: var(--accent-cyan); }
     .violet-tag { background: rgba(124, 58, 237, 0.1); color: var(--accent-violet); }
@@ -1180,27 +1116,23 @@
     .border-violet { border-left: 4px solid var(--accent-violet); }
     .border-emerald { border-left: 4px solid var(--accent-emerald); }
 
-    /* Skills */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
     .skills-category h3 { font-size: 1.1rem; color: var(--text-heading); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
     .tag-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
     .tag-list li { background: var(--inner-card-bg); color: var(--text-main); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; border: 1px solid var(--glass-border); }
     .section-sub-title { margin: 32px 0 16px 0; color: var(--text-heading); display: flex; align-items: center; gap: 8px; }
 
-    /* Certifications */
     .cert-image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 20px; }
     .cert-img-wrapper { text-align: center; transition: transform 0.3s ease; }
     .cert-img-wrapper:hover { transform: translateY(-5px); }
     .cert-img { width: 100%; height: auto; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--glass-border); aspect-ratio: 4/3; object-fit: cover; background: rgba(0, 0, 0, 0.05); display: block; }
     .cert-img-wrapper p { font-weight: 600; color: var(--text-heading); font-size: 0.95rem; }
 
-    /* Education */
     .education-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
     .edu-card h4 { color: var(--text-heading); display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
     .edu-card p { color: var(--text-main); }
     .edu-card .date { color: var(--accent-cyan); font-size: 0.85rem; font-weight: 600; }
 
-    /* Contact Box */
     .contact-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
     .contact-info p { margin-bottom: 16px; display: flex; align-items: center; gap: 12px; font-size: 1.05rem; color: var(--text-heading); }
     .contact-info i { color: var(--accent-cyan); font-size: 1.2rem; }
@@ -1210,12 +1142,8 @@
     .download-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--inner-card-bg); border: 1px solid var(--glass-border); color: var(--text-heading); padding: 14px 28px; border-radius: 12px; text-decoration: none; margin-top: 16px; font-weight: 700; transition: background 0.3s, transform 0.3s; }
     .download-btn:hover { transform: translateY(-2px); background: var(--text-heading); color: var(--bg-color); }
 
-    /* Footer */
     .footer { color: #94a3b8; text-align: center; padding: 40px 0; font-size: 0.9rem; margin-top: auto; }
 
-    /* =====================================================
-       FINAL LANDING-PAGE POLISH
-       ===================================================== */
     .hero {
       width: 100%;
     }
@@ -1277,11 +1205,6 @@
       font-size: 1rem;
     }
 
-    /* =========================================================
-       STACKED / 3D FEATURED CAROUSEL
-       No native horizontal scrolling. Cards are positioned as a
-       layered deck and advanced with arrows, touch swipe or drag.
-       ========================================================= */
     .coverflow-carousel {
       position: relative;
       height: 430px;
@@ -1452,9 +1375,6 @@
       .tab-content { padding: 24px !important; border-radius: 28px !important; }
     }
 
-    /* ========================================= */
-    /* LIGHTBOX / ELEVATED PREVIEW               */
-    /* ========================================= */
     .lightbox-overlay {
       position: fixed;
       top: 0;
@@ -1518,9 +1438,6 @@
       background: #000;
     }
 
-    /* ========================================= */
-    /* WORKS CAROUSEL - CLICK-TO-PREVIEW DETAIL  */
-    /* ========================================= */
     .carousel-card {
       cursor: pointer;
     }
@@ -1554,7 +1471,6 @@
       line-height: 1.7;
     }
 
-    /* Reliable document preview viewer */
     .preview-shell {
       width: min(1100px, 94vw);
       max-height: 92vh;
@@ -1646,18 +1562,13 @@
       .preview-title span { font-size: .68rem; }
     }
   
-/* Uploaded world map + compact mobile hero */
 .world-map-svg{position:absolute;width:58%;max-width:760px;min-width:380px;height:auto;left:50%;top:43%;transform:translate(-50%,-50%);opacity: .30;pointer-events:none;z-index: 4;opacity:1!important;visibility:visible!important}
 @media (max-width:900px){.hero{height:auto!important;min-height:0!important;max-height:none!important;overflow:hidden;padding-bottom:24px}.hero-grid{display:flex!important;flex-direction:column!important;width:100%!important;min-height:0!important;height:auto!important;padding:84px 18px 20px!important;gap:0!important}.hero-copy{width:100%!important;flex:0 0 auto!important;padding-top:0!important;position:relative;z-index:20;text-align:center}.hero-visual{position:relative!important;width:min(100%,620px)!important;height:clamp(390px,62vw,500px)!important;min-height:390px!important;max-height:500px!important;margin:0 auto!important;left:auto!important;right:auto!important;top:auto!important;transform:none!important;overflow:visible!important}.analytics-scene{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;transform:none!important;overflow:visible!important}.world-map-svg{width:78%;min-width:0;max-width:520px;top:47%;opacity:.12}.hero-portrait{display:block!important;visibility:visible!important;opacity:1!important;position:absolute!important;z-index:8!important;height:min(540px,86vw)!important;max-height:540px!important;width:auto!important;max-width:92%!important;min-width:0!important;left:50%!important;right:auto!important;bottom:0!important;transform:translateX(-50%)!important}.spotlight{z-index:2!important}.portrait-glow{z-index:3!important}.kpi-panel{z-index:12!important}}
 @media (max-width:620px){.hero-grid{padding:76px 12px 14px!important}.hero-copy h1{font-size:clamp(2.05rem,10vw,3rem)!important;line-height:.98!important;margin-bottom:12px!important}.hero-copy>p{font-size:.72rem!important;line-height:1.55!important;max-width:360px!important;margin-left:auto!important;margin-right:auto!important}.hero-visual{width:100%!important;height:405px!important;min-height:405px!important;max-height:405px!important;margin-top:2px!important}.world-map-svg{width:88%;max-width:430px;top:50%;opacity:.10}.hero-portrait{height:390px!important;max-height:390px!important;max-width:94%!important;bottom:0!important}.spotlight{width:340px!important;height:340px!important;left:50%!important;top:52%!important}.portrait-glow{width:245px!important;height:335px!important;left:50%!important;bottom:0!important}.kpi-panel{width:108px!important;right:0!important;top:12px!important;gap:5px!important}.kpi-card{min-height:48px!important;padding:7px!important}.kpi-icon{display:none!important}.kpi-card strong{font-size:12px!important}.kpi-card span{font-size:5px!important}}
 @media (max-width:900px) and (orientation:landscape){.hero-grid{padding-top:68px!important}.hero-copy{max-width:680px;margin:0 auto}.hero-visual{width:min(90vw,600px)!important;height:390px!important;min-height:390px!important;max-height:390px!important}.hero-portrait{height:360px!important}}
 
-
     @media (max-width: 900px) {
 
-
-  
-    /* World map: visible analytics layer behind the portrait */
     .analytics-scene .world-map-svg{
       position:absolute !important;
       width:62% !important;
@@ -1702,8 +1613,6 @@
       }
     }
 
-
-    /* Professional role hierarchy */
     .hero-role{
       margin: 0 0 18px;
       position: relative;
@@ -1738,18 +1647,6 @@
       margin-right: 0;
     }
 
-    
-
-    
-
-
-    /* =========================================================
-       TOUCH-DEVICE DESKTOP MODE FIX
-       Phones using "Desktop site" can report ~980px width.
-       This media query catches those devices without relying
-       only on viewport width, eliminating the desktop canvas
-       and its empty side/bottom spaces.
-       ========================================================= */
     @media (hover: none) and (pointer: coarse) and (max-width: 1200px){
       html, body{
         width:100% !important;
@@ -1889,12 +1786,6 @@
       }
     }
 
-
-    /* =========================================================
-       HERO ROLE — restored previous design with stronger
-       Scheduling Analyst + Data & Analytics, then subtle
-       Broadcast Operations + Experience underneath.
-       ========================================================= */
     .hero-role-block{
       position:relative;
       z-index:75;
@@ -1950,64 +1841,11 @@
       letter-spacing:0;
     }
 
-    
-
-    
-
-
-    /* =========================================================
-       REFERENCE ROLE BADGE
-       Compact pill: Scheduling Analyst | Data & Analytics
-       Subtle line below: Broadcast Operations • Experience
-       ========================================================= */
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
     @media (max-width:900px){
-      
 
-      
-
-      
     }
 
-    
-
-
-    /* Premium blue glow for the role badge */
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-
-
-/* =========================================================
-   HERO ROLE BADGE — authoritative styles
-   ========================================================= */
-.hero .hero-copy .hero-role-reference{
+    .hero .hero-copy .hero-role-reference{
   display:block !important;
   position:relative !important;
   width:100% !important;
@@ -2175,15 +2013,6 @@
       pointer-events:auto;
     }
 
-
-/* Disable all legacy map layers; the D3 GeoJSON layer below is authoritative. */
-
-
-
-/* =========================================================
-   RECTANGULAR INTERACTIVE MAP — INDIA CENTERED
-   No globe/oval treatment.
-   ========================================================= */
 .analytics-scene #interactive-world-map{
   position:absolute !important;
   left:4% !important;
@@ -2309,9 +2138,6 @@
 </style>
 
 <style id="hero-role-final-fix">
-/* FINAL ROLE BADGE FIX
-   Kept in a separate style tag because the legacy stylesheet contains an
-   unclosed media rule later in the file. */
 .hero-copy > .hero-role-reference {
   display: block !important;
   position: relative !important;
@@ -2351,7 +2177,6 @@
   line-height: 1 !important;
 }
 
-/* Adaptive daylight mode for role pill */
 body:not(.dark-theme) .hero-copy > .hero-role-reference > .hero-role-pill {
   background: linear-gradient(180deg, #ffffff, #f1f5f9) !important;
   border-color: rgba(37, 99, 235, 0.4) !important;
@@ -2499,91 +2324,7 @@ body:not(.dark-theme) .hero-copy .hero-role-subline { color: #475569 !important;
 </style>
 
 <style id="interactive-world-map-final">
-/* Uploaded MapSVG world map — inline and interactive */
-.world-map-interactive-wrap{
-  position:absolute; inset:0; z-index:4; width:100%; height:100%;
-  display:flex; align-items:center; justify-content:center;
-  pointer-events:auto;
-}
-.world-map-interactive{
-  display:block; width:100%; height:100%; max-width:none;
-  overflow:visible; pointer-events:auto;
-  opacity:.82;
-  filter:none;
-}
-.world-map-interactive path{
-  fill:rgba(74,135,255,.12) !important;
-  stroke:rgba(110,166,255,.28) !important;
-  stroke-width:.7 !important;
-  vector-effect:non-scaling-stroke;
-  cursor:pointer;
-  transition:fill .2s ease, stroke .2s ease, filter .2s ease;
-  pointer-events:all;
-}
-.world-map-interactive path:hover,
-.world-map-interactive path.map-active{
-  fill:rgba(72,137,255,.42) !important;
-  stroke:rgba(126,184,255,.95) !important;
-  filter:drop-shadow(0 0 7px rgba(70,140,255,.75));
-}
-body:not(.dark-theme) .world-map-interactive{ opacity:.88; }
-body:not(.dark-theme) .world-map-interactive path{
-  fill:rgba(15,45,92,.78) !important;
-  stroke:rgba(64,110,178,.38) !important;
-}
-body:not(.dark-theme) .world-map-interactive path:hover,
-body:not(.dark-theme) .world-map-interactive path.map-active{
-  fill:rgba(42,104,190,.92) !important;
-  stroke:rgba(49,112,218,1) !important;
-}
-.connection-network{
-  position:absolute; inset:0; width:100%; height:100%; z-index:6;
-  overflow:visible; pointer-events:none;
-}
-.connection-lines path{
-  fill:none; stroke:#4e8fff; stroke-width:1.25; stroke-dasharray:5 8;
-  opacity:.58; animation:networkFlow 10s linear infinite;
-  filter:none;
-}
-.connection-dots circle{
-  fill:#73aaff; stroke:#c2dcff; stroke-width:1;
-  opacity:.82; animation:networkPulse 3.2s ease-in-out infinite;
-}
-.connection-dots circle:nth-child(2){animation-delay:.25s}
-.connection-dots circle:nth-child(3){animation-delay:.5s}
-.connection-dots circle:nth-child(4){animation-delay:.75s}
-.connection-dots circle:nth-child(5){animation-delay:1s}
-.connection-dots circle:nth-child(6){animation-delay:1.25s}
-@keyframes networkFlow{to{stroke-dashoffset:-90}}
-@keyframes networkPulse{0%,100%{opacity:.45;transform-origin:center;transform:scale(.85)}50%{opacity:1;transform:scale(1.3)}}
-.map-tooltip{
-  position:absolute; left:0; top:0; z-index:90; display:none;
-  padding:7px 10px; border-radius:8px; font-size:11px; font-weight:700;
-  color:#dbeafe; background:rgba(3,12,28,.9); border:1px solid rgba(96,165,250,.35);
-  box-shadow:0 8px 24px rgba(0,0,0,.22),0 0 18px rgba(37,99,235,.16);
-  pointer-events:none; white-space:nowrap; transform:translate(12px,12px);
-}
-body:not(.dark-theme) .map-tooltip{color:#17305d;background:rgba(255,255,255,.96);border-color:rgba(59,130,246,.3);box-shadow:0 8px 24px rgba(35,65,110,.14)}
-/* Role pill adapts to the daylight theme instead of staying dark */
-body:not(.dark-theme) .hero .hero-copy .hero-role-pill{
-  background:rgba(255,255,255,.82) !important;
-  border-color:rgba(37,99,235,.36) !important;
-  box-shadow:0 0 0 1px rgba(59,130,246,.05),0 0 18px rgba(37,99,235,.12),inset 0 0 12px rgba(59,130,246,.035) !important;
-}
-body:not(.dark-theme) .hero .hero-copy .hero-role-primary{color:#174ea6 !important;text-shadow:none !important}
-body:not(.dark-theme) .hero .hero-copy .hero-role-secondary{color:#3975cc !important;text-shadow:none !important}
-body:not(.dark-theme) .hero .hero-copy .hero-role-separator{color:rgba(37,99,235,.48) !important}
-body:not(.dark-theme) .hero .hero-copy .hero-role-icon{color:#2563eb !important;text-shadow:0 0 6px rgba(37,99,235,.35) !important}
-body:not(.dark-theme) .hero .hero-copy .hero-role-subline{color:rgba(51,70,100,.68) !important;text-shadow:none !important}
-@media(max-width:900px){
-  .world-map-interactive{opacity:.7}
-  body:not(.dark-theme) .world-map-interactive{opacity:.8}
-}
-@media(max-width:620px){
-  .world-map-interactive{opacity:.56}
-  body:not(.dark-theme) .world-map-interactive{opacity:.68}
-  .connection-network{opacity:.72}
-}</style>
+\n.world-map-interactive-wrap{\n  position:absolute; inset:0; z-index:4; width:100%; height:100%;\n  display:flex; align-items:center; justify-content:center;\n  pointer-events:auto;\n}\n.world-map-interactive{\n  display:block; width:100%; height:100%; max-width:none;\n  overflow:visible; pointer-events:auto;\n  opacity:.82;\n  filter:none;\n}\n.world-map-interactive path{\n  fill:rgba(74,135,255,.12) !important;\n  stroke:rgba(110,166,255,.28) !important;\n  stroke-width:.7 !important;\n  vector-effect:non-scaling-stroke;\n  cursor:pointer;\n  transition:fill .2s ease, stroke .2s ease, filter .2s ease;\n  pointer-events:all;\n}\n.world-map-interactive path:hover,\n.world-map-interactive path.map-active{\n  fill:rgba(72,137,255,.42) !important;\n  stroke:rgba(126,184,255,.95) !important;\n  filter:drop-shadow(0 0 7px rgba(70,140,255,.75));\n}\nbody:not(.dark-theme) .world-map-interactive{ opacity:.88; }\nbody:not(.dark-theme) .world-map-interactive path{\n  fill:rgba(15,45,92,.78) !important;\n  stroke:rgba(64,110,178,.38) !important;\n}\nbody:not(.dark-theme) .world-map-interactive path:hover,\nbody:not(.dark-theme) .world-map-interactive path.map-active{\n  fill:rgba(42,104,190,.92) !important;\n  stroke:rgba(49,112,218,1) !important;\n}\n.connection-network{\n  position:absolute; inset:0; width:100%; height:100%; z-index:6;\n  overflow:visible; pointer-events:none;\n}\n.connection-lines path{\n  fill:none; stroke:#4e8fff; stroke-width:1.25; stroke-dasharray:5 8;\n  opacity:.58; animation:networkFlow 7s linear infinite;\n  filter:none;\n}\n.connection-dots circle{\n  fill:#73aaff; stroke:#c2dcff; stroke-width:1;\n  opacity:.82; animation:networkPulse 2.3s ease-in-out infinite;\n}\n.connection-dots circle:nth-child(2){animation-delay:.25s}\n.connection-dots circle:nth-child(3){animation-delay:.5s}\n.connection-dots circle:nth-child(4){animation-delay:.75s}\n.connection-dots circle:nth-child(5){animation-delay:1s}\n.connection-dots circle:nth-child(6){animation-delay:1.25s}\n@keyframes networkFlow{to{stroke-dashoffset:-90}}\n@keyframes networkPulse{0%,100%{opacity:.45;transform-origin:center;transform:scale(.85)}50%{opacity:1;transform:scale(1.3)}}\n.map-tooltip{\n  position:absolute; left:0; top:0; z-index:90; display:none;\n  padding:7px 10px; border-radius:8px; font-size:11px; font-weight:700;\n  color:#dbeafe; background:rgba(3,12,28,.9); border:1px solid rgba(96,165,250,.35);\n  box-shadow:0 8px 24px rgba(0,0,0,.22),0 0 18px rgba(37,99,235,.16);\n  pointer-events:none; white-space:nowrap; transform:translate(12px,12px);\n}\nbody:not(.dark-theme) .map-tooltip{color:#17305d;background:rgba(255,255,255,.96);border-color:rgba(59,130,246,.3);box-shadow:0 8px 24px rgba(35,65,110,.14)}\n\nbody:not(.dark-theme) .hero .hero-copy .hero-role-pill{\n  background:rgba(255,255,255,.82) !important;\n  border-color:rgba(37,99,235,.36) !important;\n  box-shadow:0 0 0 1px rgba(59,130,246,.05),0 0 18px rgba(37,99,235,.12),inset 0 0 12px rgba(59,130,246,.035) !important;\n}\nbody:not(.dark-theme) .hero .hero-copy .hero-role-primary{color:#174ea6 !important;text-shadow:none !important}\nbody:not(.dark-theme) .hero .hero-copy .hero-role-secondary{color:#3975cc !important;text-shadow:none !important}\nbody:not(.dark-theme) .hero .hero-copy .hero-role-separator{color:rgba(37,99,235,.48) !important}\nbody:not(.dark-theme) .hero .hero-copy .hero-role-icon{color:#2563eb !important;text-shadow:0 0 6px rgba(37,99,235,.35) !important}\nbody:not(.dark-theme) .hero .hero-copy .hero-role-subline{color:rgba(51,70,100,.68) !important;text-shadow:none !important}\n@media(max-width:900px){\n  .world-map-interactive{opacity:.7}\n  body:not(.dark-theme) .world-map-interactive{opacity:.8}\n}\n@media(max-width:620px){\n  .world-map-interactive{opacity:.56}\n  body:not(.dark-theme) .world-map-interactive{opacity:.68}\n  .connection-network{opacity:.72}\n}</style>
 
 <style id="geojson-world-map-css">
 .geo-map-layer{
@@ -2617,16 +2358,12 @@ body:not(.dark-theme) .geo-map-tooltip{color:#17305d;background:rgba(255,255,255
 @media(max-width:620px){.geo-map-layer{inset:10% -2% 4%}.geo-network .city-label{display:none}.geo-network .route{opacity:.55}.geo-map-status{font-size:7px}}
 </style>
 
-
 <style id="johan-geojson-final-overrides">
 .geo-map-layer{display:block!important;visibility:visible!important;opacity:1!important;z-index:5!important;}
 #geo-world-map{display:block!important;visibility:visible!important;pointer-events:auto!important;}
 #geo-world-map .country{pointer-events:all!important;}
 </style>
-<!-- D3 is loaded lazily after the page becomes interactive. -->
-
 <style id="final-map-cleanup">
-/* Remove all legacy/fake map layers and the black hard-coded network. */
 .geo-map-layer,
 #geo-map-layer,
 #geo-world-map,
@@ -2638,7 +2375,6 @@ body:not(.dark-theme) .geo-map-tooltip{color:#17305d;background:rgba(255,255,255
   display:none !important;
 }
 
-/* New flat rectangular map card */
 .analytics-scene .interactive-map-host{
   position: absolute !important;
   left: 15px !important;
@@ -2697,7 +2433,7 @@ body:not(.dark-theme) .analytics-scene .interactive-map-host {
   stroke-width:1;
   stroke-dasharray:4 8;
   vector-effect:non-scaling-stroke;
-  animation:cleanMapFlow 8s linear infinite;
+  animation:cleanMapFlow 4s linear infinite;
 }
 
 @keyframes cleanMapFlow{
@@ -2707,7 +2443,7 @@ body:not(.dark-theme) .analytics-scene .interactive-map-host {
 .city-halo{
   fill:rgba(91,168,255,.20);
   filter:url(#city-glow);
-  animation:cleanCityPulse 3.2s ease-in-out infinite;
+  animation:cleanCityPulse 2.3s ease-in-out infinite;
 }
 
 .city-dot{
@@ -2727,7 +2463,7 @@ body:not(.dark-theme) .analytics-scene .interactive-map-host {
   stroke:rgba(91,178,255,.32);
   stroke-width:1;
   stroke-dasharray:3 5;
-  animation:cleanIndiaPulse 3.4s ease-in-out infinite;
+  animation:cleanIndiaPulse 2.5s ease-in-out infinite;
 }
 
 .india-core{
@@ -2798,10 +2534,40 @@ body:not(.dark-theme) .map-country-tooltip{
 }
 </style>
 
-
 <style id="performance-optimization">
-/* Small, non-visual performance safeguards. */
-.cf-item.hidden { transition: none; }
+html { scroll-behavior: auto; }
+
+.hero-visual, .hero-portrait, .spotlight, .cf-item, .section-enter, .reveal {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.hero-card, .cf-item, .carousel-card, .tab-content, .tab-btn, .metric-card,
+.timeline-item, .skills-category, .edu-card, .cert-img-wrapper, .resume-download-box {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.cf-item.hidden {
+  transition: none;
+}
+
+.reveal {
+  transition: opacity .55s ease, transform .55s cubic-bezier(.2,.8,.2,1);
+}
+
+.geo-world-map .country, .world-map-interactive path {
+  transition: fill .18s ease, stroke .18s ease;
+}
+
+@media (max-width: 900px) {
+  .analytics-scene .interactive-map-host {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .portrait-glow { filter: blur(16px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -2810,35 +2576,11 @@ body:not(.dark-theme) .map-country-tooltip{
     scroll-behavior: auto !important;
   }
 }
-
-    /* =========================================================
-       HERO ENTRANCE OPTIMIZATION
-       Keep the live hero effects (spotlight, world map, routes,
-       glowing separator and scroll indicator). Only disable the
-       one-time entrance animations so the hero appears immediately.
-       ========================================================= */
-    .hero .hero-portrait {
-      animation: none !important;
-      opacity: 1 !important;
-      transform: translateX(-50%) translateY(0) !important;
-    }
-
-    .hero .hero-left,
-    .hero .hero-right {
-      animation: none !important;
-      opacity: 1 !important;
-      transform: none !important;
-    }
-
 </style>
 </head>
 
 <body class="dark-theme">
 
-  <!-- =====================================================
-       NEW ANALYTICS LANDING HERO
-       No top navigation tabs: the existing tab system remains below.
-       ===================================================== -->
   <header class="hero" id="home">
 
     <div class="hero-color-layer" id="hero-bg-layer"></div>
@@ -2874,7 +2616,6 @@ body:not(.dark-theme) .map-country-tooltip{
 
         <h1>Turning Complex Data Into<br><span class="blue">Accurate,</span> Streamlined Schedules.</h1>
 
-
         <p>
           Scheduling Analyst with expertise in Broadcast Operations, Data Analysis,
           and Process Optimization. I help businesses make data-driven scheduling
@@ -2887,7 +2628,6 @@ body:not(.dark-theme) .map-country-tooltip{
           </a>
         </div>
 
-        <!-- Schedule validation removed from the landing-page CTA area because the same metric is already shown in the analytics dashboard. -->
         <div class="hero-socials">
           <span>Let's connect</span>
           <a href="https://www.linkedin.com/in/sakaratees-marikannu/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -2899,16 +2639,13 @@ body:not(.dark-theme) .map-country-tooltip{
       <div class="hero-visual" id="hero-visual">
         <div class="map-tooltip" id="map-tooltip" role="status" aria-live="polite"></div>
 
-        <!-- Glowing spotlight directly behind the portrait -->
         <div class="spotlight"></div>
 
-        <!-- ALL analytics visuals live behind the portrait -->
         <div class="analytics-scene">
           <div class="interactive-map-host" id="interactive-world-map" aria-label="Interactive world map"></div>
           
 <div class="scene-grid"></div>
 
-          <!-- Area / line graph -->
           <div class="area-chart">
             <svg viewBox="0 0 500 200" preserveAspectRatio="none" aria-hidden="true">
               <defs>
@@ -2924,10 +2661,8 @@ body:not(.dark-theme) .map-country-tooltip{
             </svg>
           </div>
 
-          <!-- Pie / donut chart -->
           <div class="pie-chart" aria-hidden="true"></div>
 
-          <!-- Dashboard behind portrait -->
           <div class="dashboard-back">
             <div class="db-head"><span>LIVE OPERATIONS</span><span><i class="fas fa-circle" style="font-size:5px;color:#4ade80"></i> ONLINE</span></div>
             <div class="db-mini-grid">
@@ -2948,7 +2683,6 @@ body:not(.dark-theme) .map-country-tooltip{
             </div>
           </div>
 
-          <!-- Bar graph -->
           <div class="bar-chart" aria-hidden="true">
             <div class="bar"></div><div class="bar"></div><div class="bar"></div>
             <div class="bar"></div><div class="bar"></div><div class="bar"></div>
@@ -2957,15 +2691,12 @@ body:not(.dark-theme) .map-country-tooltip{
 
         <div class="portrait-glow"></div>
 
-        <!-- Glowing Separator line -->
         <div class="glowing-separator"></div>
 
-        <!-- Overflow container causing the portrait to "raise" seamlessly from the line -->
         <div class="portrait-container">
           <img src="my portrait.png" alt="Sakaratees Marikannu" class="hero-portrait" id="parallax-portrait">
         </div>
 
-        <!-- Foreground KPI cards -->
         <div class="kpi-panel">
           <div class="kpi-card">
             <div class="kpi-icon"><i class="fas fa-satellite-dish"></i></div>
@@ -2987,7 +2718,6 @@ body:not(.dark-theme) .map-country-tooltip{
     <div class="hero-fade-bottom"></div>
   </header>
 
-  <!-- PERMANENT 3D FEATURED CAROUSEL -->
   <section id="featured" class="container content" style="padding-bottom: 0px;">
     <h2 style="text-align: center; justify-content: center;" class="reveal"><i class="fas fa-star"></i> Featured Highlights</h2>
     
@@ -3000,10 +2730,10 @@ body:not(.dark-theme) .map-country-tooltip{
              data-preview-title="Fundamentals of Startup"
              data-preview-subtitle="Entrepreneurship & Strategy"
              data-preview-download="Fundamentals_of_Startup.pptx">
-          <img src="startup-cover.jpg" alt="Fundamentals of Startup Cover" class="cf-img" loading="lazy" decoding="async">
+          <img src="startup-cover.jpg" alt="Fundamentals of Startup Cover" class="cf-img">
           <div class="cf-caption">
             <h3>Fundamentals of Startup</h3><p>Entrepreneurship & Strategy</p>
-            <a href="./Fundamentals_of_Startup.pptx" download="Fundamentals_of_Startup.pptx" class="featured-download" onclick="event.stopPropagation();">
+            <a href="Fundamentals_of_Startup.pptx" target="_blank" rel="noopener" class="featured-download" onclick="event.stopPropagation();">
               <i class="fas fa-file-powerpoint"></i> Download PPT
             </a>
           </div>
@@ -3013,7 +2743,7 @@ body:not(.dark-theme) .map-country-tooltip{
              data-preview-type="image" data-preview-src="Graduation.jpg"
              data-preview-title="B.Com Graduation"
              data-preview-subtitle="Perunthalaivar Kamarajar Arts College">
-          <img src="Graduation.jpg" alt="Graduation" class="cf-img" loading="lazy" decoding="async">
+          <img src="Graduation.jpg" alt="Graduation" class="cf-img">
           <div class="cf-caption"><h3>B.Com Graduation</h3><p>Perunthalaivar Kamarajar Arts College</p></div>
         </div>
 
@@ -3021,7 +2751,7 @@ body:not(.dark-theme) .map-country-tooltip{
              data-preview-type="video" data-preview-src="Prototyping Seminar.mp4"
              data-preview-title="Prototyping Seminar"
              data-preview-subtitle="Interactive Workshop Session">
-          <video data-video-src="Prototyping Seminar.mp4" muted playsinline preload="none" class="cf-img"></video>
+          <video src="Prototyping Seminar.mp4" muted playsinline preload="metadata" class="cf-img"></video>
           <div class="cf-caption"><h3>Prototyping Seminar</h3><p>Interactive Workshop Session</p></div>
         </div>
 
@@ -3029,7 +2759,7 @@ body:not(.dark-theme) .map-country-tooltip{
              data-preview-type="image" data-preview-src="Startup expo - 2024.jpg"
              data-preview-title="Startup Expo 2024"
              data-preview-subtitle="Networking & Innovation">
-          <img src="Startup expo - 2024.jpg" alt="Startup Expo 2024" class="cf-img" loading="lazy" decoding="async">
+          <img src="Startup expo - 2024.jpg" alt="Startup Expo 2024" class="cf-img">
           <div class="cf-caption"><h3>Startup Expo 2024</h3><p>Networking & Innovation</p></div>
         </div>
 
@@ -3037,7 +2767,7 @@ body:not(.dark-theme) .map-country-tooltip{
              data-preview-type="image" data-preview-src="Startup Meet.jpg"
              data-preview-title="Startup Meet"
              data-preview-subtitle="E-Cell Foundation Event">
-          <img src="Startup Meet.jpg" alt="Startup Meet" class="cf-img" loading="lazy" decoding="async">
+          <img src="Startup Meet.jpg" alt="Startup Meet" class="cf-img">
           <div class="cf-caption"><h3>Startup Meet</h3><p>E-Cell Foundation Event</p></div>
         </div>
       </div>
@@ -3047,7 +2777,6 @@ body:not(.dark-theme) .map-country-tooltip{
     </div>
   </section>
 
-  <!-- INTERACTIVE TABS -->
   <nav id="portfolio-tabs" class="image-nav-area reveal">
     <div class="nav-image-container">
       
@@ -3096,10 +2825,8 @@ body:not(.dark-theme) .map-country-tooltip{
     </div>
   </nav>
 
-  <!-- MAIN CONTENT AREAS -->
   <main class="container content" style="padding-top: 10px;">
 
-    <!-- TAB 1: OVERVIEW -->
     <section id="overview" class="tab-content active">
       <h2 class="reveal"><i class="fas fa-user-gear"></i> Professional Summary</h2>
       <p class="lead-text reveal">
@@ -3125,7 +2852,6 @@ body:not(.dark-theme) .map-country-tooltip{
       </div>
     </section>
 
-    <!-- TAB 2: EXPERIENCE -->
     <section id="experience" class="tab-content">
       <h2 class="reveal"><i class="fas fa-history"></i> Professional Experience</h2>
       
@@ -3164,7 +2890,6 @@ body:not(.dark-theme) .map-country-tooltip{
       </div>
     </section>
 
-    <!-- TAB 3: WORKS CAROUSEL -->
     <section id="works" class="tab-content">
       <h2 class="reveal"><i class="fas fa-laptop-file"></i> Portfolio Works</h2>
       
@@ -3197,7 +2922,6 @@ body:not(.dark-theme) .map-country-tooltip{
       </div>
     </section>
 
-    <!-- TAB 4: SKILLS -->
     <section id="skills" class="tab-content">
       <h2 class="reveal"><i class="fas fa-brain"></i> Skills & Educational Background</h2>
       
@@ -3254,7 +2978,6 @@ body:not(.dark-theme) .map-country-tooltip{
       </div>
     </section>
 
-    <!-- TAB 5: CERTIFICATIONS -->
     <section id="certifications" class="tab-content">
       <h2 class="reveal"><i class="fas fa-award"></i> Professional Certifications</h2>
       <p class="lead-text reveal">Here is a showcase of my official certificates and ongoing professional development.</p>
@@ -3262,29 +2985,29 @@ body:not(.dark-theme) .map-country-tooltip{
       <div class="cert-image-grid">
         
         <div class="cert-img-wrapper reveal">
-          <img src="Market Ka Eklavya.jpg" alt="Market Ka Eklavya" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Market Ka Eklavya.jpg" data-preview-title="Market Ka Eklavya" data-preview-subtitle="Professional Certification" loading="lazy" decoding="async">
+          <img src="Market Ka Eklavya.jpg" alt="Market Ka Eklavya" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Market Ka Eklavya.jpg" data-preview-title="Market Ka Eklavya" data-preview-subtitle="Professional Certification">
           <p>Market Ka Eklavya</p>
         </div>
 
         <div class="cert-img-wrapper reveal">
-          <img src="Customer Care Executive.jpg" alt="Customer Care Executive" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Customer Care Executive.jpg" data-preview-title="Customer Care Executive" data-preview-subtitle="Professional Certification" loading="lazy" decoding="async">
+          <img src="Customer Care Executive.jpg" alt="Customer Care Executive" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Customer Care Executive.jpg" data-preview-title="Customer Care Executive" data-preview-subtitle="Professional Certification">
           <p>Customer Care Executive</p>
         </div>
 
         <div class="cert-img-wrapper reveal">
-          <img src="Power BI for Beginners.jpg" alt="Power BI for Beginners" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Power BI for Beginners.jpg" data-preview-title="Power BI for Beginners" data-preview-subtitle="Professional Certification" loading="lazy" decoding="async">
+          <img src="Power BI for Beginners.jpg" alt="Power BI for Beginners" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Power BI for Beginners.jpg" data-preview-title="Power BI for Beginners" data-preview-subtitle="Professional Certification">
           <p>Power BI for Beginners</p>
         </div>
 
         <div class="cert-img-wrapper reveal">
-          <img src="Power BI Projects.jpg" alt="Power BI Projects" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Power BI Projects.jpg" data-preview-title="Power BI Projects" data-preview-subtitle="Professional Certification" loading="lazy" decoding="async">
+          <img src="Power BI Projects.jpg" alt="Power BI Projects" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="Power BI Projects.jpg" data-preview-title="Power BI Projects" data-preview-subtitle="Professional Certification">
           <p>Power BI Projects</p>
         </div>
 
         <div class="cert-img-wrapper reveal">
-          <img src="AI Enthusiast.jpg" alt="AI Enthusiast" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="AI Enthusiast.jpg" data-preview-title="AI Enthusiast" data-preview-subtitle="Professional Certification" data-preview-download="AI Enthusiast.pdf" loading="lazy" decoding="async">
+          <img src="AI- Enthusiast.jpg" alt="AI Enthusiast" class="cert-img cert-preview-trigger" tabindex="0" role="button" data-preview-src="AI- Enthusiast.jpg" data-preview-title="AI Enthusiast" data-preview-subtitle="Professional Certification" data-preview-download="AI- Enthusiast.pdf">
           <p>AI Enthusiast</p>
-          <a href="./AI Enthusiast.pdf" target="_blank" rel="noopener" class="cert-download-btn" onclick="event.stopPropagation();">
+          <a href="AI- Enthusiast.pdf" target="_blank" rel="noopener" class="cert-download-btn" onclick="event.stopPropagation();">
             <i class="fas fa-file-pdf"></i> View PDF
           </a>
         </div>
@@ -3292,7 +3015,6 @@ body:not(.dark-theme) .map-country-tooltip{
       </div>
     </section>
 
-    <!-- TAB 6: CONTACT & RESUME -->
     <section id="contact" class="tab-content">
       <h2 class="reveal"><i class="fas fa-address-book"></i> Contact & Resume Download</h2>
       <div class="contact-wrapper">
@@ -3321,9 +3043,6 @@ body:not(.dark-theme) .map-country-tooltip{
     </div>
   </footer>
 
-  <!-- ========================================= -->
-  <!-- LIGHTBOX / ELEVATED PREVIEW MODAL         -->
-  <!-- ========================================= -->
   <div id="lightbox-modal" class="lightbox-overlay">
     <div class="lightbox-content">
       <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close Preview"><i class="fas fa-times"></i></button>
@@ -3331,7 +3050,6 @@ body:not(.dark-theme) .map-country-tooltip{
     </div>
   </div>
 
-  <!-- DETAIL PREVIEW MODAL FOR WORKS CAROUSEL CARDS -->
   <div id="detail-modal" class="lightbox-overlay">
     <div class="detail-modal-content">
       <button id="detail-close" class="lightbox-close-btn" aria-label="Close Preview"><i class="fas fa-times"></i></button>
@@ -3339,14 +3057,9 @@ body:not(.dark-theme) .map-country-tooltip{
     </div>
   </div>
 
-  
-
-
 <script>
 
     document.addEventListener('DOMContentLoaded', () => {
-
-      // 1. Calculate Experience
       const expCounter = document.getElementById('exp-counter');
       if (expCounter) {
         const startDate = new Date(2025, 3, 1);
@@ -3368,10 +3081,21 @@ body:not(.dark-theme) .map-country-tooltip{
         
         expCounter.textContent = expString;
       }
-
-      // Hero motion disabled for a fully static, smooth landing section.
-
-      // 3. Tab Switching Logic
+      let scrollTicking = false;
+      window.addEventListener('scroll', () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          const scrollY = Math.min(window.scrollY, 500);
+          const heroBgLayer = document.getElementById('hero-bg-layer');
+          const visual = document.getElementById('hero-visual');
+          if (heroBgLayer) heroBgLayer.style.opacity = String(1 - scrollY / 1100);
+          if (visual && window.innerWidth > 900) {
+            visual.style.transform = `translate3d(0, ${Math.round(scrollY * 0.045)}px, 0)`;
+          }
+          scrollTicking = false;
+        });
+      }, { passive: true });
       const tabButtons = document.querySelectorAll('.tab-btn');
       const tabContents = document.querySelectorAll('.tab-content');
 
@@ -3386,7 +3110,6 @@ body:not(.dark-theme) .map-country-tooltip{
           const targetElement = document.getElementById(targetTab);
           if (targetElement) {
             targetElement.classList.add('active');
-            // Replay a lightweight entrance animation for the selected section.
             targetElement.querySelectorAll(':scope > *, .metric-card, .timeline-item, .skills-category, .edu-card, .cert-img-wrapper, .carousel-card').forEach((el, i) => {
               el.classList.remove('section-enter');
               void el.offsetWidth;
@@ -3399,8 +3122,6 @@ body:not(.dark-theme) .map-country-tooltip{
           }
         });
       });
-
-      // 4. Regular Works Carousel
       const worksTrack = document.getElementById('works-carousel');
       const worksLeft = document.getElementById('works-left');
       const worksRight = document.getElementById('works-right');
@@ -3414,8 +3135,6 @@ body:not(.dark-theme) .map-country-tooltip{
         () => worksTrack && worksTrack.scrollBy({ left: 320, behavior: 'smooth' }),
         () => worksTrack && worksTrack.scrollBy({ left: -320, behavior: 'smooth' })
       );
-
-      // 5. Featured Highlights — stacked 3D carousel + file preview.
       const cfTrack = document.getElementById('cf-track');
       const cfItems = Array.from(document.querySelectorAll('.cf-item'));
       const cfLeft = document.getElementById('cf-left');
@@ -3423,27 +3142,11 @@ body:not(.dark-theme) .map-country-tooltip{
       let cfIndex = 0;
       let featuredTimer = null;
       let previewOpen = false;
-
-      // Resolve every asset relative to index.html. This works with filenames
-      // containing spaces and with normal web/local-server hosting.
       const assetURL = filename => new URL(filename, document.baseURI).href;
 
       function renderFeatured(index) {
         if (!cfItems.length) return;
         cfIndex = (index + cfItems.length) % cfItems.length;
-
-        // Only the active featured video gets a source loaded. This prevents the
-        // hidden carousel video from competing with the hero animations.
-        cfItems.forEach(item => {
-          const video = item.querySelector('video');
-          if (video) {
-            video.pause();
-            if (item !== cfItems[cfIndex]) {
-              video.removeAttribute('src');
-              video.load();
-            }
-          }
-        });
         cfItems.forEach((item, i) => {
           item.classList.remove('active', 'prev', 'next', 'hidden');
           const relative = (i - cfIndex + cfItems.length) % cfItems.length;
@@ -3461,12 +3164,6 @@ body:not(.dark-theme) .map-country-tooltip{
             item.setAttribute('aria-hidden', 'true');
           }
         });
-
-        const activeVideo = cfItems[cfIndex]?.querySelector('video');
-        if (activeVideo) {
-          activeVideo.src = activeVideo.dataset.videoSrc || 'Prototyping Seminar.mp4';
-          activeVideo.load();
-        }
       }
 
       function moveFeatured(direction, restart = true) {
@@ -3557,8 +3254,6 @@ body:not(.dark-theme) .map-country-tooltip{
           media.appendChild(video);
           video.addEventListener('error', () => showPreviewError(media, item.src));
         } else {
-          // PDFs/PPTs are deliberately NOT embedded in the preview.
-          // The selected visual thumbnail/image is the preview; the original document remains a separate link.
           const img = document.createElement('img');
           img.src = src;
           img.alt = item.title || '';
@@ -3607,8 +3302,6 @@ body:not(.dark-theme) .map-country-tooltip{
           if (e.target === lightboxModal) closeLightbox();
         });
       }
-
-      // Featured cards: side card -> center; center card -> open preview.
       cfItems.forEach((item, i) => {
         const activateOrOpen = e => {
           e.preventDefault();
@@ -3626,11 +3319,10 @@ body:not(.dark-theme) .map-country-tooltip{
           if (e.key === 'Enter' || e.key === ' ') activateOrOpen(e);
         });
       });
-
-      // Certification images open automatically.
       document.querySelectorAll('.cert-preview-trigger').forEach(img => {
         const openCert = e => {
           e.preventDefault();
+          buildPreviewItems();
           buildPreviewItems('certifications');
           const index = previewItems.findIndex(x => x.src === img.dataset.previewSrc);
           showPreview(index >= 0 ? index : 0, 'certifications');
@@ -3640,8 +3332,6 @@ body:not(.dark-theme) .map-country-tooltip{
           if (e.key === 'Enter' || e.key === ' ') openCert(e);
         });
       });
-
-      // Touch/swipe for stacked Featured carousel.
       function attachSwipe(element, onLeft, onRight, threshold = 45) {
         if (!element) return;
         let startX = 0, startY = 0, tracking = false;
@@ -3672,8 +3362,6 @@ body:not(.dark-theme) .map-country-tooltip{
         cfTrack.addEventListener('mouseenter', () => clearInterval(featuredTimer));
         cfTrack.addEventListener('mouseleave', () => { if (!previewOpen) startFeaturedTimer(); });
       }
-
-      // Viewer keyboard navigation and touch swipe.
       document.addEventListener('keydown', e => {
         if (!previewOpen) return;
         if (e.key === 'Escape') closeLightbox();
@@ -3681,9 +3369,6 @@ body:not(.dark-theme) .map-country-tooltip{
         if (e.key === 'ArrowRight') showPreview(previewIndex + 1);
       });
       attachSwipe(lightboxModal, () => showPreview(previewIndex + 1), () => showPreview(previewIndex - 1), 50);
-
-
-      // Works detail modal.
       const detailModal = document.getElementById('detail-modal');
       const detailModalBody = document.getElementById('detail-modal-body');
       const detailClose = document.getElementById('detail-close');
@@ -3703,8 +3388,6 @@ body:not(.dark-theme) .map-country-tooltip{
         detailClose.addEventListener('click', closeDetailPreview);
         detailModal.addEventListener('click', e => { if (e.target === detailModal) closeDetailPreview(); });
       }
-
-      // 7. Theme Toggle with Icon Pop Animation
       const themeToggleBtn = document.getElementById('theme-toggle');
       const themeIcon = document.getElementById('theme-icon');
       const themeText = document.getElementById('theme-text');
@@ -3743,8 +3426,6 @@ body:not(.dark-theme) .map-country-tooltip{
           }, 150);
         });
       }
-
-      // 7. Scroll Reveal Animation Logic
       const revealElements = document.querySelectorAll('.reveal');
       
       if (revealElements.length > 0) {
@@ -3762,8 +3443,6 @@ body:not(.dark-theme) .map-country-tooltip{
 
         revealElements.forEach(el => revealObserver.observe(el));
       }
-
-      // Animate the initially visible section once without adding layout changes.
       const initialSection = document.querySelector('.tab-content.active');
       if (initialSection) {
         initialSection.querySelectorAll(':scope > *, .metric-card, .timeline-item, .skills-category, .edu-card, .cert-img-wrapper, .carousel-card').forEach((el, i) => {
@@ -3827,8 +3506,6 @@ body:not(.dark-theme) .map-country-tooltip{
   }
     fetch(MAP_URL,{cache:"force-cache"}).then(r=>{if(!r.ok)throw new Error("GeoJSON request failed: "+r.status);return r.json();}).then(renderMap).catch(e=>{console.error(e);host.innerHTML="";});
   }
-
-  // Let the hero and controls become interactive before loading the map engine.
   if ("requestIdleCallback" in window) {
     requestIdleCallback(loadMap, { timeout: 1800 });
   } else {
