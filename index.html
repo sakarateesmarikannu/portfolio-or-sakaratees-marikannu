@@ -2306,7 +2306,176 @@
   }
 }
 
-</style>
+
+    /* Homepage core-skills highlights */
+    .hero-skill-highlights {
+      max-width: 560px;
+      margin: 0 0 22px;
+    }
+
+    .hero-skill-label {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--accent-cyan);
+      font-size: .62rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .hero-skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hero-skill-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border: 1px solid rgba(76, 143, 255, .28);
+      border-radius: 999px;
+      background: rgba(37, 99, 235, .10);
+      color: var(--text-heading);
+      font-size: .66rem;
+      font-weight: 600;
+      line-height: 1.3;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .hero-skill-chip i {
+      color: var(--accent-cyan);
+      font-size: .72rem;
+    }
+
+    .hero-skill-chip:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-blue);
+      background: rgba(37, 99, 235, .18);
+    }
+
+    @media (max-width: 900px) {
+      .hero-skill-highlights {
+        max-width: 620px;
+        margin: 0 auto 20px;
+      }
+      .hero-skill-list {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero-skill-highlights {
+        padding: 0 5px;
+      }
+      .hero-skill-chip {
+        padding: 6px 9px;
+        font-size: .61rem;
+      }
+    }
+
+  
+    /* Floating technical-skills panel in the open hero area */
+    .hero-tech-stack {
+      position: absolute;
+      left: 4%;
+      top: 20px;
+      width: 248px;
+      padding: 18px 17px;
+      display: grid;
+      gap: 12px;
+      border: 1px solid rgba(100, 157, 255, .28);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(9, 24, 49, .88), rgba(7, 16, 34, .72));
+      box-shadow: 0 16px 42px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255,255,255,.06);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 12;
+      pointer-events: none;
+    }
+
+    .hero-tech-heading {
+      display: grid;
+      gap: 3px;
+      padding: 0 3px 5px;
+    }
+
+    .hero-tech-eyebrow {
+      color: #72b7ff;
+      font-size: .62rem;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+    }
+
+    .hero-tech-caption {
+      color: rgba(226, 237, 255, .72);
+      font-size: .72rem;
+      font-weight: 500;
+    }
+
+    .hero-tech-item {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 11px 13px;
+      border: 1px solid rgba(116, 165, 255, .17);
+      border-radius: 11px;
+      background: rgba(42, 75, 130, .19);
+    }
+
+    .hero-tech-icon {
+      width: 43px;
+      height: 43px;
+      flex: 0 0 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: rgba(67, 126, 231, .15);
+      color: #78aaff;
+      font-size: 1.45rem;
+      box-shadow: inset 0 0 0 1px rgba(113, 164, 255, .16);
+    }
+
+    .hero-tech-icon.powerbi { color: #f2c94c; }
+    .hero-tech-icon.sql { color: #63b8ff; }
+    .hero-tech-icon.python { color: #ffd166; }
+    .hero-tech-icon.html { color: #ff8057; }
+
+    .hero-tech-name {
+      color: #f2f6ff;
+      font-size: .83rem;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-tech-stack {
+        left: 3%;
+        top: 18px;
+        width: 225px;
+        padding: 14px;
+        gap: 9px;
+      }
+      .hero-tech-item { min-height: 62px; }
+    }
+
+    @media (max-width: 620px) {
+      .hero-tech-stack {
+        left: 4%;
+        top: 12px;
+        width: 205px;
+        padding: 12px;
+        gap: 8px;
+      }
+      .hero-tech-item { min-height: 56px; padding: 8px 10px; }
+      .hero-tech-icon { width: 36px; height: 36px; flex-basis: 36px; font-size: 1.2rem; }
+      .hero-tech-name { font-size: .72rem; }
+    }
+
+  </style>
 
 <style id="hero-role-final-fix">
 /* FINAL ROLE BADGE FIX
@@ -2881,6 +3050,20 @@ body:not(.dark-theme) .map-country-tooltip{
           decisions with accuracy and efficiency.
         </p>
 
+        <!-- Core skills highlighted on the homepage -->
+        <div class="hero-skill-highlights" aria-label="Core skills">
+          <span class="hero-skill-label">CORE SKILLS</span>
+          <div class="hero-skill-list">
+            <span class="hero-skill-chip"><i class="fas fa-file-excel" aria-hidden="true"></i> Advanced Excel</span>
+            <span class="hero-skill-chip"><i class="fas fa-chart-column" aria-hidden="true"></i> Power BI</span>
+            <span class="hero-skill-chip"><i class="fas fa-chart-line" aria-hidden="true"></i> Data Analysis</span>
+            <span class="hero-skill-chip"><i class="fas fa-calendar-check" aria-hidden="true"></i> Broadcast Scheduling</span>
+            <span class="hero-skill-chip"><i class="fas fa-shield-check" aria-hidden="true"></i> Data Validation &amp; QA</span>
+            <span class="hero-skill-chip"><i class="fas fa-gears" aria-hidden="true"></i> Process Optimization</span>
+            <span class="hero-skill-chip"><i class="fas fa-table" aria-hidden="true"></i> MIS Reporting</span>
+          </div>
+        </div>
+
         <div class="hero-cta-row">
           <a href="https://wa.me/918870613643?text=Hi%20Sakaratees%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20chat." target="_blank" rel="noopener noreferrer" class="hero-cta primary whatsapp-cta">
             <i class="fab fa-whatsapp"></i> Let's Chat
@@ -2897,6 +3080,30 @@ body:not(.dark-theme) .map-country-tooltip{
       </div>
 
       <div class="hero-visual" id="hero-visual">
+        <!-- Technical skills showcase positioned in the open space beside the intro -->
+        <aside class="hero-tech-stack" aria-label="Technical skills">
+          <div class="hero-tech-heading">
+            <span class="hero-tech-eyebrow">TECH TOOLKIT</span>
+            <span class="hero-tech-caption">Core technologies</span>
+          </div>
+          <div class="hero-tech-item">
+            <span class="hero-tech-icon powerbi"><i class="fas fa-chart-column" aria-hidden="true"></i></span>
+            <span class="hero-tech-name">POWER BI</span>
+          </div>
+          <div class="hero-tech-item">
+            <span class="hero-tech-icon sql"><i class="fas fa-database" aria-hidden="true"></i></span>
+            <span class="hero-tech-name">SQL</span>
+          </div>
+          <div class="hero-tech-item">
+            <span class="hero-tech-icon python"><i class="fab fa-python" aria-hidden="true"></i></span>
+            <span class="hero-tech-name">PYTHON</span>
+          </div>
+          <div class="hero-tech-item">
+            <span class="hero-tech-icon html"><i class="fab fa-html5" aria-hidden="true"></i></span>
+            <span class="hero-tech-name">HTML</span>
+          </div>
+        </aside>
+
         <div class="map-tooltip" id="map-tooltip" role="status" aria-live="polite"></div>
 
         <!-- Glowing spotlight directly behind the portrait -->
