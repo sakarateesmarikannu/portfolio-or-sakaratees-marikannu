@@ -1675,6 +1675,7 @@
       filter:brightness(1.25) contrast(1.15) drop-shadow(0 0 18px rgba(60,130,255,.16));
       mix-blend-mode:screen;
     }
+    } /* Close the max-width: 900px media query; keep following hero styles global. */
 
     .analytics-scene .hero-portrait{
       position:relative;
@@ -2392,7 +2393,7 @@
       box-shadow: 0 16px 42px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255,255,255,.06);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      z-index: 12;
+      z-index: 20;
       pointer-events: none;
     }
 
@@ -3049,20 +3050,6 @@ body:not(.dark-theme) .map-country-tooltip{
           and Process Optimization. I help businesses make data-driven scheduling
           decisions with accuracy and efficiency.
         </p>
-
-        <!-- Core skills highlighted on the homepage -->
-        <div class="hero-skill-highlights" aria-label="Core skills">
-          <span class="hero-skill-label">CORE SKILLS</span>
-          <div class="hero-skill-list">
-            <span class="hero-skill-chip"><i class="fas fa-file-excel" aria-hidden="true"></i> Advanced Excel</span>
-            <span class="hero-skill-chip"><i class="fas fa-chart-column" aria-hidden="true"></i> Power BI</span>
-            <span class="hero-skill-chip"><i class="fas fa-chart-line" aria-hidden="true"></i> Data Analysis</span>
-            <span class="hero-skill-chip"><i class="fas fa-calendar-check" aria-hidden="true"></i> Broadcast Scheduling</span>
-            <span class="hero-skill-chip"><i class="fas fa-shield-check" aria-hidden="true"></i> Data Validation &amp; QA</span>
-            <span class="hero-skill-chip"><i class="fas fa-gears" aria-hidden="true"></i> Process Optimization</span>
-            <span class="hero-skill-chip"><i class="fas fa-table" aria-hidden="true"></i> MIS Reporting</span>
-          </div>
-        </div>
 
         <div class="hero-cta-row">
           <a href="https://wa.me/918870613643?text=Hi%20Sakaratees%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20chat." target="_blank" rel="noopener noreferrer" class="hero-cta primary whatsapp-cta">
